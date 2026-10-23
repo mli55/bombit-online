@@ -5,7 +5,9 @@ const scoresForPlayers = scores => Array.from({ length: 4 }, (_, i) => Number.is
 export class Room {
   constructor(code, { now = () => Date.now(), manual = false, setTimer = setTimeout, clearTimer = clearTimeout } = {}) {
     this.code = code; this.now = now; this.manual = manual; this.players = Array(4).fill(null);
-    this.setTimer = setTimer; this.clearTimer = clearTimer; this.timerEpoch = 0;
+    // Do not call native Workers timers with Room as their receiver.
+    this.setTimer = (callback, delay) => setTimer(callback, delay);
+    this.clearTimer = timer => clearTimer(timer); this.timerEpoch = 0;
     this.phase = 'lobby'; this.settings = { difficulty: 1 }; this.frames = [];
     this.tick = 0; this.created = false; this.timer = null; this.running = false; this.touched = now(); this.checks = new Map();
     this.verified = 0; this.generation = ''; this.result = null;
