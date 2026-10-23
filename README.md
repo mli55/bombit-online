@@ -1,16 +1,22 @@
 # Bomb It Online
 
-**[Play online](https://bombit-online.pages.dev)**
+Play **Bomb It 1** in your browser, solo or with up to three friends. Drop bombs, collect power-ups, and be the last one standing.
 
-Play original **Bomb It 1** single-player, or choose **Multiplayer** for **1–4 players online** with original scoring and unlimited rounds. CPUs fill empty slots. Friends join as **P1–P4**; no account or name needed.
+**[Play now](https://bombit-online.pages.dev)**
 
-The original menus, graphics, and sound are preserved. Room controls appear only after choosing Multiplayer. Share the invitation link to play together at **60 Hz**.
+![Online match](docs/online-battle.png)
 
-![Choose characters and invite friends](docs/online-lobby.png)
+## Play with friends
 
-![Play online with friends](docs/online-battle.png)
+Choose **Multiplayer**, select a difficulty, and copy the invitation link from the room panel in the top-right corner. Once everyone has picked a character and is ready, the host can start the match.
 
-Run locally with Node.js 22+:
+For a solo game, choose **Single Player**.
+
+![Multiplayer lobby](docs/online-lobby.png)
+
+## Run locally
+
+Requires Node.js 22+.
 
 ```sh
 npm ci
