@@ -7,7 +7,8 @@
   window.addEventListener('unhandledrejection', event => report('error', { message: String(event.reason) }));
   window.libs = window.libs.map(url => '/game/plugins/' + url.split('/').at(-1));
   let done, fired = false;
-  const splash = { create: () => Promise.resolve(), setLoadProgress(value) {
+  const fontReady = document.fonts.load('25px impact').catch(() => []).then(() => { Phaser.Text.fontPropertiesCache = {}; });
+  const splash = { create: () => fontReady, setLoadProgress(value) {
     if (value === 100 && !fired) { fired = true; setTimeout(() => done?.(), 50); }
   }, setButtonCallback(callback) { done = callback; }, destroy() { document.getElementById('loader').hidden = true; } };
   h5branding.SplashLoader.getInstance = () => splash;

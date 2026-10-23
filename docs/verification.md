@@ -10,5 +10,6 @@
 - Original Single Player works without a WebSocket: character keys, tutorial, movement input, local clock, and native pause/resume. The original online score screen's NEXT ROUND button emits the continuation request.
 - [ui-qa-results.json](ui-qa-results.json) contains browser measurements. The two README screenshots are from this four-player run. WebGL is active; no browser runtime errors occurred.
 - The updated UI suite also passes with in-memory room identities: fresh invitations join once, same-document transport reconnection preserves the seat, and refreshing either a guest or a host returns to the original menu without opening a WebSocket. Old room URLs and stored identities are cleared. See [refresh-qa-results.json](refresh-qa-results.json).
+- The UI suite passes after the shared text baseline adjustment. Menu, selector, HUD, and result screenshots were inspected. With delayed font loading, Impact is loaded before the menu; 100 text redraws keep the same 2 px adjustment at 25 px, and changing to 50 px gives 4 px without drift, including explicit text bounds.
 
 Browser checks used separate Chrome 155 contexts on one computer. They do not cover four geographically separate devices, all browser engines, or real mobile hardware.

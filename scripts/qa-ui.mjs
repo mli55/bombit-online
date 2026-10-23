@@ -132,11 +132,13 @@ const browser = await chromium.launch({ executablePath: chrome, headless: true,
 try {
   const host = (await newPlayer(browser, 'host')).page;
   await stateIs(host, 'mainMenuState');
+  await host.screenshot({ path: resolve(output, 'main-menu.png') });
   assert.equal(await host.locator('#name, input[name="name"]').count(), 0, 'The lobby must not ask players to choose names');
   await setPanel(host, false);
   assert.equal(await host.locator('#network').isHidden(), true, 'The main menu must not show networking before Multiplayer');
   await nativeClick(host, 'buttonStartGame');
   await nativeClick(host, 'button2Player');
+  await host.screenshot({ path: resolve(output, 'difficulty-menu.png') });
   await until(() => host.locator('#network').isVisible(), 'Multiplayer must reveal room controls');
   await nativeClick(host, 'buttonNormal');
   await stateIs(host, 'characterSelectState');
@@ -316,6 +318,7 @@ try {
       }
     });
     await stateIs(fixture, 'gameOverState');
+    await fixture.screenshot({ path: resolve(output, 'round-result.png') });
     const result = await fixture.evaluate(() => ({ result: window.onlineBridge.result, text: Game.App.getInstance().state.getCurrentState().textButton.text }));
     assert.equal(result.result.canContinue, true); assert.equal(result.text, 'NEXT ROUND');
     await nativeClick(fixture, 'buttonNextLevel');

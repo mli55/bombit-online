@@ -27,7 +27,7 @@ function input(code, down) {
 function loadGame() {
   const id = ++loadId;
   bridge = null; iframe?.remove();
-  iframe = document.createElement('iframe'); iframe.title = 'Bomb It 1'; iframe.allow = 'autoplay; fullscreen'; iframe.src = '/game/?v=4';
+  iframe = document.createElement('iframe'); iframe.title = 'Bomb It 1'; iframe.allow = 'autoplay; fullscreen'; iframe.src = '/game/?v=5';
   $('game-mount').replaceChildren(iframe); $('loading').hidden = false;
   loadPromise = new Promise((resolve, reject) => {
     const timeout = setTimeout(() => { if (id === loadId) reject(new Error('原版素材加载超时，请刷新页面')); }, 45000);
