@@ -18,6 +18,8 @@
 
 `shared/room.js` 是 Node 和 Cloudflare 共用的协议。Node 在 `server/index.js` 提供 HTTP/WS 服务，Cloudflare 在 `worker/index.js` 中使用一个 Durable Object 管理一个房间。
 
+公开入口为 `https://bombit-online.pages.dev`。Pages 直接提供静态素材，`pages/_routes.json` 仅将 `/ws/*` 与 `/health` 交给 Pages Function，再通过 GAME service binding 转发给已有 Worker。原请求 URL、Origin 和 WebSocket 101 响应保持不变，客户端邀请链接和连接地址随当前域名生成。此入口不修改账号级 workers.dev 子域，也不迁移房间。两个域名的浏览器 sessionStorage 独立，正在玩的房间应结束后再换网址。
+
 服务器负责房间、座位身份、准备、输入排序、暂停和断线回放。它不运行游戏物理，不接收任意代码，也不传输视频。状态保存在内存中，最多保留 36,000 帧（约 20 分钟）的当前对局历史。达到限制后需返回房间重开。
 
 每位玩家只提交自己的 5 位按键掩码。短暂放弹点击会锁存到下个网络帧，避免低于 33ms 的点击被丢弃；没有持续心跳输入时释放按键。房主只能在所有真人都加载完成且初始校验一致后开始。

@@ -1,0 +1,12 @@
+import './build.mjs';
+import { cp, readFile, rm } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import { relative } from 'node:path';
+const root = fileURLToPath(new URL('../', import.meta.url));
+const source = root + 'public';
+const output = root + '.local/pages';
+const excluded = new Set(['.assetsignore', ...(await readFile(source + '/.assetsignore', 'utf8')).split(/\r?\n/).filter(Boolean)]);
+await rm(output, { recursive: true, force: true });
+await cp(source, output, { recursive: true, filter: path => !excluded.has(relative(source, path)) });
+for (const file of ['_worker.js', '_routes.json']) await cp(root + 'pages/' + file, output + '/' + file);
+console.log('Pages frontend built with the existing game server binding.');

@@ -2,7 +2,7 @@
 
 原版 **Bomb It 1 HTML5** 的非官方好友联机版。每个人在自己的浏览器加载游戏和素材，通过 WebSocket 同步操作。无需 Flash、账号或视频串流。
 
-**[直接开玩](https://bombit-online.mengninglihi.workers.dev)** · [公开仓库](https://github.com/mli55/bombit-online)
+**[直接开玩](https://bombit-online.pages.dev)** · [公开仓库](https://github.com/mli55/bombit-online)
 
 - **原版闯关：1–2 位真人**，保留原版电脑、道具、生命、计分与关卡继续流程。
 - **混战：1–4 位真人**，四个角色各自为战，空位由原版电脑补齐。最后存活者获胜；时间到还有多人存活则平局。
@@ -33,7 +33,17 @@ npx wrangler login
 npx wrangler deploy
 ```
 
-首次部署前确认账号使用 **Workers Free**。`wrangler.jsonc` 的 `name` 可改成自己的项目名称。分享部署命令输出的 `https://…workers.dev` 地址。更新代码后重新 build、deploy 即可。
+首次部署前确认账号使用 **Workers Free**。以上命令发布游戏服务器。公开入口使用 Cloudflare Pages，使网址不包含账号子域：
+
+```sh
+npm run build:pages
+cd pages
+# 仅新账号第一次部署需要创建项目
+npx wrangler pages project create bombit-online --production-branch main
+npx wrangler pages deploy --project-name bombit-online --branch main
+```
+
+分享 `https://bombit-online.pages.dev`。`pages/wrangler.jsonc` 的 GAME service binding 指向上述 Worker；如果修改 Worker 名称，也要同步修改该绑定。前端更新后重新 build:pages、pages deploy；联机协议改动还需重新部署 Worker。已有 workers.dev 地址保持可用。
 
 免费额度并非无限：截至 2026-10-22，Durable Objects Free 包含每天 100,000 次计费请求及 13,000 GB-s 运行时间，WebSocket 入站消息按 20:1 折算，出站消息不计请求费用。Free 超额会拒绝服务，不自动转成付费。额度由同一账号内的项目共享。本项目每个房间的连接存续期间都会占用运行时间，适合几个朋友少量房间；玩完请离开房间。[Cloudflare 官方说明](https://developers.cloudflare.com/durable-objects/platform/pricing/)
 

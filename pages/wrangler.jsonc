@@ -1,0 +1,6 @@
+{
+  "name": "bombit-online",
+  "pages_build_output_dir": "../.local/pages",
+  "compatibility_date": "2026-08-01",
+  "services": [{ "binding": "GAME", "service": "bombit-online" }]
+}

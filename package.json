@@ -14,6 +14,7 @@
     "test": "node --test",
     "check": "node --check server/index.js && node --check shared/room.js && node --check worker/index.js && node --check public/client.js && node --check public/adapter.js",
     "build": "node scripts/build.mjs",
+    "build:pages": "node scripts/build-pages.mjs",
     "prestart": "npm run build"
   },
   "dependencies": {
