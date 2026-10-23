@@ -44,8 +44,16 @@ test('only host may start, alter settings or pause; all players must be ready', 
 test('input is tied to authenticated seat, invalid masks rejected and short taps retained', () => {
   const { room, act, start, setTime } = setup(); start();
   act(2, { type: 'input', seat: 0, keys: 8 }); act(0, { type: 'input', keys: 1024 });
-  act(1, { type: 'input', keys: 16 }); act(1, { type: 'input', keys: 0 }); room.step(); assert.deepEqual(room.frames[0][1], [0,16,8,0]);
+  act(1, { type: 'input', keys: 16 }); act(1, { type: 'input', keys: 0 }); room.step(); assert.deepEqual(room.frames[0][1], [0,48,8,0]);
   room.step(); assert.deepEqual(room.frames[1][1], [0,0,8,0]); setTime(2000); room.step(); assert.deepEqual(room.frames[2][1], [0,0,0,0]);
+});
+test('a rapid action re-press is distinguishable from holding across adjacent frames', () => {
+  const { room, act, start } = setup(1); start();
+  act(0, { type: 'input', keys: 16 }); room.step(); assert.equal(room.frames.at(-1)[1][0], 48);
+  room.step(); assert.equal(room.frames.at(-1)[1][0], 16);
+  act(0, { type: 'input', keys: 0 }); act(0, { type: 'input', keys: 16 });
+  room.step(); assert.equal(room.frames.at(-1)[1][0], 48);
+  act(0, { type: 'input', keys: 0 }); room.step(); assert.equal(room.frames.at(-1)[1][0], 0);
 });
 test('disconnect leaves the match running with zero input; replay catches up behind live frames', () => {
   const { room, clients, act, start } = setup(); start(); act(2, { type: 'input', keys: 24 }); room.step();

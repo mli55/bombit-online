@@ -11,6 +11,23 @@
   let room = null, identity = null, enteringLobby = false, onlineSelection = false;
   const pressed = new Set();
 
+  function removePromotion(button) {
+    if (!button) return;
+    button.inputEnabled = false;
+    button.visibility?.enable(false);
+    // Some native menu transitions restore visibility. Keep the whole promo
+    // subtree hidden, including its NEW badge and click target.
+    Object.defineProperty(button, 'visible', { configurable: true, get: () => false, set() {} });
+  }
+  for (const [State, property] of [[Game.MainMenuState, 'buttonBombit2'], [Game.GameOverState, 'buttonBombIt2']]) {
+    const create = State.prototype.create;
+    State.prototype.create = function (...args) {
+      const result = create.apply(this, args);
+      removePromotion(this[property]);
+      return result;
+    };
+  }
+
   const mainLocalize = Game.MainMenuState.prototype.localizeUI;
   Game.MainMenuState.prototype.localizeUI = function () {
     mainLocalize.call(this);

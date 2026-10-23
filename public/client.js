@@ -1,9 +1,11 @@
 const $ = id => document.getElementById(id);
 const inputCodes = ['KeyW','KeyA','KeyS','KeyD','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Space','Enter'];
+const directions = { KeyW:1, ArrowUp:1, KeyS:2, ArrowDown:2, KeyA:4, ArrowLeft:4, KeyD:8, ArrowRight:8 };
 let socket, identity = null, room = null, generation = '', bridge = null, iframe;
 let leaving = false, reconnectTimer, toastTimer, preparing = false, packetQueue = [];
 let loadId = 0, prepareId = 0, onGameReady, loadPromise, queuedSettings, selectingDifficulty = false;
 const keys = new Set();
+let activeDirection = null;
 // Keep reconnect credentials only for this page's lifetime. A refresh starts over.
 try { sessionStorage.removeItem('bomb-it-room'); } catch {}
 const pageURL = new URL(location.href);
@@ -17,17 +19,24 @@ if (invitation) { $('code').value = invitation.toUpperCase(); $('network').hidde
 function notice(message) { $('notice').textContent = message; $('notice').hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(() => { $('notice').hidden = true; }, 6000); }
 function send(msg) { if (socket?.readyState === WebSocket.OPEN) socket.send(JSON.stringify({ generation, ...msg })); }
 function status(text) { $('connection').textContent = text; }
-function mask() { let n = 0; for (const key of keys) n |= ({ KeyW:1, ArrowUp:1, KeyS:2, ArrowDown:2, KeyA:4, ArrowLeft:4, KeyD:8, ArrowRight:8, Space:16, Enter:16 })[key] || 0; return n; }
-function release() { keys.clear(); send({ type: 'input', keys: 0 }); }
+function mask() { return (directions[activeDirection] || 0) | (keys.has('Space') || keys.has('Enter') ? 16 : 0); }
+function release() { keys.clear(); activeDirection = null; send({ type: 'input', keys: 0 }); }
 function input(code, down) {
   // Always process key-up, including while paused or disconnected.
+  if (down === keys.has(code)) return;
   down ? keys.add(code) : keys.delete(code);
+  // Like the native keyboard: the latest direction wins; releasing it stops.
+  // Keep older held keys tracked so their autorepeat cannot steal the turn back.
+  if (directions[code]) {
+    if (down) activeDirection = code;
+    else if (activeDirection === code) activeDirection = null;
+  }
   if (room?.phase === 'playing' && !preparing) send({ type: 'input', keys: mask() });
 }
 function loadGame() {
   const id = ++loadId;
   bridge = null; iframe?.remove();
-  iframe = document.createElement('iframe'); iframe.title = 'Bomb It 1'; iframe.allow = 'autoplay; fullscreen'; iframe.src = '/game/?v=5';
+  iframe = document.createElement('iframe'); iframe.title = 'Bomb It 1'; iframe.allow = 'autoplay; fullscreen'; iframe.src = '/game/?v=6';
   $('game-mount').replaceChildren(iframe); $('loading').hidden = false;
   loadPromise = new Promise((resolve, reject) => {
     const timeout = setTimeout(() => { if (id === loadId) reject(new Error('原版素材加载超时，请刷新页面')); }, 45000);

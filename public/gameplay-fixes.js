@@ -14,6 +14,7 @@
     this.animationIndicator.visible = false;
     if (this.inputController) {
       this.inputController.clearInputs();
+      this.inputController.clearActionHold?.();
       this.inputController.onlineActionHeld = false;
     }
   };

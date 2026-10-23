@@ -17,6 +17,4 @@ npm ci
 npm start
 ```
 
-Open [localhost:3000](http://localhost:3000). Move with arrow keys; press Space for bombs or weapons.
-
 [Architecture](ARCHITECTURE.md) · [Original game and asset attribution](THIRD_PARTY.md)

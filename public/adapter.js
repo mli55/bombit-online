@@ -6,11 +6,15 @@
   window.addEventListener('error', event => report('error', { message: event.error?.stack || event.message }));
   window.addEventListener('unhandledrejection', event => report('error', { message: String(event.reason) }));
   window.libs = window.libs.map(url => '/game/plugins/' + url.split('/').at(-1));
-  let done, fired = false;
+  let done, fired = false, assetsLoaded = false;
+  function finishLoading() {
+    if (fired || !assetsLoaded || !done) return;
+    fired = true; setTimeout(() => done(), 50);
+  }
   const fontReady = document.fonts.load('25px impact').catch(() => []).then(() => { Phaser.Text.fontPropertiesCache = {}; });
   const splash = { create: () => fontReady, setLoadProgress(value) {
-    if (value === 100 && !fired) { fired = true; setTimeout(() => done?.(), 50); }
-  }, setButtonCallback(callback) { done = callback; }, destroy() { document.getElementById('loader').hidden = true; } };
+    if (value === 100) { assetsLoaded = true; finishLoading(); }
+  }, setButtonCallback(callback) { done = callback; finishLoading(); }, destroy() { document.getElementById('loader').hidden = true; } };
   h5branding.SplashLoader.getInstance = () => splash;
   h5branding.Utils.inGDGameZone = () => true;
   h5branding.Utils.isOnDevice = () => false;
@@ -55,7 +59,8 @@
     }
   };
   // Keep per-browser saved lives/tutorial preferences out of the shared simulation.
-  const memory = { lives1: 3, lives2: 3 };
+  const onlineInitialLives = 1;
+  const memory = { lives1: onlineInitialLives, lives2: onlineInitialLives };
   const onlineData = {
     getLivesPlayer1: () => memory.lives1,
     getLivesPlayer2: () => memory.lives2,
@@ -128,7 +133,7 @@
   const createPlayers = Game.Grid.prototype.createPlayers;
   Game.Grid.prototype.createPlayers = function () {
     createPlayers.call(this);
-    if (active) for (const p of this.players) p.lives = Game.SETTINGS.INITIAL_LIVES;
+    if (active) for (const p of this.players) p.lives = onlineInitialLives;
   };
   const checkPlayers = Game.GameplayState.prototype.checkPlayers;
   Game.GameplayState.prototype.checkPlayers = function () {
@@ -217,7 +222,7 @@
       for (const root of [gsRoot, gsFrames]) root._time = root._totalTime = root._startTime = 0;
       TweenLite.ticker.time = TweenLite.ticker.frame = 0;
       game.rnd.sow([config.seed]);
-      memory.lives1 = memory.lives2 = Game.SETTINGS.INITIAL_LIVES;
+      memory.lives1 = memory.lives2 = onlineInitialLives;
       game.time.removeAll(); game.tweens.removeAll();
       game.time.time = game.time.now = game.time.prevTime = now;
       game.time.events = new Phaser.Timer(game, false); game.time.events.start();
@@ -244,15 +249,7 @@
       if (game.state.current === 'gameplayState' && state.grid && !pendingResult) {
         for (const human of config.players) {
           const p = state.grid.players.find(p => p.playerID === human.character);
-          const input = p.inputController, mask = masks[human.seat] || 0;
-          input.clearInputs();
-          // Match original single-axis movement: the first direction takes priority.
-          if (mask & 1) input.upPressed = true;
-          else if (mask & 2) input.downPressed = true;
-          else if (mask & 4) input.leftPressed = true;
-          else if (mask & 8) input.rightPressed = true;
-          if ((mask & 16) && !input.onlineActionHeld) input.actionKeyPressed();
-          input.onlineActionHeld = !!(mask & 16);
+          p.inputController.applyOnlineInput(masks[human.seat] || 0);
         }
       }
       clockStep();

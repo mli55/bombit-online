@@ -193,7 +193,8 @@ export class Room {
     const keys = this.players.map(p => {
       if (!p?.ws || !p.prepared) return 0;
       let mask = this.now() - p.lastInput > 1500 ? 0 : p.keys;
-      if (p.pulse) mask |= 16;
+      // Preserve a fresh press even when release + re-press occur between frames.
+      if (p.pulse) mask |= 16 | 32;
       p.pulse = false; return mask;
     });
     const frame = [++this.tick, keys];

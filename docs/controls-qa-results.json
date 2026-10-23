@@ -1,0 +1,207 @@
+{
+  "baseURL": "http://127.0.0.1:3100",
+  "startedAt": "2026-10-23T14:49:18.522Z",
+  "checks": [
+    {
+      "name": "main-menu promotion hidden",
+      "found": true,
+      "visible": false,
+      "inputEnabled": false,
+      "children": [
+        {
+          "name": "text",
+          "visible": false
+        },
+        {
+          "name": "icon",
+          "visible": false
+        },
+        {
+          "name": "new",
+          "visible": false
+        }
+      ]
+    },
+    {
+      "name": "promotion stays hidden after native settings, languages and resize",
+      "found": true,
+      "visible": false,
+      "inputEnabled": false,
+      "children": [
+        {
+          "name": "text",
+          "visible": false
+        },
+        {
+          "name": "icon",
+          "visible": false
+        },
+        {
+          "name": "new",
+          "visible": false
+        }
+      ]
+    },
+    {
+      "name": "native real-key Space hold, map limit, capacity and release",
+      "placements": [
+        [
+          3,
+          3
+        ],
+        [
+          4,
+          3
+        ]
+      ],
+      "bombs": 2,
+      "uses": 0,
+      "x": 6,
+      "y": 3
+    },
+    {
+      "name": "native held Space does not activate a newly acquired skill; a fresh press fires once"
+    },
+    {
+      "name": "online one initial life; actual pickups update the life display only for hearts",
+      "initialLives": {
+        "lives": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "display": [
+          "1",
+          "1",
+          "1",
+          "1"
+        ]
+      },
+      "pickups": [
+        {
+          "type": "BOMB",
+          "lives": 1,
+          "display": "1",
+          "remainingItems": 0
+        },
+        {
+          "type": "POWER",
+          "lives": 1,
+          "display": "1",
+          "remainingItems": 0
+        },
+        {
+          "type": "SPEED",
+          "lives": 1,
+          "display": "1",
+          "remainingItems": 0
+        },
+        {
+          "type": "SHIELD",
+          "lives": 1,
+          "display": "1",
+          "remainingItems": 0
+        },
+        {
+          "type": "KICK_BOMBS",
+          "lives": 1,
+          "display": "1",
+          "remainingItems": 0
+        },
+        {
+          "type": "HEART",
+          "lives": 2,
+          "display": "2",
+          "remainingItems": 0
+        }
+      ]
+    },
+    {
+      "name": "online held-bomb placement, capacity, occupied cells and release",
+      "placements": [
+        [
+          3,
+          3
+        ],
+        [
+          4,
+          3
+        ]
+      ],
+      "bombs": 2,
+      "uses": 0,
+      "x": 8,
+      "y": 3
+    },
+    {
+      "name": "all six original skill classes retain one activation per press",
+      "skills": [
+        {
+          "type": "GRENADE",
+          "uses": 1,
+          "bombs": 0
+        },
+        {
+          "type": "ROCKET",
+          "uses": 1,
+          "bombs": 0
+        },
+        {
+          "type": "FIRE",
+          "uses": 1,
+          "bombs": 0
+        },
+        {
+          "type": "FREEZE",
+          "uses": 1,
+          "bombs": 0
+        },
+        {
+          "type": "MINE",
+          "uses": 1,
+          "bombs": 0
+        },
+        {
+          "type": "BATTERY",
+          "uses": 1,
+          "bombs": 0
+        }
+      ]
+    },
+    {
+      "name": "holding does not auto-fire a newly acquired skill; bit 32 preserves a rapid repress"
+    },
+    {
+      "name": "held action still respects frozen and dead players"
+    },
+    {
+      "name": "online next-round result keeps the original highscore promotion subtree hidden",
+      "scoreVisible": true,
+      "highscoreVisible": false
+    },
+    {
+      "name": "native results promotion hidden after localization and resize",
+      "found": true,
+      "visible": false,
+      "inputEnabled": false,
+      "children": [
+        {
+          "name": "icon",
+          "visible": false
+        },
+        {
+          "name": "new",
+          "visible": false
+        },
+        {
+          "name": "text",
+          "visible": false
+        }
+      ]
+    }
+  ],
+  "ok": true,
+  "errors": [],
+  "finishedAt": "2026-10-23T14:49:22.206Z"
+}

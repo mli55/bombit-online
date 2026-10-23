@@ -37,7 +37,7 @@ function observe(page, label) {
         if (observation.generation !== message.generation) observation.verified = 0;
         observation.generation = message.generation; observation.lastFrame = message.tick || 0;
       }
-      if (message.type === 'frame') observation.lastFrame = message.frame[0];
+      if (message.type === 'frame') { observation.lastFrame = message.frame[0]; observation.masks = message.frame[1]; }
       if (message.type === 'verified') observation.verified = message.tick;
       if (message.type === 'error') observation.messages.push(message.message);
     });
@@ -132,6 +132,11 @@ const browser = await chromium.launch({ executablePath: chrome, headless: true,
 try {
   const host = (await newPlayer(browser, 'host')).page;
   await stateIs(host, 'mainMenuState');
+  assert.equal(await (await gameFrame(host)).evaluate(() => {
+    const button = Game.App.getInstance().state.getCurrentState().buttonBombit2;
+    button.visible = true;
+    return button.visible || button.inputEnabled;
+  }), false, 'Bomb It 2 promotion must remain hidden and non-interactive');
   await host.screenshot({ path: resolve(output, 'main-menu.png') });
   assert.equal(await host.locator('#name, input[name="name"]').count(), 0, 'The lobby must not ask players to choose names');
   await setPanel(host, false);
@@ -175,6 +180,7 @@ try {
   await Promise.all(pages.slice(0, 4).map(page => stateIs(page, 'gameplayState')));
   await waitRoom(host, room => room.phase === 'playing', 'Four players did not start together');
   const initialSync = await commonHash();
+  assert.deepEqual(await (await gameFrame(host)).evaluate(() => Game.App.getInstance().state.getCurrentState().grid.players.map(p => p.lives)), [1,1,1,1]);
   assert.match(await host.locator('#sync').textContent(), /状态一致/);
   const beforeFrame = await frameNumber(host), beforeTime = performance.now();
   await delay(1000);
@@ -183,6 +189,18 @@ try {
   assert(fps >= 48 && fps <= 70, `Expected about 60 ordered frames/sec; observed ${fps.toFixed(2)}`);
   await host.screenshot({ path: resolve(output, 'online-battle.png') });
   record('Real-time 60 Hz room and matching four-client hashes', { frames: afterFrame - beforeFrame, elapsedMs: Math.round(elapsed), fps: Number(fps.toFixed(2)), ...initialSync });
+
+  await host.keyboard.down('ArrowUp');
+  await until(() => observations.get(host).masks?.[0] === 1, 'Up input was not delivered');
+  await host.keyboard.down('ArrowRight');
+  await until(() => observations.get(host).masks?.[0] === 8, 'The latest direction must override the previously held direction');
+  await host.keyboard.down('ArrowUp'); // browser autorepeat of the older held key
+  await delay(100);
+  assert.equal(observations.get(host).masks[0], 8, 'Autorepeat of an older key must not steal the new direction');
+  await host.keyboard.up('ArrowRight');
+  await until(() => observations.get(host).masks?.[0] === 0, 'Releasing the latest direction must stop, like the original');
+  await host.keyboard.up('ArrowUp');
+  record('Last-pressed direction wins; old-key repeat cannot steal turns; releasing stops');
 
   const disconnected = guests[0], disconnectStart = Date.now();
   const beforeDisconnect = await frameNumber(host);
