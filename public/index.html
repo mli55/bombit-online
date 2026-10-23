@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#20142a"><meta name="description" content="Original Bomb It with 1–4 player online multiplayer."><title>Bomb It Online</title><link rel="icon" type="image/png" sizes="320x320" href="/favicon.png"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="apple-touch-icon" href="/favicon.png"><link rel="stylesheet" href="/style.css"><script type="module" src="/client.js"></script></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#20142a"><meta name="description" content="Original Bomb It with 1–4 player online multiplayer."><title>Bomb It Online</title><link rel="icon" type="image/png" sizes="320x320" href="/favicon.png"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="apple-touch-icon" href="/favicon.png"><link rel="stylesheet" href="/style.css"><script type="module" src="/client.js"></script></head>
 <body>
-<main id="stage"><div id="game-mount"></div><p id="loading" role="status">正在加载原版游戏…</p></main>
-<details id="network" hidden><summary>联机 <span id="connection">准备开玩</span></summary><div class="panel">
-<form id="join-form"><label for="code">加入朋友</label><div class="row"><input id="code" maxlength="10" placeholder="10 位房间码" autocomplete="off" spellcheck="false"><button type="submit">加入</button></div></form>
-<div id="room-info" hidden><div id="room-label"></div><div class="row"><input id="invite" readonly aria-label="邀请链接"><button id="copy">复制邀请</button></div><p id="roster"></p><div class="row"><button id="back">重新选人</button><button id="difficulty-settings">更改难度</button><button id="leave">离开</button></div></div>
-<p class="help">选择难度即可建房 · 1–4 人在线 · 自动分配 P1–P4<br>方向键 / WASD 移动，空格放炸弹</p><div class="row"><button id="fullscreen">全屏</button><button id="resume" hidden>继续游戏</button></div><small id="sync"></small>
+<main id="stage"><div id="game-mount"></div><p id="loading" role="status">Loading Bomb It 1…</p></main>
+<details id="network" hidden><summary>Multiplayer <span id="connection">Ready to play</span></summary><div class="panel">
+<form id="join-form"><label for="code">Join a friend</label><div class="row"><input id="code" maxlength="10" placeholder="10-character room code" autocomplete="off" spellcheck="false"><button type="submit">Join</button></div></form>
+<div id="room-info" hidden><div id="room-label"></div><div class="row"><input id="invite" readonly aria-label="Invite link"><button id="copy">Copy invite</button></div><p id="roster"></p><div class="row"><button id="back">Choose character</button><button id="difficulty-settings">Change difficulty</button><button id="leave">Leave</button></div></div>
+<p class="help">Choose a difficulty to create a room.<br>Arrow keys / WASD to move · Space to drop a bomb</p><div class="row"><button id="fullscreen">Fullscreen</button><button id="resume" hidden>Resume game</button></div><small id="sync"></small>
 </div></details>
 <div id="notice" role="status" aria-live="polite" hidden></div>
-<div id="touch" hidden><div class="dpad"><button data-key="KeyW" aria-label="向上">↑</button><button data-key="KeyA" aria-label="向左">←</button><button data-key="KeyS" aria-label="向下">↓</button><button data-key="KeyD" aria-label="向右">→</button></div><button data-key="Space" aria-label="放炸弹">●</button></div>
+<div id="touch" hidden><div class="dpad"><button data-key="KeyW" aria-label="Move up">↑</button><button data-key="KeyA" aria-label="Move left">←</button><button data-key="KeyS" aria-label="Move down">↓</button><button data-key="KeyD" aria-label="Move right">→</button></div><button data-key="Space" aria-label="Drop a bomb">●</button></div>
 </body></html>

@@ -38,7 +38,7 @@ export function createApp() {
       ws.on('message', (raw, binary) => {
         if (Date.now() - windowAt > 1000) { windowAt = Date.now(); messages = 0; }
         if (++messages > 100 || binary) return ws.close(1008, 'Rate limit');
-        try { room.receive(ws, JSON.parse(raw)); } catch { room.error(ws, '消息格式错误'); }
+        try { room.receive(ws, JSON.parse(raw)); } catch { room.error(ws, 'Invalid message format.'); }
       });
     });
   });

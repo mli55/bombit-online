@@ -181,7 +181,7 @@ try {
   await waitRoom(host, room => room.phase === 'playing', 'Four players did not start together');
   const initialSync = await commonHash();
   assert.deepEqual(await (await gameFrame(host)).evaluate(() => Game.App.getInstance().state.getCurrentState().grid.players.map(p => p.lives)), [1,1,1,1]);
-  assert.match(await host.locator('#sync').textContent(), /状态一致/);
+  assert.match(await host.locator('#sync').textContent(), /In sync/);
   const beforeFrame = await frameNumber(host), beforeTime = performance.now();
   await delay(1000);
   const afterFrame = await frameNumber(host), elapsed = performance.now() - beforeTime;
@@ -215,7 +215,7 @@ try {
   await delay(Math.max(0, 5000 - (Date.now() - disconnectStart)));
   const duringDisconnect = await frameNumber(host);
   assert(duringDisconnect > beforeDisconnect + 180, 'The connected players stopped while another player was offline');
-  assert.match((await host.locator('#roster').textContent()) + (await host.locator('#connection').textContent()), /掉线/);
+  assert.match((await host.locator('#roster').textContent()) + (await host.locator('#connection').textContent()), /disconnected/i);
   record('Disconnected player is labeled and the other players keep running', { advancedFrames: duringDisconnect - beforeDisconnect, offlineMs: Date.now() - disconnectStart });
   await disconnected.context.setOffline(false);
   await stateIs(disconnected.page, 'gameplayState');

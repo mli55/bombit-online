@@ -77,27 +77,27 @@ export class Room {
     if (!msg || typeof msg !== 'object' || Array.isArray(msg)) return;
     if (msg.type === 'ping') return this.send(ws, { type: 'pong', time: msg.time });
     if (msg.type === 'create') {
-      if (this.created || seat >= 0) return this.error(ws, '这个房间已经存在，请创建新房间');
+      if (this.created || seat >= 0) return this.error(ws, 'This room already exists. Please create a new room.');
       this.created = true; seat = 0;
       this.players[0] = { token: randomToken(), ws, character: 0, name: 'P1', ready: false, keys: 0, ack: 0, lastSeen: receivedAt };
     } else if (msg.type === 'join') {
       if (seat >= 0) return;
-      if (!this.created) return this.error(ws, '房间不存在或已过期', true);
+      if (!this.created) return this.error(ws, 'This room does not exist or has expired.', true);
       seat = this.players.findIndex(p => p && p.token === msg.token);
       if (seat >= 0) {
-        if (this.players[seat].ws) return this.error(ws, '这个玩家已经在线，请用另一个浏览器加入', true);
+        if (this.players[seat].ws) return this.error(ws, 'This player is already connected. Join from another browser.', true);
         this.players[seat].ws = ws; this.players[seat].keys = 0; this.players[seat].lastSeen = receivedAt;
       } else {
-        if (msg.token) return this.error(ws, '重连身份已过期', true);
-        if (this.phase !== 'lobby') return this.error(ws, '正在对局，请等房主返回房间后加入');
+        if (msg.token) return this.error(ws, 'Your session has expired. Please rejoin the room.', true);
+        if (this.phase !== 'lobby') return this.error(ws, 'A game is in progress. Wait for the host to return to the lobby.');
         seat = this.players.findIndex(p => !p);
-        if (seat < 0) return this.error(ws, '房间已满');
+        if (seat < 0) return this.error(ws, 'This room is full.');
         const used = new Set(this.members().map(p => p.character));
         const character = [0, 1, 2, 3].find(n => !used.has(n));
         this.players[seat] = { token: randomToken(), ws, character, name: `P${seat + 1}`, ready: false, keys: 0, ack: 0, lastSeen: receivedAt };
       }
     } else {
-      if (seat < 0) return this.error(ws, '请先加入房间');
+      if (seat < 0) return this.error(ws, 'Please join a room first.');
       return this.action(seat, msg);
     }
     const p = this.players[seat];
@@ -123,18 +123,18 @@ export class Room {
       this.members().forEach(x => { x.ready = false; }); return this.announce();
     }
     if (msg.type === 'character' && this.phase === 'lobby') {
-      if (![0, 1, 2, 3].includes(msg.character) || this.members().some(x => x !== p && x.character === msg.character)) return this.error(p.ws, '这个角色已被选择');
+      if (![0, 1, 2, 3].includes(msg.character) || this.members().some(x => x !== p && x.character === msg.character)) return this.error(p.ws, 'This character is already taken.');
       p.character = msg.character; p.ready = false; return this.announce();
     }
     if (msg.type === 'ready' && this.phase === 'lobby') { p.ready = !!msg.ready; return this.announce(); }
     if (msg.type === 'start' && seat === 0 && this.phase === 'lobby') {
-      if (this.members().some(x => !x.ws || !x.ready)) return this.error(p.ws, '等所有玩家准备好后再开始');
+      if (this.members().some(x => !x.ws || !x.ready)) return this.error(p.ws, 'Wait until everyone is ready before starting.');
       return this.startMatch();
     }
     if (msg.generation !== this.generation) return;
     if (msg.type === 'prepared' && this.config && this.phase !== 'lobby') {
       if (p.prepared) return;
-      if (!Number.isInteger(msg.tick) || msg.tick < 0 || msg.tick > this.tick) return this.error(p.ws, '恢复进度不一致，请重新连接');
+      if (!Number.isInteger(msg.tick) || msg.tick < 0 || msg.tick > this.tick) return this.error(p.ws, 'Could not restore the game. Please reconnect.');
       p.prepared = true; p.ack = msg.tick; p.prepareHash = msg.hash;
       if (this.phase === 'loading') this.startWhenLoaded();
       // If everyone had disconnected, resume only after the first returning replica is ready.
@@ -173,7 +173,7 @@ export class Room {
       else { this.phase = 'playing'; this.run(); }
       return this.announce();
     }
-    if (msg.type === 'fault') { this.stop(); this.phase = 'fault'; this.broadcast({ type: 'error', message: '游戏运行出错，请房主返回房间重开' }); this.announce(); }
+    if (msg.type === 'fault') { this.stop(); this.phase = 'fault'; this.broadcast({ type: 'error', message: 'A game error occurred. The host must return to the lobby to restart.' }); this.announce(); }
   }
   step() {
     if (this.phase !== 'playing') return;
@@ -201,7 +201,7 @@ export class Room {
     this.frames.push(frame);
     this.broadcast({ type: 'frame', generation: this.generation, frame });
   }
-  desync(tick) { this.stop(); this.phase = 'desync'; this.broadcast({ type: 'error', message: `第 ${tick} 帧状态不一致，已停止对局，请房主返回房间重开` }); this.announce(); }
+  desync(tick) { this.stop(); this.phase = 'desync'; this.broadcast({ type: 'error', message: `The game went out of sync at frame ${tick} and has stopped. The host must return to the lobby to restart.` }); this.announce(); }
   disconnect(ws) {
     const p = this.players.find(p => p?.ws === ws); if (!p) return;
     p.ws = null; p.keys = 0; p.pulse = false; p.ready = false; p.prepared = false; this.touched = this.now();

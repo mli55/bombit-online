@@ -13,7 +13,7 @@ export class GameRoom extends DurableObject {
     server.addEventListener('message', event => {
       if (Date.now() - windowAt > 1000) { windowAt = Date.now(); messages = 0; }
       if (++messages > 100 || typeof event.data !== 'string' || event.data.length > 8192) return server.close(1008, 'Message limit');
-      try { this.room.receive(server, JSON.parse(event.data)); } catch { this.room.error(server, '消息格式错误'); }
+      try { this.room.receive(server, JSON.parse(event.data)); } catch { this.room.error(server, 'Invalid message format.'); }
     });
     const close = () => { this.sockets.delete(server); this.room.disconnect(server); };
     server.addEventListener('close', close); server.addEventListener('error', close);

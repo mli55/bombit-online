@@ -37,10 +37,10 @@ function loadGame() {
   const id = ++loadId;
   iframe?.contentWindow?.bombItAudio?.dispose();
   bridge = null; iframe?.remove();
-  iframe = document.createElement('iframe'); iframe.title = 'Bomb It 1'; iframe.allow = 'autoplay; fullscreen'; iframe.src = '/game/?v=7';
-  $('game-mount').replaceChildren(iframe); $('loading').hidden = false;
+  iframe = document.createElement('iframe'); iframe.title = 'Bomb It 1'; iframe.allow = 'autoplay; fullscreen'; iframe.src = '/game/?v=8';
+  $('game-mount').replaceChildren(iframe); $('loading').textContent = 'Loading Bomb It 1…'; $('loading').hidden = false;
   loadPromise = new Promise((resolve, reject) => {
-    const timeout = setTimeout(() => { if (id === loadId) reject(new Error('原版素材加载超时，请刷新页面')); }, 45000);
+    const timeout = setTimeout(() => { if (id === loadId) reject(new Error('Loading timed out. Please refresh the page.')); }, 45000);
     onGameReady = () => { clearTimeout(timeout); if (id !== loadId) return; bridge = iframe.contentWindow.onlineBridge; $('loading').hidden = true; resolve(bridge); };
   });
   return loadPromise;
@@ -52,7 +52,7 @@ async function prepare(msg) {
     game.start(msg.config, identity.seat);
     for (let i = 0; i < msg.history.length; i++) {
       game.advance(msg.history[i], true);
-      if (i % 240 === 0) { $('loading').hidden = false; $('loading').textContent = `恢复对局 ${Math.round(i / Math.max(1, msg.history.length) * 100)}%`; await new Promise(r => setTimeout(r, 0)); if (id !== prepareId) return; }
+      if (i % 240 === 0) { $('loading').hidden = false; $('loading').textContent = `Restoring game ${Math.round(i / Math.max(1, msg.history.length) * 100)}%`; await new Promise(r => setTimeout(r, 0)); if (id !== prepareId) return; }
     }
     while (packetQueue.length) {
       const batch = packetQueue.splice(0);
@@ -64,10 +64,10 @@ async function prepare(msg) {
     // A peer can reach a result while this browser is catching up.
     if (game.result && room?.phase === 'playing') send({ type: 'result', result: game.result });
     render();
-  } catch (error) { if (id !== prepareId) return; preparing = false; notice('游戏加载失败：' + error.message); send({ type: 'fault' }); }
+  } catch (error) { if (id !== prepareId) return; preparing = false; notice('Could not load the game: ' + error.message); send({ type: 'fault' }); }
 }
 function connect(code, create = false, token) {
-  leaving = false; clearTimeout(reconnectTimer); status('连接中…');
+  leaving = false; clearTimeout(reconnectTimer); status('Connecting…');
   if (socket) { socket.onclose = null; socket.close(); }
   const ws = socket = new WebSocket(`${location.protocol === 'https:' ? 'wss:' : 'ws:'}//${location.host}/ws/${code}`);
   ws.onopen = () => send({ type: create ? 'create' : 'join', token });
@@ -76,18 +76,18 @@ function connect(code, create = false, token) {
     let msg; try { msg = JSON.parse(event.data); } catch { return; }
     if (msg.type === 'joined') {
       identity = { code: msg.code, token: msg.token, seat: msg.seat };
-      status('已连接');
+      status('Connected');
       $('network').hidden = false;
       $('invite').value = `${location.origin}/?room=${msg.code}`;
-      if (create) notice('选好角色后准备；右上角“联机”可复制邀请链接');
+      if (create) notice('Choose a character, then select READY. Open Multiplayer to copy the invite link.');
       if (queuedSettings) { send({ type: 'settings', ...queuedSettings }); queuedSettings = null; }
     } else if (msg.type === 'room') {
       const previous = room; room = msg;
       if (previous && room.phase !== previous.phase) release();
       if (previous) for (const p of room.players.filter(Boolean)) {
         const old = previous.players[p.seat];
-        if (old?.online && !p.online) notice(`${p.name} 掉线了，角色停止操作`);
-        if (old && !old.online && p.online) notice(`${p.name} 已重新连接`);
+        if (old?.online && !p.online) notice(`${p.name} disconnected. Their character will stop moving.`);
+        if (old && !old.online && p.online) notice(`${p.name} reconnected.`);
       }
       render();
       const reporter = room.players.find(p => p?.online && p.prepared);
@@ -101,41 +101,41 @@ function connect(code, create = false, token) {
     else if (msg.type === 'frame' && msg.generation === generation) {
       if (preparing || !bridge) packetQueue.push(msg.frame);
       else try { bridge.advance(msg.frame); } catch (error) { notice(error.message); send({ type: 'fault' }); }
-    } else if (msg.type === 'verified') $('sync').textContent = `状态一致 · ${msg.tick} 帧`;
-    else if (msg.type === 'pong') { if (room?.phase !== 'paused') { const offline = room?.players.filter(p => p && !p.online).map(p => `${p.seat + 1}P 掉线`) || []; status([...offline, `${Math.max(0, Date.now() - msg.time)} ms`].join(' · ')); } }
+    } else if (msg.type === 'verified') $('sync').textContent = `In sync · Frame ${msg.tick}`;
+    else if (msg.type === 'pong') { if (room?.phase !== 'paused') { const offline = room?.players.filter(p => p && !p.online).map(p => `P${p.seat + 1} disconnected`) || []; status([...offline, `${Math.max(0, Date.now() - msg.time)} ms`].join(' · ')); } }
     else if (msg.type === 'error') {
       notice(msg.message);
       if (msg.reset) { leave(false); $('network').hidden = false; $('network').open = true; }
-    } else if (msg.type === 'ended') { notice('房间已结束'); leave(false); }
+    } else if (msg.type === 'ended') { notice('The room has closed.'); leave(false); }
   };
   ws.onclose = () => {
     if (socket !== ws) return; release();
     if (leaving) return;
-    status('掉线 · 重连中');
+    status('Disconnected · Reconnecting…');
     if (identity) reconnectTimer = setTimeout(() => connect(identity.code, false, identity.token), 1200);
-    else notice('连接失败，请稍后重试');
+    else notice('Could not connect. Please try again.');
   };
-  ws.onerror = () => status('连接暂不可用');
+  ws.onerror = () => status('Connection unavailable');
 }
 function leave(notify = true) {
   leaving = true; clearTimeout(reconnectTimer); release(); if (notify) send({ type: 'leave' });
   socket?.close(); socket = null; identity = room = null; generation = ''; ++prepareId; preparing = false; selectingDifficulty = false;
-  $('network').hidden = true; $('room-info').hidden = true; $('touch').hidden = true; status('准备开玩'); loadGame().catch(e => notice(e.message));
+  $('network').hidden = true; $('room-info').hidden = true; $('touch').hidden = true; status('Ready to play'); loadGame().catch(e => notice(e.message));
 }
 function render() {
   if (!room || !identity) return;
   bridge?.updateRoster?.(room);
   const host = identity.seat === 0;
-  $('room-info').hidden = false; $('room-label').textContent = `房间 ${identity.code} · ${room.players.filter(Boolean).length}/4`;
-  $('roster').textContent = room.players.filter(Boolean).map(p => `${p.name}${p.seat === identity.seat ? '（你）' : ''} · ${!p.online ? '掉线' : room.phase === 'lobby' ? (p.ready ? '已准备' : '选人中') : '在线'}`).join('\n');
+  $('room-info').hidden = false; $('room-label').textContent = `Room ${identity.code} · ${room.players.filter(Boolean).length}/4`;
+  $('roster').textContent = room.players.filter(Boolean).map(p => `${p.name}${p.seat === identity.seat ? ' (you)' : ''} · ${!p.online ? 'Disconnected' : room.phase === 'lobby' ? (p.ready ? 'Ready' : 'Choosing a character') : 'Online'}`).join('\n');
   $('back').hidden = $('difficulty-settings').hidden = !host; $('difficulty-settings').disabled = room.phase !== 'lobby';
   $('resume').hidden = !(host && room.phase === 'paused');
   $('touch').hidden = room.phase !== 'playing';
-  if (room.phase === 'loading' || preparing) status('加载中…');
-  if (room.phase === 'paused') { status('已暂停'); $('network').open = true; }
+  if (room.phase === 'loading' || preparing) status('Loading…');
+  if (room.phase === 'paused') { status('Paused'); $('network').open = true; }
   if (room.phase === 'playing') $('network').open = false;
-  if (['fault','desync'].includes(room.phase)) { status('请重新选人'); $('network').open = true; }
-  const offline = room.players.filter(p => p && !p.online).map(p => `${p.seat + 1}P 掉线`);
+  if (['fault','desync'].includes(room.phase)) { status('Return to character select'); $('network').open = true; }
+  const offline = room.players.filter(p => p && !p.online).map(p => `P${p.seat + 1} disconnected`);
   if (offline.length) status(offline.join(' · '));
 }
 function confirmSelection() {
@@ -158,25 +158,25 @@ window.addEventListener('message', e => {
     selectingDifficulty = false;
     if (room && identity?.seat === 0) send({ type: 'settings', difficulty: msg.difficulty });
     else if (!room) { queuedSettings = { difficulty: msg.difficulty }; const code = Array.from(crypto.getRandomValues(new Uint8Array(5)), n => n.toString(16).padStart(2,'0')).join('').toUpperCase(); connect(code, true); }
-    else notice('难度由房主选择');
+    else notice('Only the host can change the difficulty.');
   } else if (msg.type === 'character-request') send({ type: 'character', character: msg.character });
   else if (msg.type === 'confirm-request') confirmSelection();
-  else if (msg.type === 'continue-request') { if (identity?.seat === 0) send({ type: 'continue' }); else notice('等待房主开始下一局'); }
-  else if (msg.type === 'lobby-request') { if (identity?.seat === 0) send({ type: 'lobby' }); else notice('等待房主返回选人'); }
+  else if (msg.type === 'continue-request') { if (identity?.seat === 0) send({ type: 'continue' }); else notice('Waiting for the host to start the next round.'); }
+  else if (msg.type === 'lobby-request') { if (identity?.seat === 0) send({ type: 'lobby' }); else notice('Waiting for the host to return to character select.'); }
   else if (msg.type === 'key') input(msg.code, msg.down);
   else if (msg.type === 'release') release();
   else if (msg.type === 'check') send({ type: 'check', tick: msg.tick, hash: msg.hash });
   else if (msg.type === 'result') send({ type: 'result', result: msg.result });
-  else if (msg.type === 'pause-request') { if (identity?.seat === 0) { release(); send({ type: 'pause' }); } else notice('暂停由房主控制'); }
-  else if (msg.type === 'error') { notice('游戏错误：' + msg.message.split('\n')[0]); send({ type: 'fault' }); }
+  else if (msg.type === 'pause-request') { if (identity?.seat === 0) { release(); send({ type: 'pause' }); } else notice('Only the host can pause the game.'); }
+  else if (msg.type === 'error') { notice('Game error: ' + msg.message.split('\n')[0]); send({ type: 'fault' }); }
 });
-$('join-form').onsubmit = e => { e.preventDefault(); const code = $('code').value.trim().toUpperCase(); if (!/^[A-F0-9]{10}$/.test(code)) return notice('请输入 10 位房间码'); if (identity) return notice('请先离开当前房间'); connect(code); };
+$('join-form').onsubmit = e => { e.preventDefault(); const code = $('code').value.trim().toUpperCase(); if (!/^[A-F0-9]{10}$/.test(code)) return notice('Enter a 10-character room code.'); if (identity) return notice('Leave the current room before joining another.'); connect(code); };
 $('leave').onclick = () => leave();
-$('copy').onclick = async () => { try { await navigator.clipboard.writeText($('invite').value); notice('邀请链接已复制'); } catch { $('invite').select(); notice('请复制邀请链接'); } };
+$('copy').onclick = async () => { try { await navigator.clipboard.writeText($('invite').value); notice('Invite link copied.'); } catch { $('invite').select(); notice('Copy the invite link to share it.'); } };
 $('back').onclick = () => { release(); send({ type: 'lobby' }); };
 $('difficulty-settings').onclick = () => { selectingDifficulty = true; bridge?.showMainMenu(); $('network').open = false; };
 $('resume').onclick = () => send({ type: 'pause' });
-$('fullscreen').onclick = () => document.documentElement.requestFullscreen?.().catch(() => notice('当前浏览器不支持全屏'));
+$('fullscreen').onclick = () => document.documentElement.requestFullscreen?.().catch(() => notice('Fullscreen is unavailable in this browser.'));
 for (const type of ['keydown','keyup']) window.addEventListener(type, e => {
   if (type === 'keyup' && keys.has(e.code)) input(e.code, false);
   if (['INPUT','SELECT','TEXTAREA','BUTTON'].includes(e.target.tagName) || !inputCodes.includes(e.code)) return;
