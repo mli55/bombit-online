@@ -16,3 +16,18 @@
 - The complete four-browser UI suite passes with the updated input protocol. It also checks latest-direction priority, ignoring older held-key repeats, and stopping on release. See [controls-ui-qa-results.json](controls-ui-qa-results.json). Effect durations and native Single Player latency measurements are recorded in [gameplay-comparison.md](gameplay-comparison.md).
 
 Browser checks used separate Chrome 155 contexts on one computer. They do not cover four geographically separate devices, all browser engines, or real mobile hardware.
+
+Audio follow-up, 2026-10-23:
+
+- `test/audio.test.js` runs the bundled Howler and Ph2 audio manager with controlled Web Audio nodes. Ten tests reproduce the original deferred-menu/playback race and verify scene changes, slow loading, automatic suspension, repeated unlocks, mute/pause, replay effects, and disposal.
+- `scripts/qa-audio.mjs` passes 11 real Chrome checks, tracking native `AudioBufferSourceNode` start/stop/end events. Permitted autoplay starts one menu BGM on entry; strict autoplay stays suspended until a real pointer or keyboard gesture. A menu-to-game transition before unlocking starts only the current gameplay track. Native sound-off persists, replay skips historical explosions, live effects still play, and disposal stops old sources.
+- The audio suite uses CDP evaluation with `userGesture: false` so inspection cannot silently bypass autoplay restrictions. Single-player entry uses the native UI; online audio/replay and menu return use isolated engine fixtures. It checks playback sources, not microphone output, and does not cover Safari, mobile devices, or the HTML audio fallback.
+- The existing full `scripts/qa-ui.mjs` suite also passes with the audio changes, including four-client checksums, uninterrupted reconnection, pause/resume, difficulty changes, native Single Player, and refresh behavior.
+
+Run audio browser checks after `npm run build` and starting the local server:
+
+```sh
+node scripts/qa-audio.mjs
+```
+
+As with the other browser checks, `PLAYWRIGHT_MODULE`, `CHROME_BIN`, `BASE_URL`, and `QA_OUTPUT_DIR` can select the local test runtime and output location.

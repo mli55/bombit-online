@@ -244,7 +244,7 @@
   function advance(packet, replay = false) {
     const [n, masks] = packet;
     if (n !== frame + 1) throw new Error(`Frame sequence ${frame} → ${n}`);
-    inClock(() => {
+    const simulate = () => inClock(() => {
       const state = game.state.getCurrentState();
       if (game.state.current === 'gameplayState' && state.grid && !pendingResult) {
         for (const human of config.players) {
@@ -257,6 +257,8 @@
       if (game.state.current === 'gameplayState' && !pendingResult && !roundOutcome && current.grid.players.filter(p => !p.dead).length <= 1) current.gameOver(false);
       frame = n;
     });
+    if (replay) window.bombItAudio.replay(simulate);
+    else simulate();
     if (pendingResult && !resultReported && !replay) { resultReported = true; report('result', { result: pendingResult }); }
     if (frame % 60 === 0 && !replay) report('check', { tick: frame, hash: checksum(), state: game.state.current });
   }
@@ -278,7 +280,7 @@
     for (let i = 0; i < text.length; i++) { hash ^= text.charCodeAt(i); hash = Math.imul(hash, 16777619); }
     return (hash >>> 0).toString(16).padStart(8, '0');
   }
-  function sound(on) { window.Howler?.mute(!on); if (on) window.Howler?.ctx?.resume(); }
+  function sound(on) { window.Howler?.mute(!on); if (on) window.bombItAudio.unlock(); }
   function updateRoster(room) {
     if (!active || game.state.current !== 'gameplayState') return;
     const state = game.state.getCurrentState();
@@ -294,6 +296,8 @@
     }
   }
   window.onlineBridge = { start, advance, checksum, snapshot, sound, updateRoster, get online() { return active; }, get frame() { return frame; }, get state() { return game.state.current; }, get result() { return pendingResult; } };
+  window.onlineBridge.unlockAudio = window.bombItAudio.unlock;
+  window.onlineBridge.disposeAudio = window.bombItAudio.dispose;
   let ready = false;
   const wait = setInterval(() => {
     if (game.state.current === 'mainMenuState' && Game.Instances.DataManager && !ready) {

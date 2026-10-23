@@ -35,8 +35,9 @@ function input(code, down) {
 }
 function loadGame() {
   const id = ++loadId;
+  iframe?.contentWindow?.bombItAudio?.dispose();
   bridge = null; iframe?.remove();
-  iframe = document.createElement('iframe'); iframe.title = 'Bomb It 1'; iframe.allow = 'autoplay; fullscreen'; iframe.src = '/game/?v=6';
+  iframe = document.createElement('iframe'); iframe.title = 'Bomb It 1'; iframe.allow = 'autoplay; fullscreen'; iframe.src = '/game/?v=7';
   $('game-mount').replaceChildren(iframe); $('loading').hidden = false;
   loadPromise = new Promise((resolve, reject) => {
     const timeout = setTimeout(() => { if (id === loadId) reject(new Error('原版素材加载超时，请刷新页面')); }, 45000);
@@ -184,6 +185,8 @@ for (const type of ['keydown','keyup']) window.addEventListener(type, e => {
   if (room) { e.preventDefault(); if (!e.repeat) input(e.code, type === 'keydown'); }
 });
 $('network').addEventListener('focusin', release);
+// Room controls live outside the canvas; these gestures also unlock its audio.
+for (const type of ['pointerdown', 'click', 'touchend', 'keydown']) window.addEventListener(type, () => iframe?.contentWindow?.bombItAudio?.unlock(), true);
 window.addEventListener('blur', release); document.addEventListener('visibilitychange', () => { if (document.hidden) release(); });
 for (const button of document.querySelectorAll('[data-key]')) { button.onpointerdown = e => { e.preventDefault(); button.setPointerCapture(e.pointerId); input(button.dataset.key, true); }; button.onpointerup = button.onpointercancel = () => input(button.dataset.key, false); }
 setInterval(() => { if (room?.phase === 'playing' && !preparing) send({ type: 'input', keys: mask() }); }, 500);
