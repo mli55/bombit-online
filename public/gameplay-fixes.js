@@ -1,5 +1,13 @@
-/* Small fixes around the original Bomb It player lifecycle. */
+/* Gameplay timing and player lifecycle adjustments around the original engine. */
 (() => {
+  // Finish the visible flame and its danger cells together, using the game clock
+  // so pauses and deterministic online replays keep the same duration.
+  Game.BombExplosion.prototype.checkTimer = function () {
+    if (!this.hasExploded) return;
+    this.timer += this.game.time.elapsedMS;
+    if (this.timer >= 300) this.endExplosion();
+  };
+
   const updatePlayer = Game.Player.prototype.update;
   Game.Player.prototype.update = function () {
     updatePlayer.call(this);

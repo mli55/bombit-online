@@ -12,6 +12,11 @@ const end = source.indexOf(endMarker);
 const start = source.lastIndexOf('function(l){', end);
 assert.ok(start >= 0 && end > start, 'Find the preserved upstream Player definition');
 const playerDefinition = source.slice(start, end + endMarker.length);
+const explosionEndMarker = 'h.BombExplosion=t}';
+const explosionEnd = source.indexOf(explosionEndMarker);
+const explosionStart = source.lastIndexOf('function(h){', explosionEnd);
+assert.ok(explosionStart >= 0 && explosionEnd > explosionStart, 'Find the preserved upstream BombExplosion definition');
+const explosionDefinition = source.slice(explosionStart, explosionEnd + explosionEndMarker.length);
 const fixes = readFileSync(new URL('../public/gameplay-fixes.js', import.meta.url), 'utf8');
 
 function fixture({ patched = true, weapon = 'grenade' } = {}) {
@@ -23,13 +28,14 @@ function fixture({ patched = true, weapon = 'grenade' } = {}) {
     SETTINGS: { CELL_WIDTH: 50, CELL_HEIGHT: 50, GRID_WIDTH: 6, GRID_HEIGHT: 6 },
   };
   const context = vm.createContext({
-    Game, Phaser: { Group: function Group() {} },
+    Game, Phaser: { Group: function Group() {}, Sprite: function Sprite() {} },
     __extends(derived, base) {
       derived.prototype = Object.create(base.prototype);
       derived.prototype.constructor = derived;
     },
   });
   vm.runInContext(`(${playerDefinition})(Game)`, context);
+  vm.runInContext(`(${explosionDefinition})(Game)`, context);
   if (patched) vm.runInContext(fixes, context);
   const sprite = () => ({ visible: true, ph2Animations: { play() {}, pause() {} } });
   const firedWeapon = { alive: true };
