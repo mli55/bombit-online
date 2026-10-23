@@ -71,6 +71,13 @@ async function gameFrame(page) {
   const element = await page.locator('#game-mount iframe').elementHandle();
   return element ? element.contentFrame() : null;
 }
+async function screenshotGame(page, filename) {
+  const frame = await gameFrame(page);
+  assert(frame, 'The game frame must exist before capturing it');
+  const clip = await frame.locator('canvas').boundingBox();
+  assert(clip && clip.width > 0 && clip.height > 0, 'The game canvas must be visible before capturing it');
+  await page.screenshot({ path: resolve(output, filename), clip });
+}
 async function stateIs(page, state, timeout = 45000) {
   await until(async () => {
     try { const frame = await gameFrame(page); return frame ? await frame.evaluate(expected => window.onlineBridge?.state === expected, state) : false; }
@@ -137,13 +144,13 @@ try {
     button.visible = true;
     return button.visible || button.inputEnabled;
   }), false, 'Bomb It 2 promotion must remain hidden and non-interactive');
-  await host.screenshot({ path: resolve(output, 'main-menu.png') });
+  await screenshotGame(host, 'main-menu.png');
   assert.equal(await host.locator('#name, input[name="name"]').count(), 0, 'The lobby must not ask players to choose names');
   await setPanel(host, false);
   assert.equal(await host.locator('#network').isHidden(), true, 'The main menu must not show networking before Multiplayer');
   await nativeClick(host, 'buttonStartGame');
   await nativeClick(host, 'button2Player');
-  await host.screenshot({ path: resolve(output, 'difficulty-menu.png') });
+  await screenshotGame(host, 'difficulty-menu.png');
   await until(() => host.locator('#network').isVisible(), 'Multiplayer must reveal room controls');
   await nativeClick(host, 'buttonNormal');
   await stateIs(host, 'characterSelectState');
@@ -174,7 +181,7 @@ try {
   await waitRoom(host, room => room.players.every(player => player?.ready), 'Host native confirmation did not ready every player');
   await until(async () => (await (await gameFrame(host)).evaluate(() => Game.App.getInstance().state.getCurrentState().onlineConfirmText.text)) === 'START', 'Native confirm button did not switch to START');
   await host.locator('#notice').waitFor({ state: 'hidden' });
-  await host.screenshot({ path: resolve(output, 'online-lobby.png') });
+  await screenshotGame(host, 'online-lobby.png');
   record('Four original character selectors, Space readiness, and native START', { characters });
   await nativeClick(host, 'buttonMobile');
   await Promise.all(pages.slice(0, 4).map(page => stateIs(page, 'gameplayState')));
@@ -187,7 +194,7 @@ try {
   const afterFrame = await frameNumber(host), elapsed = performance.now() - beforeTime;
   const fps = (afterFrame - beforeFrame) * 1000 / elapsed;
   assert(fps >= 48 && fps <= 70, `Expected about 60 ordered frames/sec; observed ${fps.toFixed(2)}`);
-  await host.screenshot({ path: resolve(output, 'online-battle.png') });
+  await screenshotGame(host, 'online-battle.png');
   record('Real-time 60 Hz room and matching four-client hashes', { frames: afterFrame - beforeFrame, elapsedMs: Math.round(elapsed), fps: Number(fps.toFixed(2)), ...initialSync });
 
   await host.keyboard.down('ArrowUp');
@@ -336,7 +343,7 @@ try {
       }
     });
     await stateIs(fixture, 'gameOverState');
-    await fixture.screenshot({ path: resolve(output, 'round-result.png') });
+    await screenshotGame(fixture, 'round-result.png');
     const result = await fixture.evaluate(() => ({ result: window.onlineBridge.result, text: Game.App.getInstance().state.getCurrentState().textButton.text }));
     assert.equal(result.result.canContinue, true); assert.equal(result.text, 'NEXT ROUND');
     await nativeClick(fixture, 'buttonNextLevel');
