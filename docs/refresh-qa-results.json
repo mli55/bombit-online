@@ -1,0 +1,60 @@
+{
+  "baseURL": "http://localhost:3100",
+  "startedAt": "2026-10-23T05:09:52.407Z",
+  "checks": [
+    {
+      "name": "Native Multiplayer and difficulty create a room; native robot selects blue",
+      "room": "163D7E2F26"
+    },
+    {
+      "name": "Four original character selectors, Space readiness, and native START",
+      "characters": [
+        2,
+        0,
+        1,
+        3
+      ]
+    },
+    {
+      "name": "Real-time 60 Hz room and matching four-client hashes",
+      "frames": 60,
+      "elapsedMs": 1005,
+      "fps": 59.72,
+      "tick": 60,
+      "hash": "094de789"
+    },
+    {
+      "name": "Disconnected player is labeled and the other players keep running",
+      "advancedFrames": 300,
+      "offlineMs": 5008
+    },
+    {
+      "name": "Reconnect catches up to an exact shared frame and checksum",
+      "tick": 540,
+      "hash": "7c1c4983"
+    },
+    {
+      "name": "Original pause button pauses and resumes all four replicas",
+      "pausedAt": 543
+    },
+    {
+      "name": "Native difficulty changes preserve P1–P4 and synchronized play",
+      "tick": 60,
+      "hash": "a76e5227"
+    },
+    {
+      "name": "Original Single Player tutorial, character keys, movement input, and pause work without networking",
+      "character": 1,
+      "humans": 1
+    },
+    {
+      "name": "Isolated original score screen and clickable NEXT ROUND",
+      "simulatedFrame": 11101
+    },
+    {
+      "name": "Fresh invitations join once; refresh forgets the room, clears legacy identity, and opens no WebSocket"
+    }
+  ],
+  "completedAt": "2026-10-23T05:10:23.005Z",
+  "elapsedMs": 30598
+}

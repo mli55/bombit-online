@@ -9,5 +9,6 @@
 - Real browser UI checks pass: original Multiplayer/difficulty/character selection, automatic invite joining, P1–P4, four-client checkpoints, pause/resume, and difficulty changes. During a five-second disconnect, the other clients advanced 300 frames; the returning browser caught up and matched their hash.
 - Original Single Player works without a WebSocket: character keys, tutorial, movement input, local clock, and native pause/resume. The original online score screen's NEXT ROUND button emits the continuation request.
 - [ui-qa-results.json](ui-qa-results.json) contains browser measurements. The two README screenshots are from this four-player run. WebGL is active; no browser runtime errors occurred.
+- The updated UI suite also passes with in-memory room identities: fresh invitations join once, same-document transport reconnection preserves the seat, and refreshing either a guest or a host returns to the original menu without opening a WebSocket. Old room URLs and stored identities are cleared. See [refresh-qa-results.json](refresh-qa-results.json).
 
 Browser checks used separate Chrome 155 contexts on one computer. They do not cover four geographically separate devices, all browser engines, or real mobile hardware.

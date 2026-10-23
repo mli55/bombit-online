@@ -4,8 +4,15 @@ let socket, identity = null, room = null, generation = '', bridge = null, iframe
 let leaving = false, reconnectTimer, toastTimer, preparing = false, packetQueue = [];
 let loadId = 0, prepareId = 0, onGameReady, loadPromise, queuedSettings, selectingDifficulty = false;
 const keys = new Set();
-const stored = (() => { try { return JSON.parse(sessionStorage.getItem('bomb-it-room')); } catch { return null; } })();
-const invitation = new URLSearchParams(location.search).get('room');
+// Keep reconnect credentials only for this page's lifetime. A refresh starts over.
+try { sessionStorage.removeItem('bomb-it-room'); } catch {}
+const pageURL = new URL(location.href);
+const refreshed = performance.getEntriesByType('navigation')[0]?.type === 'reload';
+const invitation = refreshed ? null : pageURL.searchParams.get('room');
+if (pageURL.searchParams.has('room')) {
+  pageURL.searchParams.delete('room');
+  history.replaceState(null, '', pageURL.pathname + pageURL.search + pageURL.hash);
+}
 if (invitation) { $('code').value = invitation.toUpperCase(); $('network').hidden = false; $('network').open = true; }
 function notice(message) { $('notice').textContent = message; $('notice').hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(() => { $('notice').hidden = true; }, 6000); }
 function send(msg) { if (socket?.readyState === WebSocket.OPEN) socket.send(JSON.stringify({ generation, ...msg })); }
@@ -59,7 +66,7 @@ function connect(code, create = false, token) {
     let msg; try { msg = JSON.parse(event.data); } catch { return; }
     if (msg.type === 'joined') {
       identity = { code: msg.code, token: msg.token, seat: msg.seat };
-      sessionStorage.setItem('bomb-it-room', JSON.stringify(identity)); history.replaceState(null, '', `?room=${msg.code}`); status('已连接');
+      status('已连接');
       $('network').hidden = false;
       $('invite').value = `${location.origin}/?room=${msg.code}`;
       if (create) notice('选好角色后准备；右上角“联机”可复制邀请链接');
@@ -103,7 +110,6 @@ function connect(code, create = false, token) {
 function leave(notify = true) {
   leaving = true; clearTimeout(reconnectTimer); release(); if (notify) send({ type: 'leave' });
   socket?.close(); socket = null; identity = room = null; generation = ''; ++prepareId; preparing = false; selectingDifficulty = false;
-  sessionStorage.removeItem('bomb-it-room'); history.replaceState(null, '', location.pathname);
   $('network').hidden = true; $('room-info').hidden = true; $('touch').hidden = true; status('准备开玩'); loadGame().catch(e => notice(e.message));
 }
 function render() {
@@ -174,5 +180,4 @@ for (const button of document.querySelectorAll('[data-key]')) { button.onpointer
 setInterval(() => { if (room?.phase === 'playing' && !preparing) send({ type: 'input', keys: mask() }); }, 500);
 setInterval(() => { if (socket?.readyState === WebSocket.OPEN) send({ type: 'ping', time: Date.now() }); }, 3000);
 loadGame().catch(e => notice(e.message));
-if (stored && (!invitation || invitation.toUpperCase() === stored.code)) { identity = stored; connect(stored.code, false, stored.token); }
-else if (invitation && /^[A-F0-9]{10}$/i.test(invitation)) connect(invitation.toUpperCase());
+if (invitation && /^[A-F0-9]{10}$/i.test(invitation)) connect(invitation.toUpperCase());

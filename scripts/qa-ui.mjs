@@ -52,6 +52,11 @@ async function newPlayer(browser, label, url = baseURL + '/') {
   const context = await browser.newContext({ viewport: { width: 1280, height: 800 }, deviceScaleFactor: 1 });
   contexts.push(context);
   await context.addInitScript(() => {
+    const NativeWebSocket = window.WebSocket;
+    window.__qaSockets = [];
+    window.WebSocket = class extends NativeWebSocket {
+      constructor(...args) { super(...args); window.__qaSockets.push(this); }
+    };
     window.addEventListener('message', event => {
       if (event.data?.source === 'bomb-it-game' && event.data.type === 'error') console.error('[bombit-qa-engine] ' + event.data.message);
     });
@@ -136,8 +141,9 @@ try {
   await nativeClick(host, 'buttonNormal');
   await stateIs(host, 'characterSelectState');
   await setPanel(host, false);
-  const code = new URL(host.url()).searchParams.get('room');
+  const code = new URL(await host.locator('#invite').inputValue()).searchParams.get('room');
   assert.match(code || '', /^[0-9A-F]{10}$/);
+  assert.equal(new URL(host.url()).searchParams.has('room'), false, 'Creating a room must not make refresh join it again');
   await waitRoom(host, room => room.settings.difficulty === 1, 'Native NORMAL button did not create a room at normal difficulty');
   // Choose blue while it is vacant. Later joins must fill the remaining colors.
   await nativeClick(host, 'hero3');
@@ -149,6 +155,8 @@ try {
     assert.equal(await guest.page.locator('#name, input[name="name"]').count(), 0, 'Joining must not require a name');
     await stateIs(guest.page, 'characterSelectState');
     await waitRoom(guest.page, room => room.players[seat]?.name === names[seat], `Guest ${seat} did not join its seat`);
+    assert.equal(new URL(guest.page.url()).searchParams.has('room'), false, 'An invitation must be consumed after opening it');
+    assert.equal(await guest.page.evaluate(() => sessionStorage.getItem('bomb-it-room')), null, 'Joining must not persist a room identity');
   }
   await waitRoom(host, room => room.players.filter(Boolean).length === 4, 'All four original selectors must share one room');
   const characters = observations.get(host).room.players.map(player => player.character);
@@ -177,13 +185,12 @@ try {
   const disconnected = guests[0], disconnectStart = Date.now();
   const beforeDisconnect = await frameNumber(host);
   await disconnected.context.setOffline(true);
-  await delay(250);
   // Some Chrome versions leave existing WebSockets open under network emulation.
-  // Navigating the offline page closes its real connection, without faking room state.
-  if (observations.get(host).room.players[1]?.online) {
-    try { await disconnected.page.reload({ waitUntil: 'domcontentloaded', timeout: 5000 }); }
-    catch (error) { if (!/ERR_INTERNET_DISCONNECTED|ERR_NETWORK_CHANGED|Timeout/.test(error.message)) throw error; }
-  }
+  // Close only the captured transport so reconnect retains this document's identity.
+  await disconnected.page.evaluate(() => {
+    window.__qaReconnectDocument = true;
+    for (const ws of window.__qaSockets) if (ws.readyState === WebSocket.OPEN) ws.close(4000, 'QA connection interruption');
+  });
   await waitRoom(host, room => !room.players[1]?.online, 'The server did not notice the disconnected browser', 10000);
   await delay(Math.max(0, 5000 - (Date.now() - disconnectStart)));
   const duringDisconnect = await frameNumber(host);
@@ -191,9 +198,9 @@ try {
   assert.match((await host.locator('#roster').textContent()) + (await host.locator('#connection').textContent()), /掉线/);
   record('Disconnected player is labeled and the other players keep running', { advancedFrames: duringDisconnect - beforeDisconnect, offlineMs: Date.now() - disconnectStart });
   await disconnected.context.setOffline(false);
-  await disconnected.page.reload({ waitUntil: 'domcontentloaded' });
   await stateIs(disconnected.page, 'gameplayState');
   await waitRoom(host, room => room.players[1]?.online && room.players[1]?.prepared, 'Returning player did not finish deterministic catch-up');
+  assert.equal(await disconnected.page.evaluate(() => window.__qaReconnectDocument), true, 'Transient reconnect must retain the same document');
   const recoveredSync = await commonHash(duringDisconnect);
   record('Reconnect catches up to an exact shared frame and checksum', recoveredSync);
 
@@ -223,7 +230,7 @@ try {
   await stateIs(host, 'characterSelectState');
   await waitRoom(host, room => room.settings.difficulty === 2 && room.players.filter(Boolean).length === 4,
     'The original difficulty selector must preserve all four joined players');
-  assert.equal(new URL(host.url()).searchParams.get('room'), code, 'Changing difficulty must preserve the room link');
+  assert.equal(new URL(await host.locator('#invite').inputValue()).searchParams.get('room'), code, 'Changing difficulty must preserve the room invitation');
   assert.deepEqual(observations.get(host).room.players.map(player => player.name), names);
   for (let i = 0; i < guests.length; i++) await readyByKeyboard(guests[i].page, i + 1);
   await nativeClick(host, 'buttonMobile');
@@ -315,6 +322,24 @@ try {
     await until(() => fixture.evaluate(() => window.__qaContinueRequests === 1), 'Clicking original NEXT ROUND did not emit a single continuation request');
     record('Isolated original score screen and clickable NEXT ROUND', { simulatedFrame: await frameNumber(fixture) });
   }
+  // Reload is deliberately different from a transient socket failure. Test a
+  // consumed invitation and the URL/storage left behind by an older release.
+  for (const [page, legacyURL] of [[guests[0].page, false], [host, true]]) {
+    const beforeSockets = observations.get(page).sockets;
+    await page.evaluate(({ code, legacyURL }) => {
+      sessionStorage.setItem('bomb-it-room', JSON.stringify({ code, token: 'legacy-room-token', seat: 0 }));
+      if (legacyURL) history.replaceState(null, '', `?room=${code}`);
+    }, { code, legacyURL });
+    await page.reload({ waitUntil: 'domcontentloaded' });
+    await stateIs(page, 'mainMenuState');
+    await delay(1500);
+    assert.equal(await page.locator('#network').isHidden(), true, 'Refreshing must return to the original menu with room controls hidden');
+    assert.equal(new URL(page.url()).searchParams.has('room'), false, 'Refreshing must remove an old room query');
+    assert.equal(await page.evaluate(() => sessionStorage.getItem('bomb-it-room')), null, 'Refreshing must discard any legacy room identity');
+    assert.equal(observations.get(page).sockets, beforeSockets, 'Refreshing must not reconnect or join another seat');
+    assert.equal(await (await gameFrame(page)).evaluate(() => window.onlineBridge.online), false, 'Refreshing must start the original offline menu');
+  }
+  record('Fresh invitations join once; refresh forgets the room, clears legacy identity, and opens no WebSocket');
   assert.deepEqual(errors, [], 'Browser or engine runtime errors occurred');
   evidence.completedAt = new Date().toISOString(); evidence.elapsedMs = Date.now() - started;
   await writeFile(resolve(output, 'ui-qa-results.json'), JSON.stringify(evidence, null, 2) + '\n');
