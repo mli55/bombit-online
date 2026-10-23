@@ -53,3 +53,9 @@ test('continued campaign is one ordered command for every replica', () => {
   const { room, act, start } = setup(2,'coop');start();act(0,{type:'result',result:{canContinue:true,win:true,level:2}});assert.equal(room.phase,'result');
   act(1,{type:'continue'});assert.equal(room.phase,'result');act(0,{type:'continue'});room.step();assert.equal(room.frames[0][2],'continue');
 });
+test('returning to lobby cancels a queued level continuation', () => {
+  const { room, act, start } = setup(2, 'coop'); start();
+  act(0, { type: 'result', result: { canContinue: true } });
+  act(0, { type: 'continue' }); act(0, { type: 'lobby' });
+  start(); room.step(); assert.equal(room.frames[0].length, 2);
+});

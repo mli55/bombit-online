@@ -61,7 +61,9 @@ function connect(code, create = false, token) {
     } else if (msg.type === 'ended') { notice('房间已结束'); leave(false); }
   };
   socket.onclose = () => {
-    release(); status('连接断开');
+    release();
+    if (leaving) { status('准备开玩'); return; }
+    status('连接断开');
     if (!leaving && identity) {
       if (room) { room.phase = 'reconnecting'; render(); }
       reconnectTimer = setTimeout(() => connect(identity.code, false, identity.token), 1500);

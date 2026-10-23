@@ -83,7 +83,7 @@ export class Room {
     if (msg.type === 'ready' && this.phase === 'lobby') { p.ready = !!msg.ready; return this.announce(); }
     if (msg.type === 'start' && seat === 0 && this.phase === 'lobby') {
       if (this.members().some(x => !x.ws || !x.ready)) return this.error(p.ws, '等所有玩家准备好后再开始');
-      this.generation = randomToken().slice(0, 12); this.frames = []; this.tick = 0; this.verified = 0; this.checks.clear(); this.result = null;
+      this.generation = randomToken().slice(0, 12); this.frames = []; this.tick = 0; this.verified = 0; this.checks.clear(); this.result = null; this.pendingCommand = null;
       this.config = { ...this.settings, seed: randomToken(), players: this.members().map(x => ({ seat: this.players.indexOf(x), character: x.character, name: x.name })) };
       this.phase = 'loading';
       this.members().forEach(x => { x.prepared = false; x.ack = 0; x.keys = 0; x.pulse = false; x.lastInput = 0; this.prepare(x.ws); });
@@ -159,6 +159,6 @@ export class Room {
     if (this.config && this.phase !== 'lobby') { this.stop(); this.phase = 'reconnecting'; }
     this.announce();
   }
-  toLobby() { this.stop(); this.config = null; this.frames = []; this.checks.clear(); this.result = null; this.phase = 'lobby'; this.members().forEach(x => { x.ready = false; x.keys = 0; }); }
+  toLobby() { this.stop(); this.config = null; this.frames = []; this.checks.clear(); this.result = null; this.pendingCommand = null; this.phase = 'lobby'; this.members().forEach(x => { x.ready = false; x.keys = 0; }); }
   dispose() { this.stop(); this.checks.clear(); this.frames = []; }
 }
