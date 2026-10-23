@@ -87,11 +87,12 @@
     if (label.width > width) label.scale.set(width / label.width);
   }
   function layoutSelector(state) {
-    // Keep the original keyboard instructions; show its native mobile confirm
-    // button beside them so clicking and touch need no new web controls.
+    // Keep the keyboard instructions and place the rectangular confirm button
+    // beside them, with its current action centered inside the button.
     const mobile = state.mobileContainer;
     mobile.visibility.enable(false); mobile.visible = true;
     mobile.x = game.width * 0.5 + 390; mobile.y = 580;
+    state.onlineConfirmText.position.set(state.buttonMobile.x, state.buttonMobile.y + 3);
     find('controls_mobile/move_text', state.uiCharacterSelect).visible = false;
     const desktop = find('controls_desktop', state.uiCharacterSelect);
     desktop.visibility.enable(false); desktop.visible = true;
@@ -156,13 +157,16 @@
       });
     }
     this.onlineConfirmText = find('controls_mobile/button_text', this.uiCharacterSelect);
+    this.buttonMobile.loadTexture('atlas_ui', 'button.png');
     this.buttonMobile.inputEnabled = true;
     this.buttonMobile.input.useHandCursor = true;
     this.buttonMobile.events.onInputDown.add(confirm);
-    // The caption is clickable too, as it sits above the original round button.
-    this.onlineConfirmText.inputEnabled = true;
-    this.onlineConfirmText.input.useHandCursor = true;
-    this.onlineConfirmText.events.onInputDown.add(confirm);
+    this.buttonMobile.events.onInputOver.add(() => { this.buttonMobile.frameName = 'button_press.png'; });
+    this.buttonMobile.events.onInputOut.add(() => { this.buttonMobile.frameName = 'button.png'; });
+    this.onlineConfirmText.fontSize = 30;
+    this.onlineConfirmText.strokeThickness = 0;
+    // Let the whole rectangle handle input once, including clicks on its text.
+    this.onlineConfirmText.inputEnabled = false;
     refreshSelector(this);
   };
   const selectInputs = Game.CharacterSelectState.prototype.createInputs;
