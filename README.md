@@ -39,7 +39,7 @@ npx wrangler deploy
 
 ## Render 备用部署
 
-在 Render 创建 Blueprint，选择这个私有 GitHub 仓库，使用仓库中的 `render.yaml`。配置为 **Free / Virginia**，构建 `npm ci && npm run build`，启动 `node server/index.js`。
+在 Render 创建 Blueprint，选择 [mli55/bombit-online](https://github.com/mli55/bombit-online)，使用仓库中的 `render.yaml`。配置为 **Free / Virginia**，构建 `npm ci && npm run build`，启动 `node server/index.js`。
 
 Render Free 空闲 15 分钟后休眠，再次访问通常需要约一分钟唤醒；每月有 750 小时免费实例时长，服务可能被平台重启。带宽、构建额度另计，绑定付款方式的账号应检查支出上限。[Render 官方说明](https://render.com/docs/free)
 
