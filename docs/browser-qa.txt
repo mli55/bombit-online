@@ -1,15 +1,30 @@
-Ready. Each scenario loads four fresh independent replicas.
+Browser QA: 2026-10-23T04:55:11.331Z
+URL: http://localhost:3100/qa.html
+Browser: 155.0.8059.85
+
+Running four independent replicas per scenario at 60 Hz.
 Loading 1-human scenario…
-Start 1: 011e7939 011e7939 011e7939 011e7939
-PASS 1 humans / 6000 frames / 200 simulated seconds / result {"winner":2,"canContinue":false,"level":1,"scores":[0,20,320,320]}
+Start 1 humans / round 1: ea8e0a3d ea8e0a3d ea8e0a3d ea8e0a3d
+PASS 1 humans / 12000 frames / 200 simulated seconds / state gameOverState / result {"winner":2,"canContinue":true,"win":true,"level":1,"scores":[0,20,5311,320]}
+Start 1 humans / round 2: fc3d4b2a fc3d4b2a fc3d4b2a fc3d4b2a
+PASS 1 humans / round 2 / 600 frames / 10 simulated seconds / carried [0,20,5311,320] / cumulative [0,40,5331,370]
 Loading 2-human scenario…
-Start 2: 56b93808 56b93808 56b93808 56b93808
-Continue original campaign at tick 610
-PASS 2 humans / 6000 frames / 200 simulated seconds / result {"winner":null,"canContinue":true,"win":false,"level":1,"scores":[160,60,410,130]}
+Start 2 humans / round 1: f830279c f830279c f830279c f830279c
+PASS 2 humans / 12000 frames / 200 simulated seconds / state gameOverState / result {"winner":2,"canContinue":true,"win":true,"level":1,"scores":[130,0,13716,630]}
+Start 2 humans / round 2: e04069db e04069db e04069db e04069db
+PASS 2 humans / round 2 / 600 frames / 10 simulated seconds / carried [130,0,13716,630] / cumulative [130,20,13746,770]
 Loading 3-human scenario…
-Start 3: 4e64a428 4e64a428 4e64a428 4e64a428
-PASS 3 humans / 6000 frames / 200 simulated seconds / result {"winner":3,"canContinue":false,"level":1,"scores":[0,0,10,20]}
+Start 3 humans / round 1: d56b9ab2 d56b9ab2 d56b9ab2 d56b9ab2
+PASS 3 humans / 12000 frames / 200 simulated seconds / state gameOverState / result {"winner":3,"canContinue":true,"win":true,"level":1,"scores":[0,0,10,1579]}
+Start 3 humans / round 2: a1d08500 a1d08500 a1d08500 a1d08500
+PASS 3 humans / round 2 / 600 frames / 10 simulated seconds / carried [0,0,10,1579] / cumulative [0,1896,30,1719]
 Loading 4-human scenario…
-Start 4: e9f5f262 e9f5f262 e9f5f262 e9f5f262
-PASS 4 humans / 6000 frames / 200 simulated seconds / result {"winner":0,"canContinue":false,"level":1,"scores":[0,10,0,10]}
+Start 4 humans / round 1: b3a0dbcb b3a0dbcb b3a0dbcb b3a0dbcb
+PASS four survivors at timeout / original equal-score winner P4
+PASS 4 humans / 12000 frames / 200 simulated seconds / state gameOverState / result {"winner":3,"canContinue":true,"win":true,"level":1,"scores":[0,0,0,19001]}
+Start 4 humans / round 2: 52b6f33b 52b6f33b 52b6f33b 52b6f33b
+PASS 4 humans / round 2 / 600 frames / 10 simulated seconds / carried [0,0,0,19001] / cumulative [0,0,10,20462]
 ALL PASS
+
+Engines: [{"state":"gameOverState","frame":600,"online":true,"renderType":2,"webgl":true},{"state":"gameOverState","frame":600,"online":true,"renderType":2,"webgl":true},{"state":"gameOverState","frame":600,"online":true,"renderType":2,"webgl":true},{"state":"gameOverState","frame":600,"online":true,"renderType":2,"webgl":true}]
+Browser errors: []

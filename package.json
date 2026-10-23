@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Original Bomb It 1 HTML5: online cooperative campaign and 1–4 player battle",
+  "description": "Original Bomb It 1 HTML5 with original single-player and 1–4 player online multiplayer",
   "engines": {
     "node": ">=22"
   },
@@ -12,7 +12,7 @@
     "dev": "node --watch server/index.js",
     "fetch-original": "node scripts/fetch-original.mjs",
     "test": "node --test",
-    "check": "node --check server/index.js && node --check shared/room.js && node --check worker/index.js && node --check public/client.js && node --check public/adapter.js",
+    "check": "node --check server/index.js && node --check shared/room.js && node --check worker/index.js && node --check public/client.js && node --check public/adapter.js && node --check public/original-ui.js && node --check public/gameplay-fixes.js",
     "build": "node scripts/build.mjs",
     "build:pages": "node scripts/build-pages.mjs",
     "prestart": "npm run build"

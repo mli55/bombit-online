@@ -1,24 +1,140 @@
-<!doctype html><meta charset="utf-8"><title>Bomb It deterministic QA</title><style>body{font:14px monospace;background:#222;color:#fff}iframe{width:480px;height:270px;border:0}pre{white-space:pre-wrap}</style><h1>Original-engine determinism QA</h1><button id="run">Run 1–4 player tests</button><pre id="log">Ready. Each scenario loads four fresh independent replicas.</pre><div id="frames"></div><script type="module">
-const log=document.querySelector('#log');let frames=[],ready=0,readyResolve,errors=[];
-const say=t=>{log.textContent+='\n'+t;};
-window.addEventListener('message',e=>{if(e.data?.source!=='bomb-it-game')return;if(e.data.type==='error'&&errors.length<3){errors.push(e.data.message);say('ERROR '+e.data.message);}if(e.data.type==='ready'&&++ready===4)readyResolve?.();});
-async function mount(){ready=0;frames=[];document.querySelector('#frames').replaceChildren();const loaded=new Promise(r=>readyResolve=r);for(let i=0;i<4;i++){const f=document.createElement('iframe');f.src='/game/';document.querySelector('#frames').append(f);frames.push(f);}await loaded;return frames.map(f=>f.contentWindow.onlineBridge);}
-document.querySelector('#run').onclick=async()=>{
-try{for(let humans=1;humans<=4;humans++){
- say('Loading '+humans+'-human scenario…');const bridges=await mount();
- const config={mode:humans===2?'coop':'battle',difficulty:1,seed:'qa-seed-'+humans,players:Array.from({length:humans},(_,seat)=>({seat,character:seat,name:'Player '+seat}))};
- bridges.forEach(b=>b.sound(false));const initial=bridges.map(b=>b.start(config));say('Start '+humans+': '+initial.join(' '));if(new Set(initial).size>1)throw Error('Initial mismatch');
- let continued=false;
- for(let tick=1;tick<=6000;tick++){
-  const masks=[0,1,2,3].map((seat)=>[1,8,2,4][Math.floor(tick/18+seat)%4]|(tick%45===seat*5?16:0));
-  const packet=[tick,masks];
-  if(!continued&&bridges[0].result?.canContinue){packet.push('continue');continued=true;say('Continue original campaign at tick '+tick);}
-  bridges.forEach(b=>b.advance(packet,true));
-  if(tick%30===0){const hashes=bridges.map(b=>b.checksum());if(new Set(hashes).size>1){const snapshots=bridges.map(b=>b.snapshot());const diffs=[];function diff(a,b,path=''){if(JSON.stringify(a)===JSON.stringify(b))return;if(a&&b&&typeof a==='object'&&typeof b==='object'){for(const k of new Set([...Object.keys(a),...Object.keys(b)]))diff(a[k],b[k],path+'.'+k);}else diffs.push({path,a,b});}diff(snapshots[0],snapshots.find((s,i)=>hashes[i]!==hashes[0]));say('Differences: '+JSON.stringify(diffs.slice(0,15)));throw Error('Mismatch '+humans+' players tick '+tick+' '+hashes);}}
-  if(tick%120===0)await new Promise(r=>setTimeout(r,0));
-  if(errors.length)throw Error('Runtime errors');
- }
- say('PASS '+humans+' humans / 6000 frames / 200 simulated seconds / result '+JSON.stringify(bridges[0].result));
-}say('ALL PASS');}catch(e){say('FAIL '+e.stack);}
+<!doctype html>
+<meta charset="utf-8">
+<title>Bomb It deterministic QA</title>
+<style>body{font:14px monospace;background:#222;color:#fff}iframe{width:480px;height:270px;border:0}pre{white-space:pre-wrap}</style>
+<h1>Original-engine determinism QA</h1>
+<button id="run">Run 1–4 player tests</button>
+<pre id="log">Ready. Each scenario loads four independent replicas and simulates 200 seconds at 60 Hz.</pre>
+<div id="frames"></div>
+<script type="module">
+const FPS = 60, REPLICAS = 4, SCENARIO_FRAMES = 12000, NEXT_ROUND_FRAMES = 600;
+const log = document.querySelector('#log'), runButton = document.querySelector('#run');
+let frames = [], ready = new Set(), readyResolve, errors = [];
+const say = text => { log.textContent += '\n' + text; };
+const assert = (condition, message) => { if (!condition) throw new Error(message); };
+const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+window.addEventListener('message', event => {
+  if (event.origin !== location.origin || event.data?.source !== 'bomb-it-game' || !frames.some(frame => frame.contentWindow === event.source)) return;
+  if (event.data.type === 'error' && errors.length < 3) { errors.push(event.data.message); say('ERROR ' + event.data.message); }
+  if (event.data.type === 'ready') {
+    ready.add(event.source);
+    if (ready.size === REPLICAS) readyResolve?.();
+  }
+});
+async function mount() {
+  ready = new Set(); frames = []; document.querySelector('#frames').replaceChildren();
+  let timeout;
+  const loaded = new Promise((resolve, reject) => {
+    readyResolve = resolve;
+    timeout = setTimeout(() => reject(new Error('Four original engines did not load within 45 seconds')), 45000);
+  });
+  for (let i = 0; i < REPLICAS; i++) {
+    const frame = document.createElement('iframe'); frame.src = '/game/'; frame.title = 'Independent replica ' + i;
+    frames.push(frame); document.querySelector('#frames').append(frame);
+  }
+  try { await loaded; } finally { clearTimeout(timeout); readyResolve = null; }
+  assert(!errors.length, 'Runtime error while loading');
+  return frames.map(frame => frame.contentWindow.onlineBridge);
+}
+function equalReplicas(bridges, label) {
+  const hashes = bridges.map(bridge => bridge.checksum());
+  if (new Set(hashes).size === 1) return hashes[0];
+  const snapshots = bridges.map(bridge => bridge.snapshot()), differences = [];
+  function diff(a, b, path = '') {
+    if (same(a, b) || differences.length >= 15) return;
+    if (a && b && typeof a === 'object' && typeof b === 'object') {
+      for (const key of new Set([...Object.keys(a), ...Object.keys(b)])) diff(a[key], b[key], path + '.' + key);
+    } else differences.push({ path, a, b });
+  }
+  diff(snapshots[0], snapshots.find((_snapshot, i) => hashes[i] !== hashes[0]));
+  say('Differences: ' + JSON.stringify(differences));
+  throw new Error(label + ' hash mismatch: ' + hashes.join(' '));
+}
+function assertScores(scores, label) {
+  assert(Array.isArray(scores) && scores.length === 4 && scores.every(Number.isFinite), label + ' must contain four finite scores');
+}
+async function startReplicas(config) {
+  const bridges = await mount();
+  bridges.forEach(bridge => bridge.sound(false));
+  // Different local seats exercise personalized native score text without changing simulation state.
+  const initial = await Promise.all(bridges.map((bridge, i) => bridge.start(config, i % config.players.length)));
+  assert(new Set(initial).size === 1, 'Initial hash mismatch');
+  for (const bridge of bridges) {
+    assert(bridge.frame === 0 && bridge.state === 'gameplayState' && bridge.result == null, 'A fresh round must start in gameplay at frame zero');
+    const snapshot = bridge.snapshot();
+    assert(same(snapshot.scores, [0, 0, 0, 0]), 'Fresh-round scores must start at zero');
+    assert(same(snapshot.finalScores, config.scores), 'Cumulative scores were not inherited at round start');
+    assert(snapshot.players.length === 4, 'The board must contain four human/CPU characters');
+    assert(snapshot.players.filter(p => !p.data.isAI).length === config.players.length, 'Human count must match the room');
+    for (const human of config.players) {
+      const player = snapshot.players.find(p => p.data.playerID === human.character);
+      assert(player && !player.data.isAI && player.controller, `P${human.seat + 1} lost its human input controller`);
+    }
+  }
+  say(`Start ${config.players.length} humans / round ${config.round}: ${initial.join(' ')}`);
+  return bridges;
+}
+async function simulate(bridges, config, count, idle = false) {
+  const startTime = bridges[0].snapshot().time[0];
+  for (let tick = 1; tick <= count; tick++) {
+    // Keep the same real-time input cadence as the previous 30 Hz regression trace.
+    const masks = idle ? [0, 0, 0, 0] : [0, 1, 2, 3].map(seat => [1, 8, 2, 4][Math.floor(tick / 36 + seat) % 4] | (tick % 90 === seat * 10 ? 16 : 0));
+    const packet = [tick, masks];
+    bridges.forEach(bridge => bridge.advance(packet, true));
+    if (idle && tick === FPS * 10) {
+      for (const bridge of bridges) assert(bridge.state === 'gameplayState' && !bridge.result && bridge.snapshot().players.every(p => !p.data.dead), 'Four humans without CPUs must keep playing until elimination or timeout');
+    }
+    if (tick % FPS === 0) equalReplicas(bridges, `${config.players.length} humans / round ${config.round} / tick ${tick}`);
+    if (tick % 240 === 0) await new Promise(resolve => setTimeout(resolve, 0));
+    assert(!errors.length, 'Runtime errors during simulation');
+  }
+  for (const bridge of bridges) {
+    assert(bridge.frame === count, 'Simulation did not consume every ordered frame');
+    const elapsed = bridge.snapshot().time[0] - startTime;
+    assert(Math.abs(elapsed - count * 1000 / FPS) < 0.001, `60 Hz clock advanced ${elapsed} ms for ${count} frames`);
+  }
+}
+function assertRoundResult(bridges) {
+  for (const bridge of bridges) {
+    assert(bridge.state === 'gameOverState', 'Every round must use the original gameOverState score scene');
+    assert(bridge.result?.canContinue === true, 'Every result must permit another round');
+    assertScores(bridge.result.scores, 'Round result');
+    assert(same(bridge.result.scores, bridge.snapshot().finalScores), 'The result must carry cumulative scores');
+  }
+  equalReplicas(bridges, 'Native round results');
+}
+runButton.onclick = async () => {
+  runButton.disabled = true; errors = []; log.textContent = 'Running four independent replicas per scenario at 60 Hz.';
+  try {
+    for (let humans = 1; humans <= 4; humans++) {
+      const config = { difficulty: 1, tickRate: FPS, round: 1, scores: [0, 0, 0, 0], seed: 'qa-seed-' + humans,
+        players: Array.from({ length: humans }, (_, seat) => ({ seat, character: seat, name: 'P' + (seat + 1) })) };
+      say('Loading ' + humans + '-human scenario…');
+      const bridges = await startReplicas(config);
+      // Four idle humans reach timeout alive at equal points, exercising the
+      // original getMaxScore tie order instead of declaring an automatic draw.
+      await simulate(bridges, config, SCENARIO_FRAMES, humans === 4);
+      assertRoundResult(bridges);
+      if (humans === 4) {
+        for (const bridge of bridges) assert(bridge.result.winner === 3, 'Timeout must rank surviving scores using the original tie order');
+        say('PASS four survivors at timeout / original equal-score winner P4');
+      }
+      say(`PASS ${humans} humans / ${SCENARIO_FRAMES} frames / 200 simulated seconds / state ${bridges[0].state} / result ${JSON.stringify(bridges[0].result)}`);
+      const scores = bridges[0].result.scores.slice();
+      assert(scores.some(score => score > 0), 'Score-carry regression requires a nonzero first-round score');
+      const nextConfig = { ...config, round: 2, scores, seed: config.seed + '-round-2' };
+      // Every next round uses a new generation with fresh engines and cumulative scores.
+      const nextBridges = await startReplicas(nextConfig);
+      await simulate(nextBridges, nextConfig, NEXT_ROUND_FRAMES);
+      for (const bridge of nextBridges) {
+        const cumulative = bridge.snapshot().finalScores; assertScores(cumulative, 'Second-round cumulative scores');
+        assert(cumulative.every((score, seat) => score >= scores[seat]), 'Second-round cumulative scores lost first-round points');
+        if (bridge.result) { assert(bridge.state === 'gameOverState', 'The second round must use the native score scene'); assert(bridge.result.canContinue === true, 'The second result must allow another round'); }
+      }
+      say(`PASS ${humans} humans / round 2 / ${NEXT_ROUND_FRAMES} frames / 10 simulated seconds / carried ${JSON.stringify(scores)} / cumulative ${JSON.stringify(nextBridges[0].snapshot().finalScores)}`);
+    }
+    say('ALL PASS');
+  } catch (error) { say('FAIL ' + error.stack); }
+  finally { runButton.disabled = false; }
 };
 </script>

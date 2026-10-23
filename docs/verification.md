@@ -1,16 +1,12 @@
-# 验证记录
+# Verification
 
-2026-10-22，美国东部时间。
+2026-10-23. Final Single Player / Multiplayer entry flow.
 
-- `npm run check` 语法检查通过。
-- `npm test`：10 项通过，包含房间协议及四个真实 WebSocket 连接。
-- `TEST_BASE_URL=http://localhost:8787 node --test test/network.test.js`：Cloudflare 本地运行环境通过。
-- `TEST_BASE_URL=https://bombit-online.mengninglihi.workers.dev node --test test/network.test.js`：公网 HTTP 资源、四连接操作广播、断线回放、暂停和离开房间通过。
-- 原版 121 个文件与来源 manifest 的大小、SHA-256 全部匹配。
-- 四副本确定性验证：1、2、3、4 位真人配置各 6,000 网络帧，均通过。详见 `browser-qa.txt`。双人配置使用闯关，其他配置使用混战。
-- 四个浏览器实际进入 Cloudflare 本地四人混战；其中一位刷新，恢复后继续显示状态一致。
-- 公网两个浏览器实际进入双人闯关，共同结算第一关并继续第二关，状态校验通过。截图 `gameplay.png` 显示第二关和 1,200 帧一致状态；此时本机到服务器往返约 60ms。
+- `npm run check` and all **32 tests** pass. The real four-WebSocket test covers automatic P1–P4 identities, 60 Hz, repeated rounds, score carry, and uninterrupted reconnection. Sixty frames took 999 ms locally.
+- `wrangler deploy --dry-run` bundles the Worker and assets successfully.
+- Four independent replicas for each of 1, 2, 3, and 4 human players ran 12,000 frames (200 simulated seconds), then a second round of 600 frames. All checkpoints match. The four-player timeout follows the original score tie order. See [browser-qa.txt](browser-qa.txt).
+- Real browser UI checks pass: original Multiplayer/difficulty/character selection, automatic invite joining, P1–P4, four-client checkpoints, pause/resume, and difficulty changes. During a five-second disconnect, the other clients advanced 300 frames; the returning browser caught up and matched their hash.
+- Original Single Player works without a WebSocket: character keys, tutorial, movement input, local clock, and native pause/resume. The original online score screen's NEXT ROUND button emits the continuation request.
+- [ui-qa-results.json](ui-qa-results.json) contains browser measurements. The two README screenshots are from this four-player run. WebGL is active; no browser runtime errors occurred.
 
-这些浏览器测试在同一台机器的 Chromium 环境运行，公网连接确实经过 Cloudflare。尚未覆盖四台异地设备、不同浏览器引擎组合、完整关卡通关和移动端实机。此记录不是对所有网络条件下时延的保证。
-
-2026-10-23：新增不含账号子域的 Pages 入口 `https://bombit-online.pages.dev`。公网四个真实 WebSocket 连接的完整集成测试通过，覆盖静态资源、操作广播、断线恢复、暂停和离开房间；浏览器首页正常加载。新入口通过 service binding 共用原游戏服务器。
+Browser checks used separate Chrome 155 contexts on one computer. They do not cover four geographically separate devices, all browser engines, or real mobile hardware.
