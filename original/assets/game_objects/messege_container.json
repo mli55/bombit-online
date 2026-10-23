@@ -1,0 +1,37 @@
+{
+    "hierarchy": {
+        "name": "messege_container",
+        "children": [
+            {
+                "name": "message",
+                "children": [
+                    {
+                        "name": "image"
+                    }
+                ]
+            }
+        ],
+        "animations": [
+            "message_gameplay"
+        ]
+    },
+    "properties": {
+        "message": {
+            "position": {
+                "x": 0,
+                "y": -360
+            },
+            "alpha": 0,
+            "type": "container"
+        },
+        "message/image": {
+            "file": "message1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "sprite"
+        }
+    }
+}

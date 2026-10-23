@@ -1,0 +1,653 @@
+{
+    "hierarchy": {
+        "name": "Canvas",
+        "children": [
+            {
+                "name": "title_container",
+                "children": [
+                    {
+                        "name": "text"
+                    }
+                ]
+            },
+            {
+                "name": "restart_level_button",
+                "children": [
+                    {
+                        "name": "text"
+                    },
+                    {
+                        "name": "icon"
+                    }
+                ]
+            },
+            {
+                "name": "container",
+                "children": [
+                    {
+                        "name": "player1_text"
+                    },
+                    {
+                        "name": "player2_text"
+                    },
+                    {
+                        "name": "line"
+                    },
+                    {
+                        "name": "enemies_killed_text"
+                    },
+                    {
+                        "name": "enemies_killed_container_p2",
+                        "children": [
+                            {
+                                "name": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "enemies_killed_container_p1",
+                        "children": [
+                            {
+                                "name": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "level_destruction_text"
+                    },
+                    {
+                        "name": "level_destruction_container_p2",
+                        "children": [
+                            {
+                                "name": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "level_destruction_container_p1",
+                        "children": [
+                            {
+                                "name": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "left_over_time_text"
+                    },
+                    {
+                        "name": "left_over_time_container_p2",
+                        "children": [
+                            {
+                                "name": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "left_over_time_container_p1",
+                        "children": [
+                            {
+                                "name": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "extra_score_text"
+                    },
+                    {
+                        "name": "extra_score_container_p2",
+                        "children": [
+                            {
+                                "name": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "extra_score_container_p1",
+                        "children": [
+                            {
+                                "name": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "total_score_text"
+                    },
+                    {
+                        "name": "total_score_container_p2",
+                        "children": [
+                            {
+                                "name": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "total_score_container_p1",
+                        "children": [
+                            {
+                                "name": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "final_score_text"
+                    },
+                    {
+                        "name": "final_score_container_p2",
+                        "children": [
+                            {
+                                "name": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "final_score_container_p1",
+                        "children": [
+                            {
+                                "name": "text"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "properties": {
+        "Canvas": {
+            "design": {
+                "width": 1280,
+                "height": 720
+            },
+            "type": "canvas"
+        },
+        "title_container": {
+            "file": "pink_button.png",
+            "image": "SIMPLE",
+            "type": "sprite",
+            "alignment": {
+                "type": "CENTER",
+                "offset": {
+                    "x": "0%",
+                    "y": -282.7
+                }
+            }
+        },
+        "title_container/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": "YOUR SCORE",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 3
+            },
+            "type": "text"
+        },
+        "restart_level_button": {
+            "file": "button.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "button.png",
+                "pressed": "button.png",
+                "hover": "button_press.png"
+            },
+            "type": "button",
+            "alignment": {
+                "type": "CENTER",
+                "offset": {
+                    "x": "0%",
+                    "y": 309
+                }
+            }
+        },
+        "restart_level_button/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": "RESTART THE LEVEL",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 3
+            },
+            "type": "text"
+        },
+        "restart_level_button/icon": {
+            "file": "mm_brick2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -124.5,
+                "y": -2.8
+            },
+            "type": "sprite"
+        },
+        "container": {
+            "file": "tutorial_container.png",
+            "image": "SIMPLE",
+            "type": "sprite",
+            "alignment": {
+                "type": "CENTER"
+            }
+        },
+        "container/player1_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 30
+            },
+            "text": "P1",
+            "align": "center",
+            "stroke": "#f42878",
+            "strokeThickness": 6,
+            "position": {
+                "x": 30.5,
+                "y": -218.7
+            },
+            "type": "text"
+        },
+        "container/player2_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 30
+            },
+            "text": "P2",
+            "align": "center",
+            "stroke": "#f42878",
+            "strokeThickness": 6,
+            "position": {
+                "x": 230.5,
+                "y": -219
+            },
+            "type": "text"
+        },
+        "container/line": {
+            "file": "line.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 66
+            },
+            "type": "sprite"
+        },
+        "container/enemies_killed_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 30
+            },
+            "text": "ENEMIES KILLED",
+            "align": "center",
+            "position": {
+                "x": -209,
+                "y": -169
+            },
+            "type": "text"
+        },
+        "container/enemies_killed_container_p2": {
+            "file": "score_container.png",
+            "image": "SIMPLE",
+            "type": "sprite",
+            "alignment": {
+                "type": "TOP_RIGHT",
+                "offset": {
+                    "x": -38.5,
+                    "y": -49.5
+                }
+            }
+        },
+        "container/enemies_killed_container_p2/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 30
+            },
+            "text": "9999",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 2
+            },
+            "type": "text"
+        },
+        "container/enemies_killed_container_p1": {
+            "file": "score_container.png",
+            "image": "SIMPLE",
+            "type": "sprite",
+            "alignment": {
+                "type": "TOP_RIGHT",
+                "offset": {
+                    "x": -238.5,
+                    "y": -49.5
+                }
+            }
+        },
+        "container/enemies_killed_container_p1/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 30
+            },
+            "text": "9999",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 2
+            },
+            "type": "text"
+        },
+        "container/level_destruction_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 30
+            },
+            "text": "LEVEL \nDESTRUCTION",
+            "align": "center",
+            "position": {
+                "x": -209,
+                "y": -104.5
+            },
+            "type": "text"
+        },
+        "container/level_destruction_container_p2": {
+            "file": "score_container.png",
+            "image": "SIMPLE",
+            "type": "sprite",
+            "alignment": {
+                "type": "TOP_RIGHT",
+                "offset": {
+                    "x": -38.5,
+                    "y": -117.5
+                }
+            }
+        },
+        "container/level_destruction_container_p2/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 30
+            },
+            "text": "9999",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 2
+            },
+            "type": "text"
+        },
+        "container/level_destruction_container_p1": {
+            "file": "score_container.png",
+            "image": "SIMPLE",
+            "type": "sprite",
+            "alignment": {
+                "type": "TOP_RIGHT",
+                "offset": {
+                    "x": -238.5,
+                    "y": -117.5
+                }
+            }
+        },
+        "container/level_destruction_container_p1/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 30
+            },
+            "text": "9999",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 2
+            },
+            "type": "text"
+        },
+        "container/left_over_time_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 30
+            },
+            "text": "LEFT OVER TIME",
+            "align": "center",
+            "position": {
+                "x": -209,
+                "y": -42.1
+            },
+            "type": "text"
+        },
+        "container/left_over_time_container_p2": {
+            "file": "score_container.png",
+            "image": "SIMPLE",
+            "type": "sprite",
+            "alignment": {
+                "type": "TOP_RIGHT",
+                "offset": {
+                    "x": -38.5,
+                    "y": -178.5
+                }
+            }
+        },
+        "container/left_over_time_container_p2/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 30
+            },
+            "text": "9999",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 2
+            },
+            "type": "text"
+        },
+        "container/left_over_time_container_p1": {
+            "file": "score_container.png",
+            "image": "SIMPLE",
+            "type": "sprite",
+            "alignment": {
+                "type": "TOP_RIGHT",
+                "offset": {
+                    "x": -238.5,
+                    "y": -178.5
+                }
+            }
+        },
+        "container/left_over_time_container_p1/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 30
+            },
+            "text": "9999",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 2
+            },
+            "type": "text"
+        },
+        "container/extra_score_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 30
+            },
+            "text": "EXTRA SCORE",
+            "align": "center",
+            "position": {
+                "x": -209,
+                "y": 24.1
+            },
+            "type": "text"
+        },
+        "container/extra_score_container_p2": {
+            "file": "score_container.png",
+            "image": "SIMPLE",
+            "type": "sprite",
+            "alignment": {
+                "type": "TOP_RIGHT",
+                "offset": {
+                    "x": -38.5,
+                    "y": -243.5
+                }
+            }
+        },
+        "container/extra_score_container_p2/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 30
+            },
+            "text": "9999",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 2
+            },
+            "type": "text"
+        },
+        "container/extra_score_container_p1": {
+            "file": "score_container.png",
+            "image": "SIMPLE",
+            "type": "sprite",
+            "alignment": {
+                "type": "TOP_RIGHT",
+                "offset": {
+                    "x": -238.5,
+                    "y": -243.5
+                }
+            }
+        },
+        "container/extra_score_container_p1/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 30
+            },
+            "text": "9999",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 2
+            },
+            "type": "text"
+        },
+        "container/total_score_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 30
+            },
+            "text": "TOTAL SCORE",
+            "align": "center",
+            "position": {
+                "x": -209,
+                "y": 100
+            },
+            "type": "text"
+        },
+        "container/total_score_container_p2": {
+            "file": "score_container.png",
+            "image": "SIMPLE",
+            "type": "sprite",
+            "alignment": {
+                "type": "TOP_RIGHT",
+                "offset": {
+                    "x": -38.5,
+                    "y": -318.5
+                }
+            }
+        },
+        "container/total_score_container_p2/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 30
+            },
+            "text": "9999",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 2
+            },
+            "type": "text"
+        },
+        "container/total_score_container_p1": {
+            "file": "score_container.png",
+            "image": "SIMPLE",
+            "type": "sprite",
+            "alignment": {
+                "type": "TOP_RIGHT",
+                "offset": {
+                    "x": -238.5,
+                    "y": -318.5
+                }
+            }
+        },
+        "container/total_score_container_p1/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 30
+            },
+            "text": "9999",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 2
+            },
+            "type": "text"
+        },
+        "container/final_score_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 30
+            },
+            "text": "FINAL SCORE",
+            "align": "center",
+            "position": {
+                "x": -209,
+                "y": 164
+            },
+            "type": "text"
+        },
+        "container/final_score_container_p2": {
+            "file": "score_container.png",
+            "image": "SIMPLE",
+            "type": "sprite",
+            "alignment": {
+                "type": "TOP_RIGHT",
+                "offset": {
+                    "x": -38.5,
+                    "y": -383.5
+                }
+            }
+        },
+        "container/final_score_container_p2/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 30
+            },
+            "text": "9999",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 2
+            },
+            "type": "text"
+        },
+        "container/final_score_container_p1": {
+            "file": "score_container.png",
+            "image": "SIMPLE",
+            "type": "sprite",
+            "alignment": {
+                "type": "TOP_RIGHT",
+                "offset": {
+                    "x": -238.5,
+                    "y": -383.5
+                }
+            }
+        },
+        "container/final_score_container_p1/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 30
+            },
+            "text": "9999",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 2
+            },
+            "type": "text"
+        }
+    }
+}

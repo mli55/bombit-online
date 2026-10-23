@@ -1,0 +1,153 @@
+{
+    "preload": {
+      "image": [
+
+      ],
+      "atlas": [
+
+      ]
+    },
+
+    "firstLoad": {
+
+      "image": [
+        {"searchPath": "assets/bgs/"},
+        {"key": "bg_black"},
+        {"key": "bg_blue"},
+        {"key": "bg_pink"}
+      ],
+
+      "json": [
+
+        {"searchPath": "assets/json/"},
+        {"key": "balance"},
+        {"key": "localization"},
+        {"key": "maps"},
+
+        {"searchPath": "assets/uis/"},
+        {"key": "controls"},
+        {"key": "game_completed1player"},
+        {"key": "game_completed2player"},
+        {"key": "game_settings"},
+        {"key": "gameover"},
+        {"key": "gameover_2player"},
+        {"key": "gameplay"},
+        {"key": "gameplay_landscape"},
+        {"key": "gameplay_portrait"},
+        {"key": "highscore"},
+        {"key": "main_menu"},
+        {"key": "powerups"},
+
+        {"searchPath": "assets/game_objects/"},
+        {"key": "bomb"},
+        {"key": "confuse"},
+        {"key": "death"},
+        {"key": "explosion"},
+        {"key": "fire"},
+        {"key": "grenade"},
+        {"key": "hero_pink"},
+        {"key": "hero_pink_arrow"},
+        {"key": "hero_yellow"},
+        {"key": "hero_yellow_arrow"},
+        {"key": "hero_blue"},
+        {"key": "hero_blue_arrow"},
+        {"key": "hero_green"},
+        {"key": "hero_green_arrow"},
+        {"key": "heroes"},
+        {"key": "ice"},
+        {"key": "messege_container"},
+        {"key": "mine"},
+        {"key": "powerup_bigger_explosion"},
+        {"key": "powerup_bomb"},
+        {"key": "powerup_confuse"},
+        {"key": "powerup_fast"},
+        {"key": "powerup_fire"},
+        {"key": "powerup_freeze"},
+        {"key": "powerup_grenade"},
+        {"key": "powerup_life"},
+        {"key": "powerup_number"},
+        {"key": "powerup_minebomb"},
+        {"key": "powerup_push"},
+        {"key": "powerup_rocket"},
+        {"key": "powerup_shield"},
+        {"key": "rocket"},
+        {"key": "tutorial"},
+
+        {"searchPath": "assets/game_objects/animations/"},
+        {"key": "arrow_anim", "url": "arrow_anim/arrow_anim.json"},
+        {"key": "bomb_stand", "url": "bomb/bomb_stand.json"},
+        {"key": "explosion_anim", "url": "explosion/explosion_anim.json"},
+        {"key": "message_gameplay", "url": "messege_container/message_gameplay.json"},
+        {"key": "mine_anim", "url": "mine/mine_anim.json"},
+        {"key": "rocket_anim", "url": "rocket/rocket_anim.json"},
+        {"key": "select_character_hero", "url": "selectHero/select_character_hero.json"},
+        {"key": "select_character_hero_stand", "url": "selectHero/select_character_hero_stand.json"},
+
+        {"searchPath": "assets/game_objects/animations/fire/"},
+        {"key": "fire_in"},
+        {"key": "fire_out"},
+
+        {"searchPath": "assets/game_objects/animations/tutorial/"},
+        {"key": "tutorial_landscape_stand"},
+        {"key": "tutorial_portrait_stand"},
+
+        {"searchPath": "assets/game_objects/animations/grenade/"},
+        {"key": "grenade_down"},
+        {"key": "grenade_right"},
+        {"key": "grenade_up"},
+
+        {"searchPath": "assets/game_objects/animations/death/"},
+        {"key": "hero_pink_yellow_death"},
+        {"key": "hero_blue_green_death"},
+
+        {"searchPath": "assets/game_objects/animations/hero_pink/"},
+        {"key": "hero_pink_down"},
+        {"key": "hero_pink_side"},
+        {"key": "hero_pink_up"},
+
+        {"searchPath": "assets/game_objects/animations/hero_yellow/"},
+        {"key": "hero_yellow_down"},
+        {"key": "hero_yellow_side"},
+        {"key": "hero_yellow_up"},
+
+        {"searchPath": "assets/game_objects/animations/hero_blue/"},
+        {"key": "hero_blue_down"},
+        {"key": "hero_blue_side"},
+        {"key": "hero_blue_up"},
+
+        {"searchPath": "assets/game_objects/animations/hero_green/"},
+        {"key": "hero_green_down"},
+        {"key": "hero_green_side"},
+        {"key": "hero_green_up"},
+
+        {"searchPath": "assets/game_objects/animations/ice"},
+        {"key": "ice_in"},
+        {"key": "ice_out"},
+
+        {"searchPath": "assets/game_objects/animations/powerups"},
+        {"key": "powerup_out"},
+        {"key": "powerup_stand"}
+
+      ],
+      "atlas": [
+        {"searchPath": "assets/atlases/"},
+        {"key": "arcade-joystick"},
+        {"key": "atlas_gameplay"},
+        {"key": "atlas_library"},
+        {"key": "atlas_ui"}
+      ],
+      "bitmapFont": [
+
+      ],
+      "spine": [
+
+      ],
+      "audio": [
+
+      ],
+      "webFont": [
+
+      ]
+    }
+
+}

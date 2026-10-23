@@ -1,0 +1,40 @@
+{
+    "hierarchy": {
+        "name": "bomb",
+        "children": [
+            {
+                "name": "shadow"
+            },
+            {
+                "name": "bomb_base"
+            }
+        ],
+        "animations": [
+            "bomb_stand"
+        ]
+    },
+    "properties": {
+        "shadow": {
+            "file": "shadow.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 16.2
+            },
+            "type": "sprite"
+        },
+        "bomb_base": {
+            "file": "bomb.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.1,
+                "y": 15.2
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.8
+            },
+            "type": "sprite"
+        }
+    }
+}

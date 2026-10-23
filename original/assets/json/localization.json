@@ -1,0 +1,214 @@
+{
+  "en-US": {
+
+    "start_game": "START GAME",
+    "how_to_play": "HOW TO PLAY",
+    "highscore": "HIGHSCORES",
+    "more_games": "MORE GAMES",
+    "power_ups": "POWER UPS",
+
+    "tutorial_move": "MOVE",
+    "tutorial_bomb": "BOMB",
+    "tutorial_player_1": "PLAYER 1",
+    "tutorial_player_2": "PLAYER 2",
+    "pause": "PAUSE",
+    "resume": "RESUME",
+
+    "item_life": "LIFE + 1",
+    "item_speed": "WALK FASTER",
+    "item_power": "BIGGER EXPLOSION",
+    "item_shield": "PROTECTION SHIELD",
+    "item_grenade": "THROW GRENADE OVER WALLS",
+    "item_mine": "PLACE MINE BOMB",
+    "item_rocket": "SHOOTS ROCKET",
+    "item_confuse": "CONFUSE ENEMY",
+    "item_push": "PUSH BOMB",
+    "item_bomb": "BOMB + 1",
+    "item_freeze": "FREEZES THE ENEMY",
+    "item_fire": "SHOOT FIRE",
+
+    "menu_new": "NEW!",
+    "menu_bomb_it_2": "BOMB IT 2",
+    "menu_player_1": "1 PLAYER",
+    "menu_player_2": "2 PLAYER",
+    "menu_easy": "EASY",
+    "menu_normal": "NORMAL",
+    "menu_hard": "HARD",
+
+    "cs_select": "SELECT",
+    "cs_confirm": "CONFIRM",
+    "cs_1P": "1P",
+    "cs_2P": "2P",
+
+    "gameplay_level": "LEVEL",
+    "gameplay_time": "TIME",
+
+    "score_your_score": "YOUR SCORE",
+    "score_enemies": "ENEMIES KILLED",
+    "score_destruction": "LEVEL DESTRUCTION",
+    "score_time": "LEFT OVER TIME",
+    "score_extra": "EXTRA SCORE",
+    "score_total": "TOTAL SCORE",
+    "score_final": "FINAL SCORE",
+    "score_restart_level": "RESTART THE LEVEL",
+    "score_next_level": "NEXT LEVEL",
+
+    "game_over_score": "YOUR SCORE",
+    "game_over_name": "YOUR NAME",
+    "game_over_submit": "SUBMIT SCORE",
+
+    "highscore_rank": "RANK",
+    "highscore_name": "NAME",
+    "highscore_score": "SCORE",
+    "highscore_play_again": "PLAY AGAIN",
+    "highscore_back": "BACK",
+    "highscore_new": "NEW!",
+    "highscore_3000_games": "3000+ GAMES",
+
+    "number.decimal_separator": ".",
+    "number.thousands_separator": ","
+  },
+
+  "nl-NL": {
+
+    "start_game": "START SPEL",
+    "how_to_play": "UITLEG",
+    "highscore": "HIGHSCORES",
+    "more_games": "MEER SPELLEN",
+    "power_ups": "POWER UPS",
+
+    "tutorial_move": "BEWEGEN",
+    "tutorial_bomb": "BOM",
+    "tutorial_player_1": "SPELER 1",
+    "tutorial_player_2": "SPELER 2",
+    "pause": "PAUZEREN",
+    "resume": "DOORGAAN",
+
+    "item_life": "LEVEN + 1",
+    "item_speed": "SNELLER LOPEN",
+    "item_power": "GROTERE EXPLOSIE",
+    "item_shield": "BESCHERMINGS SCHILD",
+    "item_grenade": "GOOI GRANATEN OVER MUREN",
+    "item_mine": "PLAATS MIJNEN",
+    "item_rocket": "SCHIET RAKETTEN",
+    "item_confuse": "VERWAR DE VIJAND",
+    "item_push": "DUW DE BOM",
+    "item_bomb": "BOM + 1",
+    "item_freeze": "BEVRIES DE VIJAND",
+    "item_fire": "SCHIET VUUR",
+
+    "menu_new": "NIEUW!",
+    "menu_bomb_it_2": "BOMB IT 2",
+    "menu_player_1": "1 SPELER",
+    "menu_player_2": "2 SPELERS",
+    "menu_easy": "MAKKELIJK",
+    "menu_normal": "NORMAAL",
+    "menu_hard": "MOEILIJK",
+
+    "cs_select": "SELECTEER",
+    "cs_confirm": "BEVESTIG",
+    "cs_1P": "1P",
+    "cs_2P": "2P",
+
+    "gameplay_level": "LEVEL",
+    "gameplay_time": "TIJD",
+
+    "score_your_score": "JE SCORE",
+    "score_enemies": "VIJANDEN UITGESCHAKELD",
+    "score_destruction": "LEVEL SCHADE",
+    "score_time": "TIJD DIE OVER IS",
+    "score_extra": "EXTRA SCORE",
+    "score_total": "TOTALE SCORE",
+    "score_final": "DEFINITIEVE SCORE",
+    "score_restart_level": "HERSTART HET LEVEL",
+    "score_next_level": "VOLGEND LEVEL",
+
+    "game_over_score": "JE SCORE",
+    "game_over_name": "JE NAAM",
+    "game_over_submit": "VERSTUUR SCORE",
+    "highscore_rank": "RANG",
+
+    "highscore_name": "NAAM",
+    "highscore_score": "SCORE",
+    "highscore_play_again": "SPEEL OPNIEUW",
+    "highscore_back": "TERUG",
+    "highscore_new": "NIEUW!",
+    "highscore_3000_games": "3000+ SPELLEN",
+
+    "number.decimal_separator": ".",
+    "number.thousands_separator": ","
+
+  },
+
+  "es-ES": {
+
+    "start_game": "COMENZAR JUEGO",
+    "how_to_play": "COMO SE JUEGA",
+    "highscore": "PUNTUACIONES",
+    "more_games": "MÁS JUEGOS",
+    "power_ups": "POTENCIADORES",
+
+    "tutorial_move": "MOVIMIENTO",
+    "tutorial_bomb": "BOMBA",
+    "tutorial_player_1": "JUGADOR 1",
+    "tutorial_player_2": "JUGADOR 2",
+    "pause": "PAUSA",
+    "resume": "CONTINUAR",
+
+    "item_life": "VIDA +1",
+    "item_speed": "VELOCIDAD",
+    "item_power": "RANGO DE EXPLOSIÓN +1",
+    "item_shield": "ESCUDO",
+    "item_grenade": "GRANADAS",
+    "item_mine": "MINA",
+    "item_rocket": "COHETE",
+    "item_confuse": "CONFUSIÓN",
+    "item_push": "EMPUJAR BOMBA",
+    "item_bomb": "BOMBA +1",
+    "item_freeze": "HIELO",
+    "item_fire": "LANZALLAMAS",
+
+    "menu_new": "¡NUEVO!",
+    "menu_bomb_it_2": "BOMB IT 2",
+    "menu_player_1": "1 JUGADOR",
+    "menu_player_2": "2 JUGADORES",
+    "menu_easy": "FÁCIL",
+    "menu_normal": "NORMAL",
+    "menu_hard": "DIFÍCIL",
+
+    "cs_select": "SELECCIONAR",
+    "cs_confirm": "CONFIRMAR",
+    "cs_1P": "P1",
+    "cs_2P": "P2",
+
+    "gameplay_level": "NIVEL",
+    "gameplay_time": "TIEMPO",
+
+    "score_your_score": "PUNTUACIONES",
+    "score_enemies": "ELIMINACIONES",
+    "score_destruction": "DESTRUCCIÓN",
+    "score_time": "TIEMPO RESTANTE",
+    "score_extra": "PUNTOS EXTRA",
+    "score_total": "PUNTUACIÓN TOTAL",
+    "score_final": "PUNTUACIÓN FINAL",
+    "score_restart_level": "REINICIAR NIVEL",
+    "score_next_level": "SIGUIENTE NIVEL",
+
+    "game_over_score": "TU PUNTUACIÓN",
+    "game_over_name": "TU NOMBRE",
+    "game_over_submit": "ANOTAR PUNTUACIÓN",
+
+    "highscore_rank": "RANGO",
+    "highscore_name": "NOMBRE",
+    "highscore_score": "PUNTOS",
+    "highscore_play_again": "JUGAR DE NUEVO",
+    "highscore_back": "VOLVER",
+    "highscore_new": "¡NUEVO!",
+    "highscore_3000_games": "3000+ JUEGOS",
+
+    "number.decimal_separator": ",",
+    "number.thousands_separator": "."
+
+  }
+
+}

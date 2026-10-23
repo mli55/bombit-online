@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "bomb-it-friends-mli55",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-08-01",
+  "workers_dev": true,
+  "assets": { "directory": "public", "binding": "ASSETS", "run_worker_first": ["/ws/*", "/health"], "not_found_handling": "none" },
+  "durable_objects": { "bindings": [{ "name": "ROOMS", "class_name": "GameRoom" }] },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["GameRoom"] }],
+  "observability": { "enabled": false }
+}

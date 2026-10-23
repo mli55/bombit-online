@@ -1,0 +1,265 @@
+{
+    "hierarchy": {
+        "name": "heros",
+        "children": [
+            {
+                "name": "hero1",
+                "children": [
+                    {
+                        "name": "avatar1"
+                    },
+                    {
+                        "name": "avatar1_eyes"
+                    },
+                    {
+                        "name": "avatar1_player"
+                    },
+                    {
+                        "name": "avatar1_arrow"
+                    }
+                ],
+                "animations": [
+                    "select_character_hero",
+                    "select_character_hero_stand"
+                ]
+            },
+            {
+                "name": "hero2",
+                "children": [
+                    {
+                        "name": "avatar1"
+                    },
+                    {
+                        "name": "avatar1_eyes"
+                    },
+                    {
+                        "name": "avatar1_player"
+                    },
+                    {
+                        "name": "avatar1_arrow"
+                    }
+                ],
+                "animations": [
+                    "select_character_hero",
+                    "select_character_hero_stand"
+                ]
+            },
+            {
+                "name": "hero3",
+                "children": [
+                    {
+                        "name": "avatar1"
+                    },
+                    {
+                        "name": "avatar1_player"
+                    },
+                    {
+                        "name": "avatar1_arrow"
+                    },
+                    {
+                        "name": "avatar1_eyes"
+                    }
+                ],
+                "animations": [
+                    "select_character_hero",
+                    "select_character_hero_stand"
+                ]
+            },
+            {
+                "name": "hero4",
+                "children": [
+                    {
+                        "name": "avatar1"
+                    },
+                    {
+                        "name": "avatar1_player"
+                    },
+                    {
+                        "name": "avatar1_arrow"
+                    },
+                    {
+                        "name": "avatar1_eyes"
+                    }
+                ],
+                "animations": [
+                    "select_character_hero",
+                    "select_character_hero_stand"
+                ]
+            }
+        ]
+    },
+    "properties": {
+        "hero1": {
+            "position": {
+                "x": -246.2,
+                "y": -2
+            },
+            "type": "container"
+        },
+        "hero1/avatar1": {
+            "file": "hero1.png.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.3,
+                "y": -84
+            },
+            "type": "sprite"
+        },
+        "hero1/avatar1_eyes": {
+            "file": "eyes_4.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 2.3,
+                "y": -97
+            },
+            "type": "sprite"
+        },
+        "hero1/avatar1_player": {
+            "file": "player1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.3,
+                "y": -289
+            },
+            "type": "sprite"
+        },
+        "hero1/avatar1_arrow": {
+            "file": "arrow1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.3,
+                "y": -215
+            },
+            "type": "sprite"
+        },
+        "hero2": {
+            "position": {
+                "x": -82.5,
+                "y": -1.8
+            },
+            "type": "container"
+        },
+        "hero2/avatar1": {
+            "file": "hero2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -0.1,
+                "y": -86
+            },
+            "type": "sprite"
+        },
+        "hero2/avatar1_eyes": {
+            "file": "eyes_4.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -0.1,
+                "y": -101
+            },
+            "type": "sprite"
+        },
+        "hero2/avatar1_player": {
+            "file": "player1_2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -0.1,
+                "y": -293
+            },
+            "type": "sprite"
+        },
+        "hero2/avatar1_arrow": {
+            "file": "arrow2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -0.1,
+                "y": -227
+            },
+            "type": "sprite"
+        },
+        "hero3": {
+            "position": {
+                "x": 80.6,
+                "y": 0.3
+            },
+            "type": "container"
+        },
+        "hero3/avatar1": {
+            "file": "hero3.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": -85.1
+            },
+            "type": "sprite"
+        },
+        "hero3/avatar1_player": {
+            "file": "player1_3.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": -290.1
+            },
+            "type": "sprite"
+        },
+        "hero3/avatar1_arrow": {
+            "file": "arrow3.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": -224.1
+            },
+            "type": "sprite"
+        },
+        "hero3/avatar1_eyes": {
+            "file": "eyes_4.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 1,
+                "y": -99.1
+            },
+            "type": "sprite"
+        },
+        "hero4": {
+            "position": {
+                "x": 245.5,
+                "y": 1.7
+            },
+            "type": "container"
+        },
+        "hero4/avatar1": {
+            "file": "hero4.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -0.1,
+                "y": -86.2
+            },
+            "type": "sprite"
+        },
+        "hero4/avatar1_player": {
+            "file": "player1_4.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -0.1,
+                "y": -291.2
+            },
+            "type": "sprite"
+        },
+        "hero4/avatar1_arrow": {
+            "file": "arrow4.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -0.1,
+                "y": -226.2
+            },
+            "type": "sprite"
+        },
+        "hero4/avatar1_eyes": {
+            "file": "eyes_4.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.9,
+                "y": -100.2
+            },
+            "type": "sprite"
+        }
+    }
+}

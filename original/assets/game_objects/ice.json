@@ -1,0 +1,30 @@
+{
+    "hierarchy": {
+        "name": "ice",
+        "children": [
+            {
+                "name": "ice_base",
+                "animations": []
+            }
+        ],
+        "animations": [
+            "ice_in",
+            "ice_out"
+        ]
+    },
+    "properties": {
+        "ice_base": {
+            "file": "freeze_fx10.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 1
+            },
+            "type": "sprite"
+        }
+    }
+}

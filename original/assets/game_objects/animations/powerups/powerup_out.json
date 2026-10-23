@@ -1,0 +1,47 @@
+{
+    "name": "powerup_out",
+    "speed": 1,
+    "mode": "normal",
+    "data": {
+        "tool_shadow": {
+            "alpha": [
+                {
+                    "frame": 0,
+                    "value": 1
+                },
+                {
+                    "frame": 433,
+                    "value": 0
+                }
+            ]
+        },
+        "tool_base": {
+            "position": [
+                {
+                    "frame": 0,
+                    "value": [
+                        0,
+                        -33.77
+                    ]
+                },
+                {
+                    "frame": 633,
+                    "value": [
+                        0,
+                        -108.2
+                    ]
+                }
+            ],
+            "alpha": [
+                {
+                    "frame": 0,
+                    "value": 1
+                },
+                {
+                    "frame": 633,
+                    "value": 0
+                }
+            ]
+        }
+    }
+}

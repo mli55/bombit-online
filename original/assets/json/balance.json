@@ -1,0 +1,58 @@
+{
+
+  "SETTINGS": {
+
+    "CELL_WIDTH": 49,
+    "CELL_HEIGHT": 49,
+    "GRID_WIDTH": 15,
+    "GRID_HEIGHT": 13,
+
+    "INITIAL_BLINKING_TIME": 2000,
+
+    "INITIAL_SPEED": 0.2375,
+    "SPEED_INCREASE": 0.02375,
+    "INITIAL_LIVES": 3,
+    "BOMB_TIMER": 2500,
+    "SLOW_TIME": 20000,
+    "FROZEN_TIME": 3000,
+    "SLOW_SPEED": 0.05,
+    "ROCKET_SPEED": 0.5,
+    "BOMB_SPEED_KICKED": 0.5,
+    "MAX_BOMB_POWER": 5,
+    "MAX_SPEED": 9,
+    "MAX_BOMBS": 9,
+    "TIME_TO_HIDE_MINE": 3500,
+    "TIME_FIRE_ON": 1500,
+    "TIME_ICE_ON": 1500,
+
+    "CHANCE_POWER_UP": 40,
+    "CHANCE_POWER_UP_BEING_WEAPON": 30,
+    "POWER_UP_CHANCES": [
+      {"name": "bomb", "chance": 20},
+      {"name": "power", "chance": 20},
+      {"name": "speed", "chance": 20},
+      {"name": "push", "chance": 20},
+      {"name": "shield", "chance": 18},
+      {"name": "heart", "chance": 2}
+    ],
+
+    "WEAPON_CHANCES": [
+      {"name": "battery", "chance": 20},
+      {"name": "fire", "chance": 10},
+      {"name": "freeze", "chance": 20},
+      {"name": "grenade", "chance": 20},
+      {"name": "mine", "chance": 20},
+      {"name": "rocket", "chance": 10}
+    ],
+
+    "POINTS_BLOCK_DESTROY": [5, 10, 15],
+    "POINTS_POWER_UP": [100, 100, 100],
+    "POINTS_PLAYER_KILL": 1000,
+    "POINTS_PER_WIN": 1000,
+
+    "MATCH_TIME": 180000,
+    "TOTAL_ROUNDS": 5
+
+  }
+
+}

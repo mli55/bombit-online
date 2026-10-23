@@ -1,0 +1,6 @@
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: same-origin
+  X-Frame-Options: SAMEORIGIN
+/game/*
+  Cache-Control: public, max-age=3600

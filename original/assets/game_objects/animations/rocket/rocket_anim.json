@@ -1,0 +1,55 @@
+{
+    "name": "rocket_anim",
+    "speed": 1,
+    "mode": "loop",
+    "data": {
+        "rocket_smoke": {
+            "position": [
+                {
+                    "frame": 0,
+                    "value": [
+                        5.7,
+                        0
+                    ]
+                },
+                {
+                    "frame": 550,
+                    "value": [
+                        -7.6,
+                        0
+                    ]
+                }
+            ],
+            "scaleX": [
+                {
+                    "frame": 0,
+                    "value": 0.1
+                },
+                {
+                    "frame": 550,
+                    "value": 1
+                }
+            ],
+            "scaleY": [
+                {
+                    "frame": 0,
+                    "value": 0.1
+                },
+                {
+                    "frame": 550,
+                    "value": 1
+                }
+            ],
+            "alpha": [
+                {
+                    "frame": 0,
+                    "value": 1
+                },
+                {
+                    "frame": 450,
+                    "value": 0
+                }
+            ]
+        }
+    }
+}

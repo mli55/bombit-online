@@ -1,0 +1,24 @@
+{
+    "hierarchy": {
+        "name": "explosion",
+        "children": [
+            {
+                "name": "exp_base"
+            }
+        ],
+        "animations": [
+            "explosion_anim"
+        ]
+    },
+    "properties": {
+        "exp_base": {
+            "file": "exp_fx6.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "sprite"
+        }
+    }
+}

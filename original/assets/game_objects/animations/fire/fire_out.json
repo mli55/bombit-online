@@ -1,0 +1,19 @@
+{
+    "name": "fire_out",
+    "speed": 1,
+    "mode": "normal",
+    "data": {
+        "fire_base": {
+            "scaleY": [
+                {
+                    "frame": 0,
+                    "value": 0.7
+                },
+                {
+                    "frame": 67,
+                    "value": 0
+                }
+            ]
+        }
+    }
+}

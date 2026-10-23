@@ -1,0 +1,95 @@
+{
+    "name": "mine_anim",
+    "speed": 1,
+    "mode": "loop",
+    "data": {
+        "mine_base": {
+            "alpha": [
+                {
+                    "frame": 0,
+                    "value": 1
+                },
+                {
+                    "frame": 167,
+                    "value": 1
+                },
+                {
+                    "frame": 183,
+                    "value": 0
+                },
+                {
+                    "frame": 233,
+                    "value": 0
+                },
+                {
+                    "frame": 250,
+                    "value": 1
+                },
+                {
+                    "frame": 317,
+                    "value": 1
+                },
+                {
+                    "frame": 333,
+                    "value": 0
+                },
+                {
+                    "frame": 400,
+                    "value": 0
+                },
+                {
+                    "frame": 417,
+                    "value": 1
+                },
+                {
+                    "frame": 500,
+                    "value": 1
+                },
+                {
+                    "frame": 517,
+                    "value": 0
+                },
+                {
+                    "frame": 567,
+                    "value": 0
+                },
+                {
+                    "frame": 583,
+                    "value": 1
+                },
+                {
+                    "frame": 650,
+                    "value": 1
+                },
+                {
+                    "frame": 667,
+                    "value": 0
+                },
+                {
+                    "frame": 733,
+                    "value": 0
+                },
+                {
+                    "frame": 750,
+                    "value": 1
+                },
+                {
+                    "frame": 817,
+                    "value": 1
+                },
+                {
+                    "frame": 833,
+                    "value": 0
+                },
+                {
+                    "frame": 900,
+                    "value": 0
+                },
+                {
+                    "frame": 917,
+                    "value": 1
+                }
+            ]
+        }
+    }
+}

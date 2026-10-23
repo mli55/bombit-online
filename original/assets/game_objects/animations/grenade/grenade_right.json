@@ -1,0 +1,124 @@
+{
+    "name": "grenade_right",
+    "speed": 1,
+    "mode": "normal",
+    "data": {
+        "grenade_base": {
+            "position": [
+                {
+                    "frame": 0,
+                    "value": [
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "frame": 100,
+                    "value": [
+                        20,
+                        -97
+                    ]
+                },
+                {
+                    "frame": 200,
+                    "value": [
+                        48,
+                        -112
+                    ]
+                },
+                {
+                    "frame": 317,
+                    "value": [
+                        79,
+                        -97
+                    ]
+                },
+                {
+                    "frame": 500,
+                    "value": [
+                        99,
+                        -2
+                    ]
+                }
+            ],
+            "angle": [
+                {
+                    "frame": 0,
+                    "value": 0
+                },
+                {
+                    "frame": 17,
+                    "value": 82
+                },
+                {
+                    "frame": 33,
+                    "value": 146
+                },
+                {
+                    "frame": 50,
+                    "value": 201
+                },
+                {
+                    "frame": 67,
+                    "value": 254
+                },
+                {
+                    "frame": 100,
+                    "value": 282
+                },
+                {
+                    "frame": 133,
+                    "value": 323
+                },
+                {
+                    "frame": 167,
+                    "value": 353
+                },
+                {
+                    "frame": 200,
+                    "value": 360
+                },
+                {
+                    "frame": 217,
+                    "value": 0
+                },
+                {
+                    "frame": 233,
+                    "value": 5
+                },
+                {
+                    "frame": 267,
+                    "value": 23
+                },
+                {
+                    "frame": 300,
+                    "value": 45
+                },
+                {
+                    "frame": 333,
+                    "value": 77
+                },
+                {
+                    "frame": 367,
+                    "value": 112
+                },
+                {
+                    "frame": 400,
+                    "value": 163
+                },
+                {
+                    "frame": 433,
+                    "value": 209
+                },
+                {
+                    "frame": 467,
+                    "value": 286
+                },
+                {
+                    "frame": 500,
+                    "value": 351
+                }
+            ]
+        }
+    }
+}

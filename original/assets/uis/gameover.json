@@ -1,0 +1,189 @@
+{
+    "hierarchy": {
+        "name": "Canvas",
+        "children": [
+            {
+                "name": "title"
+            },
+            {
+                "name": "more_games_button",
+                "children": [
+                    {
+                        "name": "text"
+                    },
+                    {
+                        "name": "icon"
+                    }
+                ]
+            },
+            {
+                "name": "container",
+                "children": [
+                    {
+                        "name": "submit_score_button",
+                        "children": [
+                            {
+                                "name": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "your_score_text"
+                    },
+                    {
+                        "name": "your_score"
+                    },
+                    {
+                        "name": "name"
+                    },
+                    {
+                        "name": "your_name_text"
+                    }
+                ]
+            }
+        ]
+    },
+    "properties": {
+        "Canvas": {
+            "design": {
+                "width": 1280,
+                "height": 720
+            },
+            "type": "canvas"
+        },
+        "title": {
+            "file": "gc_title.png",
+            "image": "SIMPLE",
+            "type": "sprite",
+            "alignment": {
+                "type": "CENTER",
+                "offset": {
+                    "x": "0%",
+                    "y": -233
+                }
+            }
+        },
+        "more_games_button": {
+            "file": "pink_button.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "pink_button.png",
+                "pressed": "pink_button.png",
+                "hover": "pink_button_over.png"
+            },
+            "type": "button",
+            "alignment": {
+                "type": "CENTER",
+                "offset": {
+                    "x": "0%",
+                    "y": 212
+                }
+            }
+        },
+        "more_games_button/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": "MORE GAMES",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 3
+            },
+            "type": "text"
+        },
+        "more_games_button/icon": {
+            "file": "mm_brick3.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -99.1,
+                "y": -3
+            },
+            "type": "sprite"
+        },
+        "container": {
+            "file": "gc_container.png",
+            "image": "SIMPLE",
+            "type": "sprite",
+            "alignment": {
+                "type": "CENTER"
+            }
+        },
+        "container/submit_score_button": {
+            "file": "button.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "button.png",
+                "pressed": "button.png",
+                "hover": "button_press.png"
+            },
+            "position": {
+                "x": 0,
+                "y": 88
+            },
+            "type": "button"
+        },
+        "container/submit_score_button/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": "SUBMIT SCORE",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 3
+            },
+            "type": "text"
+        },
+        "container/your_score_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 30
+            },
+            "text": "YOUR SCORE",
+            "align": "center",
+            "position": {
+                "x": -123,
+                "y": -84.9
+            },
+            "type": "text"
+        },
+        "container/your_score": {
+            "font": {
+                "name": "impact",
+                "fontSize": 30
+            },
+            "text": "9999",
+            "align": "center",
+            "position": {
+                "x": 92.5,
+                "y": -82
+            },
+            "type": "text"
+        },
+        "container/name": {
+            "position": {
+                "x": 92.5,
+                "y": 0.5
+            },
+            "type": "container"
+        },
+        "container/your_name_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 30
+            },
+            "text": "YOUR NAME",
+            "align": "center",
+            "position": {
+                "x": -123,
+                "y": 0.3
+            },
+            "type": "text"
+        }
+    }
+}

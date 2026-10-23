@@ -1,0 +1,112 @@
+{
+    "name": "grenade_up",
+    "speed": 1,
+    "mode": "normal",
+    "data": {
+        "grenade_base": {
+            "position": [
+                {
+                    "frame": 0,
+                    "value": [
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "frame": 200,
+                    "value": [
+                        3,
+                        -134
+                    ]
+                },
+                {
+                    "frame": 500,
+                    "value": [
+                        -2,
+                        -98
+                    ]
+                }
+            ],
+            "angle": [
+                {
+                    "frame": 0,
+                    "value": 0
+                },
+                {
+                    "frame": 17,
+                    "value": 76
+                },
+                {
+                    "frame": 33,
+                    "value": 140
+                },
+                {
+                    "frame": 50,
+                    "value": 205
+                },
+                {
+                    "frame": 67,
+                    "value": 253
+                },
+                {
+                    "frame": 100,
+                    "value": 282
+                },
+                {
+                    "frame": 133,
+                    "value": 313
+                },
+                {
+                    "frame": 167,
+                    "value": 335
+                },
+                {
+                    "frame": 200,
+                    "value": 356
+                },
+                {
+                    "frame": 233,
+                    "value": 20
+                },
+                {
+                    "frame": 267,
+                    "value": 29
+                },
+                {
+                    "frame": 300,
+                    "value": 37
+                },
+                {
+                    "frame": 333,
+                    "value": 72
+                },
+                {
+                    "frame": 367,
+                    "value": 101
+                },
+                {
+                    "frame": 400,
+                    "value": 170
+                },
+                {
+                    "frame": 433,
+                    "value": 204
+                },
+                {
+                    "frame": 467,
+                    "value": 270
+                },
+                {
+                    "frame": 500,
+                    "value": 353
+                }
+            ],
+            "frameName": [
+                {
+                    "frame": 0,
+                    "value": "grenade2.png"
+                }
+            ]
+        }
+    }
+}

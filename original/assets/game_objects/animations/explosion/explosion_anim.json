@@ -1,0 +1,39 @@
+{
+    "name": "explosion_anim",
+    "speed": 1,
+    "mode": "normal",
+    "data": {
+        "exp_base": {
+            "frameName": [
+                {
+                    "frame": 0,
+                    "value": "exp_fx6.png"
+                },
+                {
+                    "frame": 17,
+                    "value": "exp_fx1.png"
+                },
+                {
+                    "frame": 67,
+                    "value": "exp_fx2.png"
+                },
+                {
+                    "frame": 117,
+                    "value": "exp_fx3.png"
+                },
+                {
+                    "frame": 167,
+                    "value": "exp_fx4.png"
+                },
+                {
+                    "frame": 217,
+                    "value": "exp_fx5.png"
+                },
+                {
+                    "frame": 267,
+                    "value": "exp_fx6.png"
+                }
+            ]
+        }
+    }
+}

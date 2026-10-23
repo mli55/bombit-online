@@ -1,0 +1,35 @@
+{
+    "name": "select_character_hero_stand",
+    "speed": 1,
+    "mode": "normal",
+    "data": {
+        "avatar1_eyes": {
+            "frameName": [
+                {
+                    "frame": 0,
+                    "value": "eyes_4.png"
+                },
+                {
+                    "frame": 167,
+                    "value": "eyes_4.png"
+                }
+            ]
+        },
+        "avatar1_player": {
+            "y": [
+                {
+                    "frame": 0,
+                    "value": -289
+                }
+            ]
+        },
+        "avatar1_arrow": {
+            "y": [
+                {
+                    "frame": 0,
+                    "value": -215
+                }
+            ]
+        }
+    }
+}

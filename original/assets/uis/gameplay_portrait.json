@@ -1,0 +1,1117 @@
+{
+    "hierarchy": {
+        "name": "Canvas",
+        "children": [
+            {
+                "name": "edge",
+                "children": [
+                    {
+                        "name": "edge_right"
+                    },
+                    {
+                        "name": "edge_left"
+                    },
+                    {
+                        "name": "edge_top"
+                    },
+                    {
+                        "name": "edge_bottom"
+                    }
+                ]
+            },
+            {
+                "name": "container_avatars",
+                "children": [
+                    {
+                        "name": "container_player1",
+                        "children": [
+                            {
+                                "name": "player1_avatar"
+                            },
+                            {
+                                "name": "player1_score"
+                            },
+                            {
+                                "name": "player1_bomb"
+                            },
+                            {
+                                "name": "player1_life"
+                            },
+                            {
+                                "name": "player1_powerup1",
+                                "children": [
+                                    {
+                                        "name": "bomb"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "player1_powerup2",
+                                "children": [
+                                    {
+                                        "name": "powerup_shadow"
+                                    },
+                                    {
+                                        "name": "powerup"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "player1_powerup3",
+                                "children": [
+                                    {
+                                        "name": "powerup_shadow"
+                                    },
+                                    {
+                                        "name": "powerup"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "player1_powerup4",
+                                "children": [
+                                    {
+                                        "name": "powerup_shadow"
+                                    },
+                                    {
+                                        "name": "powerup"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "container_player2",
+                        "children": [
+                            {
+                                "name": "player2_avatar"
+                            },
+                            {
+                                "name": "player2_score"
+                            },
+                            {
+                                "name": "player2_bomb"
+                            },
+                            {
+                                "name": "player2_life"
+                            },
+                            {
+                                "name": "player2_powerup1",
+                                "children": [
+                                    {
+                                        "name": "bomb"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "player2_powerup2",
+                                "children": [
+                                    {
+                                        "name": "powerup_shadow"
+                                    },
+                                    {
+                                        "name": "powerup"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "player2_powerup3",
+                                "children": [
+                                    {
+                                        "name": "powerup_shadow"
+                                    },
+                                    {
+                                        "name": "powerup"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "player2_powerup4",
+                                "children": [
+                                    {
+                                        "name": "powerup_shadow"
+                                    },
+                                    {
+                                        "name": "powerup"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "container_player3",
+                        "children": [
+                            {
+                                "name": "player3_avatar"
+                            },
+                            {
+                                "name": "player3_score"
+                            },
+                            {
+                                "name": "player3_bomb"
+                            },
+                            {
+                                "name": "player3_life"
+                            },
+                            {
+                                "name": "player3_powerup1",
+                                "children": [
+                                    {
+                                        "name": "bomb"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "player3_powerup2",
+                                "children": [
+                                    {
+                                        "name": "powerup_shadow"
+                                    },
+                                    {
+                                        "name": "powerup"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "player3_powerup3",
+                                "children": [
+                                    {
+                                        "name": "powerup_shadow"
+                                    },
+                                    {
+                                        "name": "powerup"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "player3_powerup4",
+                                "children": [
+                                    {
+                                        "name": "powerup_shadow"
+                                    },
+                                    {
+                                        "name": "powerup"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "container_player4",
+                        "children": [
+                            {
+                                "name": "player4_avatar"
+                            },
+                            {
+                                "name": "player4_score"
+                            },
+                            {
+                                "name": "player4_bomb"
+                            },
+                            {
+                                "name": "player4_life"
+                            },
+                            {
+                                "name": "player4_powerup1",
+                                "children": [
+                                    {
+                                        "name": "bomb"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "player4_powerup2",
+                                "children": [
+                                    {
+                                        "name": "powerup_shadow"
+                                    },
+                                    {
+                                        "name": "powerup"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "player4_powerup3",
+                                "children": [
+                                    {
+                                        "name": "powerup_shadow"
+                                    },
+                                    {
+                                        "name": "powerup"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "player4_powerup4",
+                                "children": [
+                                    {
+                                        "name": "powerup_shadow"
+                                    },
+                                    {
+                                        "name": "powerup"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "container_time_level",
+                        "children": [
+                            {
+                                "name": "level_text"
+                            },
+                            {
+                                "name": "level"
+                            },
+                            {
+                                "name": "time_text"
+                            },
+                            {
+                                "name": "minutes"
+                            },
+                            {
+                                "name": "seconds"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "pause_button",
+                        "children": [
+                            {
+                                "name": "button_text"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "properties": {
+        "Canvas": {
+            "design": {
+                "width": 720,
+                "height": 1280
+            },
+            "type": "canvas"
+        },
+        "edge": {
+            "type": "container",
+            "alignment": {
+                "type": "CENTER",
+                "offset": {
+                    "x": "0%",
+                    "y": "5%"
+                }
+            }
+        },
+        "edge/edge_right": {
+            "file": "frame_vertical.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 354.94,
+                "y": 0
+            },
+            "scale": {
+                "x": 0.87,
+                "y": 0.87
+            },
+            "type": "sprite"
+        },
+        "edge/edge_left": {
+            "file": "frame_vertical.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -354.9,
+                "y": 0
+            },
+            "scale": {
+                "x": -0.87,
+                "y": 0.87
+            },
+            "type": "sprite"
+        },
+        "edge/edge_top": {
+            "file": "frame_horizontal.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": -309.8
+            },
+            "scale": {
+                "x": 0.87,
+                "y": 0.87
+            },
+            "type": "sprite"
+        },
+        "edge/edge_bottom": {
+            "file": "frame_horizontal.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 309.8
+            },
+            "scale": {
+                "x": 0.87,
+                "y": -0.87
+            },
+            "type": "sprite"
+        },
+        "container_avatars": {
+            "file": "base_character.png",
+            "image": "SIMPLE",
+            "angle": 90,
+            "type": "sprite",
+            "alignment": {
+                "type": "CENTER",
+                "offset": {
+                    "x": "11%",
+                    "y": -350.2
+                }
+            }
+        },
+        "container_avatars/container_player1": {
+            "file": "avatar_container.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.5,
+                "y": 186.2
+            },
+            "angle": -90,
+            "type": "sprite"
+        },
+        "container_avatars/container_player1/player1_avatar": {
+            "file": "head1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 1.1,
+                "y": -11.7
+            },
+            "type": "sprite"
+        },
+        "container_avatars/container_player1/player1_score": {
+            "font": {
+                "name": "impact",
+                "fontSize": 20
+            },
+            "text": "999",
+            "align": "center",
+            "position": {
+                "x": 46.7,
+                "y": 34.6
+            },
+            "anchor": {
+                "x": 1,
+                "y": 0.5
+            },
+            "type": "text"
+        },
+        "container_avatars/container_player1/player1_bomb": {
+            "font": {
+                "name": "impact",
+                "fontSize": 20
+            },
+            "text": "1",
+            "align": "center",
+            "position": {
+                "x": 39,
+                "y": -45.6
+            },
+            "anchor": {
+                "x": 1,
+                "y": 0.5
+            },
+            "type": "text"
+        },
+        "container_avatars/container_player1/player1_life": {
+            "font": {
+                "name": "impact",
+                "fontSize": 20
+            },
+            "text": "1",
+            "align": "center",
+            "position": {
+                "x": -41.4,
+                "y": 34.6
+            },
+            "type": "text"
+        },
+        "container_avatars/container_player1/player1_powerup1": {
+            "position": {
+                "x": 53.6,
+                "y": -44.5
+            },
+            "type": "container"
+        },
+        "container_avatars/container_player1/player1_powerup1/bomb": {
+            "file": "head_bomb.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "container_avatars/container_player1/player1_powerup2": {
+            "position": {
+                "x": 52.9,
+                "y": -30
+            },
+            "type": "container"
+        },
+        "container_avatars/container_player1/player1_powerup2/powerup_shadow": {
+            "file": "icon_shadow.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.8,
+                "y": 5.7
+            },
+            "alpha": 0.73,
+            "type": "sprite"
+        },
+        "container_avatars/container_player1/player1_powerup2/powerup": {
+            "file": "head_icon1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "container_avatars/container_player1/player1_powerup3": {
+            "position": {
+                "x": 52.9,
+                "y": -8.1
+            },
+            "type": "container"
+        },
+        "container_avatars/container_player1/player1_powerup3/powerup_shadow": {
+            "file": "icon_shadow.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.8,
+                "y": 5.7
+            },
+            "alpha": 0.73,
+            "type": "sprite"
+        },
+        "container_avatars/container_player1/player1_powerup3/powerup": {
+            "file": "head_icon2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "container_avatars/container_player1/player1_powerup4": {
+            "position": {
+                "x": 52.9,
+                "y": 14.1
+            },
+            "type": "container"
+        },
+        "container_avatars/container_player1/player1_powerup4/powerup_shadow": {
+            "file": "icon_shadow.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.8,
+                "y": 5.7
+            },
+            "alpha": 0.73,
+            "type": "sprite"
+        },
+        "container_avatars/container_player1/player1_powerup4/powerup": {
+            "file": "head_icon3.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "container_avatars/container_player2": {
+            "file": "avatar_container.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 1,
+                "y": 63.6
+            },
+            "angle": -90,
+            "type": "sprite"
+        },
+        "container_avatars/container_player2/player2_avatar": {
+            "file": "head2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.5,
+                "y": -12.8
+            },
+            "type": "sprite"
+        },
+        "container_avatars/container_player2/player2_score": {
+            "font": {
+                "name": "impact",
+                "fontSize": 20
+            },
+            "text": "999",
+            "align": "center",
+            "position": {
+                "x": 46.7,
+                "y": 36.6
+            },
+            "anchor": {
+                "x": 1,
+                "y": 0.5
+            },
+            "type": "text"
+        },
+        "container_avatars/container_player2/player2_bomb": {
+            "font": {
+                "name": "impact",
+                "fontSize": 20
+            },
+            "text": "1",
+            "align": "center",
+            "position": {
+                "x": 40.5,
+                "y": -44.1
+            },
+            "anchor": {
+                "x": 1,
+                "y": 0.5
+            },
+            "type": "text"
+        },
+        "container_avatars/container_player2/player2_life": {
+            "font": {
+                "name": "impact",
+                "fontSize": 20
+            },
+            "text": "1",
+            "align": "center",
+            "position": {
+                "x": -41.8,
+                "y": 36.5
+            },
+            "type": "text"
+        },
+        "container_avatars/container_player2/player2_powerup1": {
+            "position": {
+                "x": 52.9,
+                "y": -45
+            },
+            "type": "container"
+        },
+        "container_avatars/container_player2/player2_powerup1/bomb": {
+            "file": "head_bomb.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "container_avatars/container_player2/player2_powerup2": {
+            "position": {
+                "x": 52.2,
+                "y": -30.5
+            },
+            "type": "container"
+        },
+        "container_avatars/container_player2/player2_powerup2/powerup_shadow": {
+            "file": "icon_shadow.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.8,
+                "y": 5.7
+            },
+            "alpha": 0.73,
+            "type": "sprite"
+        },
+        "container_avatars/container_player2/player2_powerup2/powerup": {
+            "file": "head_icon1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "container_avatars/container_player2/player2_powerup3": {
+            "position": {
+                "x": 52.2,
+                "y": -8.6
+            },
+            "type": "container"
+        },
+        "container_avatars/container_player2/player2_powerup3/powerup_shadow": {
+            "file": "icon_shadow.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.8,
+                "y": 5.7
+            },
+            "alpha": 0.73,
+            "type": "sprite"
+        },
+        "container_avatars/container_player2/player2_powerup3/powerup": {
+            "file": "head_icon2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "container_avatars/container_player2/player2_powerup4": {
+            "position": {
+                "x": 52.2,
+                "y": 13.6
+            },
+            "type": "container"
+        },
+        "container_avatars/container_player2/player2_powerup4/powerup_shadow": {
+            "file": "icon_shadow.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.8,
+                "y": 5.7
+            },
+            "alpha": 0.73,
+            "type": "sprite"
+        },
+        "container_avatars/container_player2/player2_powerup4/powerup": {
+            "file": "head_icon3.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "container_avatars/container_player3": {
+            "file": "avatar_container.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.9,
+                "y": -58.2
+            },
+            "angle": -90,
+            "type": "sprite"
+        },
+        "container_avatars/container_player3/player3_avatar": {
+            "file": "head3.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.7,
+                "y": -12.7
+            },
+            "type": "sprite"
+        },
+        "container_avatars/container_player3/player3_score": {
+            "font": {
+                "name": "impact",
+                "fontSize": 20
+            },
+            "text": "999",
+            "align": "center",
+            "position": {
+                "x": 46,
+                "y": 35
+            },
+            "anchor": {
+                "x": 1,
+                "y": 0.5
+            },
+            "type": "text"
+        },
+        "container_avatars/container_player3/player3_bomb": {
+            "font": {
+                "name": "impact",
+                "fontSize": 20
+            },
+            "text": "1",
+            "align": "center",
+            "position": {
+                "x": 38.9,
+                "y": -47.7
+            },
+            "anchor": {
+                "x": 1,
+                "y": 0.5
+            },
+            "type": "text"
+        },
+        "container_avatars/container_player3/player3_life": {
+            "font": {
+                "name": "impact",
+                "fontSize": 20
+            },
+            "text": "1",
+            "align": "center",
+            "position": {
+                "x": -41.3,
+                "y": 36.1
+            },
+            "type": "text"
+        },
+        "container_avatars/container_player3/player3_powerup1": {
+            "position": {
+                "x": 52.3,
+                "y": -44.9
+            },
+            "type": "container"
+        },
+        "container_avatars/container_player3/player3_powerup1/bomb": {
+            "file": "head_bomb.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "container_avatars/container_player3/player3_powerup2": {
+            "position": {
+                "x": 51.6,
+                "y": -30.4
+            },
+            "type": "container"
+        },
+        "container_avatars/container_player3/player3_powerup2/powerup_shadow": {
+            "file": "icon_shadow.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.8,
+                "y": 5.7
+            },
+            "alpha": 0.73,
+            "type": "sprite"
+        },
+        "container_avatars/container_player3/player3_powerup2/powerup": {
+            "file": "head_icon1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "container_avatars/container_player3/player3_powerup3": {
+            "position": {
+                "x": 51.6,
+                "y": -8.5
+            },
+            "type": "container"
+        },
+        "container_avatars/container_player3/player3_powerup3/powerup_shadow": {
+            "file": "icon_shadow.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.8,
+                "y": 5.7
+            },
+            "alpha": 0.73,
+            "type": "sprite"
+        },
+        "container_avatars/container_player3/player3_powerup3/powerup": {
+            "file": "head_icon2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "container_avatars/container_player3/player3_powerup4": {
+            "position": {
+                "x": 51.6,
+                "y": 13.7
+            },
+            "type": "container"
+        },
+        "container_avatars/container_player3/player3_powerup4/powerup_shadow": {
+            "file": "icon_shadow.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.8,
+                "y": 5.7
+            },
+            "alpha": 0.73,
+            "type": "sprite"
+        },
+        "container_avatars/container_player3/player3_powerup4/powerup": {
+            "file": "head_icon3.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "container_avatars/container_player4": {
+            "file": "avatar_container.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.3,
+                "y": -179.3
+            },
+            "angle": -90,
+            "type": "sprite"
+        },
+        "container_avatars/container_player4/player4_avatar": {
+            "file": "head4.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 2,
+                "y": -11.7
+            },
+            "type": "sprite"
+        },
+        "container_avatars/container_player4/player4_score": {
+            "font": {
+                "name": "impact",
+                "fontSize": 20
+            },
+            "text": "999",
+            "align": "center",
+            "position": {
+                "x": 46,
+                "y": 36
+            },
+            "anchor": {
+                "x": 1,
+                "y": 0.5
+            },
+            "type": "text"
+        },
+        "container_avatars/container_player4/player4_bomb": {
+            "font": {
+                "name": "impact",
+                "fontSize": 20
+            },
+            "text": "1",
+            "align": "center",
+            "position": {
+                "x": 41.1,
+                "y": -44.7
+            },
+            "anchor": {
+                "x": 1,
+                "y": 0.5
+            },
+            "type": "text"
+        },
+        "container_avatars/container_player4/player4_life": {
+            "font": {
+                "name": "impact",
+                "fontSize": 20
+            },
+            "text": "1",
+            "align": "center",
+            "position": {
+                "x": -41.7,
+                "y": 36.7
+            },
+            "type": "text"
+        },
+        "container_avatars/container_player4/player4_powerup1": {
+            "position": {
+                "x": 53.3,
+                "y": -44.3
+            },
+            "type": "container"
+        },
+        "container_avatars/container_player4/player4_powerup1/bomb": {
+            "file": "head_bomb.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "container_avatars/container_player4/player4_powerup2": {
+            "position": {
+                "x": 52.6,
+                "y": -29.8
+            },
+            "type": "container"
+        },
+        "container_avatars/container_player4/player4_powerup2/powerup_shadow": {
+            "file": "icon_shadow.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.8,
+                "y": 5.7
+            },
+            "alpha": 0.73,
+            "type": "sprite"
+        },
+        "container_avatars/container_player4/player4_powerup2/powerup": {
+            "file": "head_icon1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "container_avatars/container_player4/player4_powerup3": {
+            "position": {
+                "x": 52.6,
+                "y": -7.9
+            },
+            "type": "container"
+        },
+        "container_avatars/container_player4/player4_powerup3/powerup_shadow": {
+            "file": "icon_shadow.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.8,
+                "y": 5.7
+            },
+            "alpha": 0.73,
+            "type": "sprite"
+        },
+        "container_avatars/container_player4/player4_powerup3/powerup": {
+            "file": "head_icon2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "container_avatars/container_player4/player4_powerup4": {
+            "position": {
+                "x": 52.6,
+                "y": 14.3
+            },
+            "type": "container"
+        },
+        "container_avatars/container_player4/player4_powerup4/powerup_shadow": {
+            "file": "icon_shadow.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.8,
+                "y": 5.7
+            },
+            "alpha": 0.73,
+            "type": "sprite"
+        },
+        "container_avatars/container_player4/player4_powerup4/powerup": {
+            "file": "head_icon3.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "container_avatars/container_time_level": {
+            "file": "time_container.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 26.5,
+                "y": 346.3
+            },
+            "angle": -90,
+            "type": "sprite"
+        },
+        "container_avatars/container_time_level/level_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 22
+            },
+            "text": "LEVEL",
+            "align": "left",
+            "position": {
+                "x": -37.5,
+                "y": -31.2
+            },
+            "type": "text"
+        },
+        "container_avatars/container_time_level/level": {
+            "font": {
+                "name": "impact",
+                "fontSize": 22
+            },
+            "text": "02",
+            "align": "left",
+            "position": {
+                "x": 30.2,
+                "y": -31.8
+            },
+            "type": "text"
+        },
+        "container_avatars/container_time_level/time_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 22
+            },
+            "text": "TIME",
+            "align": "left",
+            "position": {
+                "x": -37,
+                "y": -3
+            },
+            "type": "text"
+        },
+        "container_avatars/container_time_level/minutes": {
+            "font": {
+                "name": "impact",
+                "fontSize": 22
+            },
+            "text": "0   0",
+            "align": "left",
+            "position": {
+                "x": -32.4,
+                "y": 24.3
+            },
+            "type": "text"
+        },
+        "container_avatars/container_time_level/seconds": {
+            "font": {
+                "name": "impact",
+                "fontSize": 22
+            },
+            "text": "0   0",
+            "align": "left",
+            "position": {
+                "x": 37.8,
+                "y": 24.3
+            },
+            "type": "text"
+        },
+        "container_avatars/pause_button": {
+            "file": "pause.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "pause.png",
+                "pressed": "pause.png",
+                "hover": "pause_press.png"
+            },
+            "position": {
+                "x": -57.8,
+                "y": 347.3
+            },
+            "angle": -90,
+            "type": "button"
+        },
+        "container_avatars/pause_button/button_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 30
+            },
+            "text": "PAUSE",
+            "align": "left",
+            "position": {
+                "x": 0,
+                "y": -2.8
+            },
+            "type": "text"
+        }
+    }
+}

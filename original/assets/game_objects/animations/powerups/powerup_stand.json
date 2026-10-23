@@ -1,0 +1,54 @@
+{
+    "name": "powerup_stand",
+    "speed": 1,
+    "mode": "loop",
+    "data": {
+        "tool_shadow": {
+            "alpha": [
+                {
+                    "frame": 0,
+                    "value": 1
+                },
+                {
+                    "frame": 900,
+                    "value": 0.47
+                },
+                {
+                    "frame": 1983,
+                    "value": 1
+                }
+            ]
+        },
+        "tool_base": {
+            "position": [
+                {
+                    "frame": 0,
+                    "value": [
+                        0,
+                        -25.9
+                    ]
+                },
+                {
+                    "frame": 900,
+                    "value": [
+                        0,
+                        -40
+                    ]
+                },
+                {
+                    "frame": 1983,
+                    "value": [
+                        0,
+                        -25.9
+                    ]
+                }
+            ],
+            "alpha": [
+                {
+                    "frame": 0,
+                    "value": 1
+                }
+            ]
+        }
+    }
+}

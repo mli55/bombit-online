@@ -1,0 +1,26 @@
+{
+    "hierarchy": {
+        "name": "grenade",
+        "children": [
+            {
+                "name": "grenade_base"
+            }
+        ],
+        "animations": [
+            "grenade_down",
+            "grenade_up",
+            "grenade_right"
+        ]
+    },
+    "properties": {
+        "grenade_base": {
+            "file": "grenade1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "sprite"
+        }
+    }
+}

@@ -1,0 +1,37 @@
+{
+    "hierarchy": {
+        "name": "powerup_number",
+        "children": [
+            {
+                "name": "hero_powerup"
+            },
+            {
+                "name": "hero_number"
+            }
+        ]
+    },
+    "properties": {
+        "hero_powerup": {
+            "file": "icon_ice.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -20,
+                "y": -103.4
+            },
+            "scale": {
+                "x": 0.6,
+                "y": 0.6
+            },
+            "type": "sprite"
+        },
+        "hero_number": {
+            "file": "x1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 17.6,
+                "y": -103
+            },
+            "type": "sprite"
+        }
+    }
+}

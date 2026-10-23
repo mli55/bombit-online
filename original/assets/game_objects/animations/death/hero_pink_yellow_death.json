@@ -1,0 +1,92 @@
+{
+    "name": "hero_pink_yellow_death",
+    "speed": 1,
+    "mode": "normal",
+    "data": {
+        "death_body": {
+            "alpha": [
+                {
+                    "frame": 0,
+                    "value": 1
+                },
+                {
+                    "frame": 633,
+                    "value": 0
+                },
+                {
+                    "frame": 1133,
+                    "value": 0
+                }
+            ],
+            "frameName": [
+                {
+                    "frame": 0,
+                    "value": "black1.png"
+                }
+            ]
+        },
+        "ghost": {
+            "alpha": [
+                {
+                    "frame": 0,
+                    "value": 0
+                },
+                {
+                    "frame": 283,
+                    "value": 0
+                },
+                {
+                    "frame": 617,
+                    "value": 1
+                },
+                {
+                    "frame": 850,
+                    "value": 1
+                },
+                {
+                    "frame": 1133,
+                    "value": 0
+                }
+            ],
+            "position": [
+                {
+                    "frame": 0,
+                    "value": [
+                        0,
+                        -37.3
+                    ]
+                },
+                {
+                    "frame": 417,
+                    "value": [
+                        0,
+                        -37.3
+                    ]
+                },
+                {
+                    "frame": 1133,
+                    "value": [
+                        0,
+                        -87.5
+                    ]
+                }
+            ]
+        },
+        "death_shadow": {
+            "alpha": [
+                {
+                    "frame": 0,
+                    "value": 1
+                },
+                {
+                    "frame": 333,
+                    "value": 1
+                },
+                {
+                    "frame": 633,
+                    "value": 0
+                }
+            ]
+        }
+    }
+}

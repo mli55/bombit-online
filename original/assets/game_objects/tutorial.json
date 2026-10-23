@@ -1,0 +1,138 @@
+{
+    "hierarchy": {
+        "name": "tutorial",
+        "children": [
+            {
+                "name": "base1"
+            },
+            {
+                "name": "base2"
+            },
+            {
+                "name": "telephone",
+                "children": [
+                    {
+                        "name": "telephone_l"
+                    },
+                    {
+                        "name": "telephone_r"
+                    },
+                    {
+                        "name": "hand_l"
+                    },
+                    {
+                        "name": "hand_r"
+                    }
+                ]
+            }
+        ],
+        "animations": [
+            "tutorial_landscape_stand",
+            "tutorial_portrait_stand"
+        ]
+    },
+    "properties": {
+        "base1": {
+            "file": "base_tutorial.png",
+            "image": "SLICED",
+            "slice": {
+                "top": 0.3,
+                "bottom": 0.3,
+                "left": 13,
+                "right": 13
+            },
+            "size": {
+                "width": 648,
+                "height": 1280
+            },
+            "position": {
+                "x": 3,
+                "y": 0
+            },
+            "anchor": {
+                "x": 1,
+                "y": 0.5
+            },
+            "type": "sprite"
+        },
+        "base2": {
+            "file": "base_tutorial.png",
+            "image": "SLICED",
+            "slice": {
+                "top": 0.3,
+                "bottom": 0.3,
+                "left": 13,
+                "right": 13
+            },
+            "size": {
+                "width": 648,
+                "height": 1280
+            },
+            "position": {
+                "x": -3,
+                "y": 0
+            },
+            "scale": {
+                "x": -1,
+                "y": 1
+            },
+            "anchor": {
+                "x": 1,
+                "y": 0.5
+            },
+            "alpha": 0,
+            "type": "sprite"
+        },
+        "telephone": {
+            "file": "telephone.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 102
+            },
+            "type": "sprite"
+        },
+        "telephone/telephone_l": {
+            "file": "telephone_base.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "telephone/telephone_r": {
+            "file": "telephone_base.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "scale": {
+                "x": -1,
+                "y": 1
+            },
+            "alpha": 0,
+            "type": "sprite"
+        },
+        "telephone/hand_l": {
+            "file": "hand_left.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -100,
+                "y": 110.5
+            },
+            "type": "sprite"
+        },
+        "telephone/hand_r": {
+            "file": "hand_right.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 98.4,
+                "y": 111.5
+            },
+            "alpha": 0,
+            "type": "sprite"
+        }
+    }
+}

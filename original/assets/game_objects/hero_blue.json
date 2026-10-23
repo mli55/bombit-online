@@ -1,0 +1,124 @@
+{
+    "hierarchy": {
+        "name": "hero_blue",
+        "children": [
+            {
+                "name": "hero1_shadow"
+            },
+            {
+                "name": "hero1_leg_l"
+            },
+            {
+                "name": "hero1_leg_r"
+            },
+            {
+                "name": "hero1_arm_l"
+            },
+            {
+                "name": "hero1_body"
+            },
+            {
+                "name": "hero1_arm_r"
+            },
+            {
+                "name": "hero1_head"
+            }
+        ],
+        "animations": [
+            "hero_blue_down",
+            "hero_blue_up",
+            "hero_blue_side"
+        ]
+    },
+    "properties": {
+        "hero1_shadow": {
+            "file": "shadow.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "hero1_leg_l": {
+            "file": "leg.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 3.4,
+                "y": -17.1
+            },
+            "scale": {
+                "x": -1,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "hero1_leg_r": {
+            "file": "leg.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -3.7,
+                "y": -16.8
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "hero1_arm_l": {
+            "file": "arm.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 6.6,
+                "y": -27.3
+            },
+            "angle": -26,
+            "scale": {
+                "x": -1,
+                "y": 1
+            },
+            "anchor": {
+                "x": 1,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "hero1_body": {
+            "file": "hero1_body.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": -20.4
+            },
+            "type": "sprite"
+        },
+        "hero1_arm_r": {
+            "file": "arm.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -7,
+                "y": -27.9
+            },
+            "angle": 24,
+            "anchor": {
+                "x": 1,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "hero1_head": {
+            "file": "hero1_head_front.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -0.3,
+                "y": -55.6
+            },
+            "type": "sprite"
+        }
+    }
+}

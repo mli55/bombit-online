@@ -1,0 +1,50 @@
+{
+    "hierarchy": {
+        "name": "death",
+        "children": [
+            {
+                "name": "death_shadow"
+            },
+            {
+                "name": "death_body"
+            },
+            {
+                "name": "ghost"
+            }
+        ],
+        "animations": [
+            "hero_blue_green_death",
+            "hero_pink_yellow_death"
+        ]
+    },
+    "properties": {
+        "death_shadow": {
+            "file": "shadow.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "death_body": {
+            "file": "black1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": -42.6
+            },
+            "type": "sprite"
+        },
+        "ghost": {
+            "file": "ghost.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": -37.3
+            },
+            "alpha": 0,
+            "type": "sprite"
+        }
+    }
+}

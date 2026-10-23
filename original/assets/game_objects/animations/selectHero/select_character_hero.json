@@ -1,0 +1,119 @@
+{
+    "name": "select_character_hero",
+    "speed": 1,
+    "mode": "loop",
+    "data": {
+        "avatar1_eyes": {
+            "frameName": [
+                {
+                    "frame": 0,
+                    "value": "eyes_4.png"
+                },
+                {
+                    "frame": 33,
+                    "value": "eyes_1.png"
+                },
+                {
+                    "frame": 83,
+                    "value": "eyes_2.png"
+                },
+                {
+                    "frame": 133,
+                    "value": "eyes_3.png"
+                },
+                {
+                    "frame": 183,
+                    "value": "eyes_2.png"
+                },
+                {
+                    "frame": 217,
+                    "value": "eyes_1.png"
+                },
+                {
+                    "frame": 233,
+                    "value": "eyes_4.png"
+                },
+                {
+                    "frame": 283,
+                    "value": "eyes_4.png"
+                },
+                {
+                    "frame": 300,
+                    "value": "eyes_1.png"
+                },
+                {
+                    "frame": 350,
+                    "value": "eyes_2.png"
+                },
+                {
+                    "frame": 400,
+                    "value": "eyes_3.png"
+                },
+                {
+                    "frame": 450,
+                    "value": "eyes_2.png"
+                },
+                {
+                    "frame": 483,
+                    "value": "eyes_1.png"
+                },
+                {
+                    "frame": 500,
+                    "value": "eyes_4.png"
+                },
+                {
+                    "frame": 3750,
+                    "value": "eyes_4.png"
+                }
+            ]
+        },
+        "avatar1_arrow": {
+            "y": [
+                {
+                    "frame": 0,
+                    "value": -215
+                },
+                {
+                    "frame": 1033,
+                    "value": -195.4
+                },
+                {
+                    "frame": 2000,
+                    "value": -215
+                },
+                {
+                    "frame": 2867,
+                    "value": -195.4
+                },
+                {
+                    "frame": 3750,
+                    "value": -215
+                }
+            ]
+        },
+        "avatar1_player": {
+            "y": [
+                {
+                    "frame": 0,
+                    "value": -289
+                },
+                {
+                    "frame": 1033,
+                    "value": -263
+                },
+                {
+                    "frame": 2000,
+                    "value": -289
+                },
+                {
+                    "frame": 2883,
+                    "value": -263
+                },
+                {
+                    "frame": 3750,
+                    "value": -289
+                }
+            ]
+        }
+    }
+}

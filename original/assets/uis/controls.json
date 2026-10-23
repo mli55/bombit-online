@@ -1,0 +1,471 @@
+{
+    "hierarchy": {
+        "name": "Canvas",
+        "children": [
+            {
+                "name": "start_game_button",
+                "children": [
+                    {
+                        "name": "text"
+                    },
+                    {
+                        "name": "icon"
+                    }
+                ]
+            },
+            {
+                "name": "how_to_play_button",
+                "children": [
+                    {
+                        "name": "text"
+                    },
+                    {
+                        "name": "icon"
+                    }
+                ]
+            },
+            {
+                "name": "container",
+                "children": [
+                    {
+                        "name": "container_mobile",
+                        "children": [
+                            {
+                                "name": "move_text"
+                            },
+                            {
+                                "name": "move_imagge"
+                            },
+                            {
+                                "name": "bomb_text"
+                            },
+                            {
+                                "name": "button_image"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "container_desktop",
+                        "children": [
+                            {
+                                "name": "1_player_move_text"
+                            },
+                            {
+                                "name": "1_player_key_arrows"
+                            },
+                            {
+                                "name": "1_player_bomb_text"
+                            },
+                            {
+                                "name": "1_player_key_space"
+                            },
+                            {
+                                "name": "line1"
+                            },
+                            {
+                                "name": "2players_player1_text"
+                            },
+                            {
+                                "name": "2players_move_player1"
+                            },
+                            {
+                                "name": "2players_key_move_player1"
+                            },
+                            {
+                                "name": "2players_bomb_player1_text"
+                            },
+                            {
+                                "name": "2players_space"
+                            },
+                            {
+                                "name": "2players_player2_text"
+                            },
+                            {
+                                "name": "2players_move_player2"
+                            },
+                            {
+                                "name": "2players_key_move_player2"
+                            },
+                            {
+                                "name": "2players_bomb_player2_text"
+                            },
+                            {
+                                "name": "2players_enter"
+                            },
+                            {
+                                "name": "line2"
+                            },
+                            {
+                                "name": "pause_text"
+                            },
+                            {
+                                "name": "key_p"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "properties": {
+        "Canvas": {
+            "design": {
+                "width": 1280,
+                "height": 720
+            },
+            "type": "canvas"
+        },
+        "start_game_button": {
+            "file": "pink_button.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "pink_button.png",
+                "pressed": "pink_button.png",
+                "hover": "pink_button_over.png"
+            },
+            "type": "button",
+            "alignment": {
+                "type": "CENTER",
+                "offset": {
+                    "x": 183,
+                    "y": 309
+                }
+            }
+        },
+        "start_game_button/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": "START GAME",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 3
+            },
+            "type": "text"
+        },
+        "start_game_button/icon": {
+            "file": "tutorial_icon2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -85.9,
+                "y": -10.9
+            },
+            "type": "sprite"
+        },
+        "how_to_play_button": {
+            "file": "pink_button.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "pink_button.png",
+                "pressed": "pink_button.png",
+                "hover": "pink_button_over.png"
+            },
+            "type": "button",
+            "alignment": {
+                "type": "CENTER",
+                "offset": {
+                    "x": -181,
+                    "y": 309
+                }
+            }
+        },
+        "how_to_play_button/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": "HOW TO PLAY",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 3
+            },
+            "type": "text"
+        },
+        "how_to_play_button/icon": {
+            "file": "tutorial_brick1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -90.8,
+                "y": -4.8
+            },
+            "type": "sprite"
+        },
+        "container": {
+            "file": "tutorial_container.png",
+            "image": "SIMPLE",
+            "type": "sprite",
+            "alignment": {
+                "type": "CENTER"
+            }
+        },
+        "container/container_mobile": {
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "container",
+            "visibility": "mobile",
+            "orientation": {}
+        },
+        "container/container_mobile/move_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 50
+            },
+            "text": "MOVE",
+            "align": "center",
+            "stroke": "#ff5ea4",
+            "strokeThickness": 6,
+            "position": {
+                "x": -141.7,
+                "y": -168.6
+            },
+            "type": "text"
+        },
+        "container/container_mobile/move_imagge": {
+            "file": "move_image.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -170.2,
+                "y": 29.6
+            },
+            "type": "sprite"
+        },
+        "container/container_mobile/bomb_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 50
+            },
+            "text": "BOMB",
+            "align": "center",
+            "stroke": "#ff5ea4",
+            "strokeThickness": 6,
+            "position": {
+                "x": 139.1,
+                "y": -168.6
+            },
+            "type": "text"
+        },
+        "container/container_mobile/button_image": {
+            "file": "bomb_image.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 172.4,
+                "y": 31
+            },
+            "type": "sprite"
+        },
+        "container/container_desktop": {
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "container",
+            "visibility": "desktop",
+            "orientation": {}
+        },
+        "container/container_desktop/1_player_move_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": "MOVE",
+            "align": "center",
+            "position": {
+                "x": -200,
+                "y": -107
+            },
+            "type": "text"
+        },
+        "container/container_desktop/1_player_key_arrows": {
+            "file": "arrows.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -92.2,
+                "y": -126.9
+            },
+            "type": "sprite"
+        },
+        "container/container_desktop/1_player_bomb_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": "BOMB",
+            "align": "center",
+            "position": {
+                "x": 43,
+                "y": -107
+            },
+            "type": "text"
+        },
+        "container/container_desktop/1_player_key_space": {
+            "file": "space.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 183,
+                "y": -111.3
+            },
+            "type": "sprite"
+        },
+        "container/container_desktop/line1": {
+            "file": "line.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": -80
+            },
+            "type": "sprite"
+        },
+        "container/container_desktop/2players_player1_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": "PLAYER 1",
+            "align": "center",
+            "position": {
+                "x": -155.8,
+                "y": -19
+            },
+            "type": "text"
+        },
+        "container/container_desktop/2players_move_player1": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": "MOVE",
+            "align": "center",
+            "position": {
+                "x": -191,
+                "y": 55
+            },
+            "type": "text"
+        },
+        "container/container_desktop/2players_key_move_player1": {
+            "file": "wasd.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -98,
+                "y": 40
+            },
+            "type": "sprite"
+        },
+        "container/container_desktop/2players_bomb_player1_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": "BOMB",
+            "align": "center",
+            "position": {
+                "x": -230.2,
+                "y": 120.8
+            },
+            "type": "text"
+        },
+        "container/container_desktop/2players_space": {
+            "file": "space.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -94,
+                "y": 114
+            },
+            "type": "sprite"
+        },
+        "container/container_desktop/2players_player2_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": "PLAYER 2",
+            "align": "center",
+            "position": {
+                "x": 138,
+                "y": -19
+            },
+            "type": "text"
+        },
+        "container/container_desktop/2players_move_player2": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": "MOVE",
+            "align": "center",
+            "position": {
+                "x": 111,
+                "y": 55
+            },
+            "type": "text"
+        },
+        "container/container_desktop/2players_key_move_player2": {
+            "file": "arrows.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 209,
+                "y": 33
+            },
+            "type": "sprite"
+        },
+        "container/container_desktop/2players_bomb_player2_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": "BOMB",
+            "align": "center",
+            "position": {
+                "x": 130,
+                "y": 121
+            },
+            "type": "text"
+        },
+        "container/container_desktop/2players_enter": {
+            "file": "enter.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 213,
+                "y": 101
+            },
+            "type": "sprite"
+        },
+        "container/container_desktop/line2": {
+            "file": "line.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 147
+            },
+            "type": "sprite"
+        },
+        "container/container_desktop/pause_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": "PAUSE",
+            "align": "center",
+            "position": {
+                "x": -2,
+                "y": 182
+            },
+            "type": "text"
+        },
+        "container/container_desktop/key_p": {
+            "file": "p.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 65.4,
+                "y": 178
+            },
+            "type": "sprite"
+        }
+    }
+}

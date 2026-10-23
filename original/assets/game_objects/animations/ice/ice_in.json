@@ -1,0 +1,35 @@
+{
+    "name": "ice_in",
+    "speed": 1,
+    "mode": "normal",
+    "data": {
+        "ice_base": {
+            "frameName": [
+                {
+                    "frame": 0,
+                    "value": "freeze_fx10.png"
+                },
+                {
+                    "frame": 17,
+                    "value": "freeze_fx1.png"
+                },
+                {
+                    "frame": 50,
+                    "value": "freeze_fx2.png"
+                },
+                {
+                    "frame": 100,
+                    "value": "freeze_fx3.png"
+                },
+                {
+                    "frame": 133,
+                    "value": "freeze_fx4.png"
+                },
+                {
+                    "frame": 183,
+                    "value": "freeze_fx5.png"
+                }
+            ]
+        }
+    }
+}

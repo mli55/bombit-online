@@ -1,0 +1,37 @@
+{
+    "hierarchy": {
+        "name": "powerup_minebomb",
+        "children": [
+            {
+                "name": "tool_shadow"
+            },
+            {
+                "name": "tool_base"
+            }
+        ],
+        "animations": [
+            "powerup_stand",
+            "powerup_out"
+        ]
+    },
+    "properties": {
+        "tool_shadow": {
+            "file": "shadow.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "tool_base": {
+            "file": "icon_mine.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": -29.5
+            },
+            "type": "sprite"
+        }
+    }
+}

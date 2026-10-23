@@ -1,0 +1,22 @@
+{
+  "name": "bomb-it-online",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Original Bomb It 1 HTML5: online cooperative campaign and 1–4 player battle",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "fetch-original": "node scripts/fetch-original.mjs",
+    "test": "node --test",
+    "check": "node --check server/index.js && node --check shared/room.js && node --check worker/index.js && node --check public/client.js && node --check public/adapter.js",
+    "build": "node scripts/build.mjs",
+    "prestart": "npm run build"
+  },
+  "dependencies": {
+    "ws": "^8.18.3"
+  }
+}

@@ -1,0 +1,286 @@
+{
+    "hierarchy": {
+        "name": "Canvas",
+        "children": [
+            {
+                "name": "heros_container"
+            },
+            {
+                "name": "controls_mobile",
+                "children": [
+                    {
+                        "name": "button_image"
+                    },
+                    {
+                        "name": "move_text"
+                    },
+                    {
+                        "name": "button_text"
+                    }
+                ]
+            },
+            {
+                "name": "controls_desktop",
+                "children": [
+                    {
+                        "name": "keys_image"
+                    },
+                    {
+                        "name": "player1_text"
+                    },
+                    {
+                        "name": "confirm_text"
+                    },
+                    {
+                        "name": "select_text"
+                    }
+                ]
+            },
+            {
+                "name": "controls_desktop_2players",
+                "children": [
+                    {
+                        "name": "keys_image"
+                    },
+                    {
+                        "name": "player1_text"
+                    },
+                    {
+                        "name": "confirm_text"
+                    },
+                    {
+                        "name": "select_text"
+                    },
+                    {
+                        "name": "player2_keys_image"
+                    },
+                    {
+                        "name": "player2_text"
+                    }
+                ]
+            }
+        ]
+    },
+    "properties": {
+        "Canvas": {
+            "design": {
+                "width": 1280,
+                "height": 720
+            },
+            "type": "canvas"
+        },
+        "heros_container": {
+            "type": "container",
+            "alignment": {
+                "type": "CENTER"
+            }
+        },
+        "controls_mobile": {
+            "type": "container",
+            "alignment": {
+                "type": "CENTER",
+                "offset": {
+                    "x": "0%",
+                    "y": 196
+                }
+            },
+            "visibility": "mobile",
+            "orientation": {}
+        },
+        "controls_mobile/button_image": {
+            "file": "button_mobile.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 28
+            },
+            "type": "sprite"
+        },
+        "controls_mobile/move_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 35
+            },
+            "text": "SELECT",
+            "align": "center",
+            "stroke": "#4491cf",
+            "strokeThickness": 6,
+            "position": {
+                "x": 0,
+                "y": -522
+            },
+            "type": "text"
+        },
+        "controls_mobile/button_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 35
+            },
+            "text": "CONFIRM",
+            "align": "center",
+            "stroke": "#4491cf",
+            "strokeThickness": 6,
+            "position": {
+                "x": 0,
+                "y": -84
+            },
+            "type": "text"
+        },
+        "controls_desktop": {
+            "type": "container",
+            "alignment": {
+                "type": "CENTER",
+                "offset": {
+                    "x": "0%",
+                    "y": 196
+                }
+            },
+            "visibility": "desktop",
+            "orientation": {}
+        },
+        "controls_desktop/keys_image": {
+            "file": "sc_controlInstruction1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 101.1,
+                "y": -0.3
+            },
+            "type": "sprite"
+        },
+        "controls_desktop/player1_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 40
+            },
+            "text": "1P",
+            "align": "center",
+            "stroke": "#4491cf",
+            "strokeThickness": 6,
+            "position": {
+                "x": 105,
+                "y": -113
+            },
+            "type": "text"
+        },
+        "controls_desktop/confirm_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 40
+            },
+            "text": "CONFIRM",
+            "align": "center",
+            "stroke": "#4491cf",
+            "strokeThickness": 6,
+            "position": {
+                "x": -125,
+                "y": 47
+            },
+            "type": "text"
+        },
+        "controls_desktop/select_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 40
+            },
+            "text": "SELECT",
+            "align": "center",
+            "stroke": "#4491cf",
+            "strokeThickness": 6,
+            "position": {
+                "x": -125,
+                "y": -40
+            },
+            "type": "text"
+        },
+        "controls_desktop_2players": {
+            "type": "container",
+            "alignment": {
+                "type": "CENTER",
+                "offset": {
+                    "x": "0%",
+                    "y": 196
+                }
+            },
+            "visibility": "desktop",
+            "orientation": {}
+        },
+        "controls_desktop_2players/keys_image": {
+            "file": "sc_controlInstruction2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 101.1,
+                "y": -0.3
+            },
+            "type": "sprite"
+        },
+        "controls_desktop_2players/player1_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 40
+            },
+            "text": "1P",
+            "align": "center",
+            "stroke": "#4491cf",
+            "strokeThickness": 6,
+            "position": {
+                "x": 105,
+                "y": -113
+            },
+            "type": "text"
+        },
+        "controls_desktop_2players/confirm_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 40
+            },
+            "text": "CONFIRM",
+            "align": "center",
+            "stroke": "#4491cf",
+            "strokeThickness": 6,
+            "position": {
+                "x": -125,
+                "y": 47
+            },
+            "type": "text"
+        },
+        "controls_desktop_2players/select_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 40
+            },
+            "text": "SELECT",
+            "align": "center",
+            "stroke": "#4491cf",
+            "strokeThickness": 6,
+            "position": {
+                "x": -125,
+                "y": -40
+            },
+            "type": "text"
+        },
+        "controls_desktop_2players/player2_keys_image": {
+            "file": "sc_controlInstruction3.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 382,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "controls_desktop_2players/player2_text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 40
+            },
+            "text": "2P",
+            "align": "center",
+            "stroke": "#4491cf",
+            "strokeThickness": 6,
+            "position": {
+                "x": 386,
+                "y": -113
+            },
+            "type": "text"
+        }
+    }
+}

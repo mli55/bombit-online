@@ -1,0 +1,41 @@
+{
+    "hierarchy": {
+        "name": "rocket",
+        "children": [
+            {
+                "name": "rocket_smoke"
+            },
+            {
+                "name": "rocket_base"
+            }
+        ],
+        "animations": [
+            "rocket_anim"
+        ]
+    },
+    "properties": {
+        "rocket_smoke": {
+            "file": "rocket_smoke.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 5.7,
+                "y": 0
+            },
+            "scale": {
+                "x": 0.1,
+                "y": 0.1
+            },
+            "type": "sprite"
+        },
+        "rocket_base": {
+            "file": "rocket.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 8.9,
+                "y": 0
+            },
+            "angle": 90,
+            "type": "sprite"
+        }
+    }
+}

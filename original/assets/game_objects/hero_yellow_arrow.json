@@ -1,0 +1,36 @@
+{
+    "hierarchy": {
+        "name": "hero_yellow_arrow",
+        "children": [
+            {
+                "name": "avatar1_arrow"
+            },
+            {
+                "name": "avatar1_player"
+            }
+        ],
+        "animations": [
+            "arrow_anim"
+        ]
+    },
+    "properties": {
+        "avatar1_arrow": {
+            "file": "arrow_p3.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": -109.46
+            },
+            "type": "sprite"
+        },
+        "avatar1_player": {
+            "file": "1p_p3.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": -145.59
+            },
+            "type": "sprite"
+        }
+    }
+}

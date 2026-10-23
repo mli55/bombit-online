@@ -1,0 +1,24 @@
+<!doctype html><meta charset="utf-8"><title>Bomb It deterministic QA</title><style>body{font:14px monospace;background:#222;color:#fff}iframe{width:480px;height:270px;border:0}pre{white-space:pre-wrap}</style><h1>Original-engine determinism QA</h1><button id="run">Run 1–4 player tests</button><pre id="log">Ready. Each scenario loads four fresh independent replicas.</pre><div id="frames"></div><script type="module">
+const log=document.querySelector('#log');let frames=[],ready=0,readyResolve,errors=[];
+const say=t=>{log.textContent+='\n'+t;};
+window.addEventListener('message',e=>{if(e.data?.source!=='bomb-it-game')return;if(e.data.type==='error'&&errors.length<3){errors.push(e.data.message);say('ERROR '+e.data.message);}if(e.data.type==='ready'&&++ready===4)readyResolve?.();});
+async function mount(){ready=0;frames=[];document.querySelector('#frames').replaceChildren();const loaded=new Promise(r=>readyResolve=r);for(let i=0;i<4;i++){const f=document.createElement('iframe');f.src='/game/';document.querySelector('#frames').append(f);frames.push(f);}await loaded;return frames.map(f=>f.contentWindow.onlineBridge);}
+document.querySelector('#run').onclick=async()=>{
+try{for(let humans=1;humans<=4;humans++){
+ say('Loading '+humans+'-human scenario…');const bridges=await mount();
+ const config={mode:humans===2?'coop':'battle',difficulty:1,seed:'qa-seed-'+humans,players:Array.from({length:humans},(_,seat)=>({seat,character:seat,name:'Player '+seat}))};
+ bridges.forEach(b=>b.sound(false));const initial=bridges.map(b=>b.start(config));say('Start '+humans+': '+initial.join(' '));if(new Set(initial).size>1)throw Error('Initial mismatch');
+ let continued=false;
+ for(let tick=1;tick<=6000;tick++){
+  const masks=[0,1,2,3].map((seat)=>[1,8,2,4][Math.floor(tick/18+seat)%4]|(tick%45===seat*5?16:0));
+  const packet=[tick,masks];
+  if(!continued&&bridges[0].result?.canContinue){packet.push('continue');continued=true;say('Continue original campaign at tick '+tick);}
+  bridges.forEach(b=>b.advance(packet,true));
+  if(tick%30===0){const hashes=bridges.map(b=>b.checksum());if(new Set(hashes).size>1){const snapshots=bridges.map(b=>b.snapshot());const diffs=[];function diff(a,b,path=''){if(JSON.stringify(a)===JSON.stringify(b))return;if(a&&b&&typeof a==='object'&&typeof b==='object'){for(const k of new Set([...Object.keys(a),...Object.keys(b)]))diff(a[k],b[k],path+'.'+k);}else diffs.push({path,a,b});}diff(snapshots[0],snapshots.find((s,i)=>hashes[i]!==hashes[0]));say('Differences: '+JSON.stringify(diffs.slice(0,15)));throw Error('Mismatch '+humans+' players tick '+tick+' '+hashes);}}
+  if(tick%120===0)await new Promise(r=>setTimeout(r,0));
+  if(errors.length)throw Error('Runtime errors');
+ }
+ say('PASS '+humans+' humans / 6000 frames / 200 simulated seconds / result '+JSON.stringify(bridges[0].result));
+}say('ALL PASS');}catch(e){say('FAIL '+e.stack);}
+};
+</script>

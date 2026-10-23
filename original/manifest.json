@@ -1,0 +1,732 @@
+{
+  "source": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/",
+  "retrievedAt": "2026-10-23T03:14:56.081Z",
+  "files": [
+    {
+      "file": "assets/atlases/x1/arcade-joystick.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/atlases/x1/arcade-joystick.json",
+      "bytes": 1929,
+      "sha256": "5ba9146e782e55c88a02bd3a8f6c87fb781c87ad90890a5b1ec9bc48d8605e99"
+    },
+    {
+      "file": "assets/atlases/x1/arcade-joystick.png",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/atlases/x1/arcade-joystick.png",
+      "bytes": 135447,
+      "sha256": "23bd0dbd1826db1dbab7d4e19a5f5ed3ac4880991dd84999f1138843218eefad"
+    },
+    {
+      "file": "assets/atlases/x1/atlas_gameplay.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/atlases/x1/atlas_gameplay.json",
+      "bytes": 16405,
+      "sha256": "05bd3fcf864cded1484c64932d1f892a9553f4b16706f973a5b3692b3555006b"
+    },
+    {
+      "file": "assets/atlases/x1/atlas_gameplay.png",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/atlases/x1/atlas_gameplay.png",
+      "bytes": 249234,
+      "sha256": "89639adb8becf12a9794921650d8e3234f5a35ca5664b1a141b96c841ea8ebe8"
+    },
+    {
+      "file": "assets/atlases/x1/atlas_library.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/atlases/x1/atlas_library.json",
+      "bytes": 14648,
+      "sha256": "3535116ba9d4da9fa6d19e324d8f919873f53e6c8320632c9ee2da2fc384d63b"
+    },
+    {
+      "file": "assets/atlases/x1/atlas_library.png",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/atlases/x1/atlas_library.png",
+      "bytes": 275468,
+      "sha256": "d4c520fb1cbb1dbe2e7938ffbb77965e5c7c628c06d2c6c3d8dd9b3212d4380a"
+    },
+    {
+      "file": "assets/atlases/x1/atlas_ui.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/atlases/x1/atlas_ui.json",
+      "bytes": 26687,
+      "sha256": "de66d82741ee7d3b58902cf207d423f61bd6155f4cb650009febc6083a41311c"
+    },
+    {
+      "file": "assets/atlases/x1/atlas_ui.png",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/atlases/x1/atlas_ui.png",
+      "bytes": 1425623,
+      "sha256": "390f2a31a4de291998022f439c756d36d3eda2515014185f5b8f85af4044b028"
+    },
+    {
+      "file": "assets/audios/audiosprite.mp3",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/audios/audiosprite.mp3",
+      "bytes": 329668,
+      "sha256": "b6d777668ef65a96d9281eb1e4c6506b58f08556f0672153409e671d529fe724"
+    },
+    {
+      "file": "assets/audios/audiosprite.ogg",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/audios/audiosprite.ogg",
+      "bytes": 291107,
+      "sha256": "d9640471927ff4756325836d7f401226d30c83d185ee61602744d64067cf73e0"
+    },
+    {
+      "file": "assets/audios/music_gp_level1.mp3",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/audios/music_gp_level1.mp3",
+      "bytes": 356647,
+      "sha256": "2710cd9b2600b1eccbbdc04b0626bea616367df937b3ee0559dbc9d26f8c8f6d"
+    },
+    {
+      "file": "assets/audios/music_gp_level1.ogg",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/audios/music_gp_level1.ogg",
+      "bytes": 563145,
+      "sha256": "21f6d7b011f4b2aa824a310198757020fc5d942255d977733bc5b59a3dbc0441"
+    },
+    {
+      "file": "assets/audios/music_gp_level2.mp3",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/audios/music_gp_level2.mp3",
+      "bytes": 355811,
+      "sha256": "519120ca56b19dacdde22653f6eb36a3ffe86d5fdac7d396f1370a7af1242785"
+    },
+    {
+      "file": "assets/audios/music_gp_level2.ogg",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/audios/music_gp_level2.ogg",
+      "bytes": 678785,
+      "sha256": "6b63f0e18432fd4e93cd8d6ec6b6b8592823d74be2a0c3eec72f4494129ffe1f"
+    },
+    {
+      "file": "assets/audios/music_gp_level3.mp3",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/audios/music_gp_level3.mp3",
+      "bytes": 385486,
+      "sha256": "29343030fc049493e0ddd372ac751555adfa69121ee626b8922fab905678e88c"
+    },
+    {
+      "file": "assets/audios/music_gp_level3.ogg",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/audios/music_gp_level3.ogg",
+      "bytes": 704015,
+      "sha256": "51226c5c05bff32d4d0dbe582d0d71b0bb4f30519fd96ae1de3032e3e6ad199d"
+    },
+    {
+      "file": "assets/audios/music_gp_level4.mp3",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/audios/music_gp_level4.mp3",
+      "bytes": 368141,
+      "sha256": "88180a304789403610279fc977005a66cecd39cbd4f0452191303bf70187ba4c"
+    },
+    {
+      "file": "assets/audios/music_gp_level4.ogg",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/audios/music_gp_level4.ogg",
+      "bytes": 661459,
+      "sha256": "1c3bbefbfb2599fad53480e4a3ed3de51c7b01a6d4fc5e1ee1c6f1de8007e63f"
+    },
+    {
+      "file": "assets/audios/music_menu.mp3",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/audios/music_menu.mp3",
+      "bytes": 248187,
+      "sha256": "7905a0b9a81896ff970a6413469dbf943b5a39b92cf3e73c377dac5c7f643f22"
+    },
+    {
+      "file": "assets/audios/music_menu.ogg",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/audios/music_menu.ogg",
+      "bytes": 414543,
+      "sha256": "568ff678c0f0a00710732e47679e10e6bf9c8af4653278d3840d6934243616dc"
+    },
+    {
+      "file": "assets/bgs/x1/bg_black.png",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/bgs/x1/bg_black.png",
+      "bytes": 922,
+      "sha256": "81d2f0b3de3881910311ca16747f8a4a68602a0847862f7c5929f9b6f42f9d96"
+    },
+    {
+      "file": "assets/bgs/x1/bg_blue.png",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/bgs/x1/bg_blue.png",
+      "bytes": 196341,
+      "sha256": "cd5c675b3662f1d885c5716b3e7e4258eeedc8bddb242611811c2fc0f921da6a"
+    },
+    {
+      "file": "assets/bgs/x1/bg_pink.png",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/bgs/x1/bg_pink.png",
+      "bytes": 319282,
+      "sha256": "2cd5fff4277c7edb44c7dba646a7c2c78373cc2cb4243d0f8607c723ad2d820c"
+    },
+    {
+      "file": "assets/css/app.css",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/css/app.css",
+      "bytes": 1683,
+      "sha256": "bc973e680bf1170d11c8d83ce76b08b9ca9673fb7c144fdf1ccc4be48ac24f8f"
+    },
+    {
+      "file": "assets/fonts/impact/impact-Regular.css",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/fonts/impact/impact-Regular.css",
+      "bytes": 543,
+      "sha256": "132d39231ce618e4bd7b2ea9e1d8a6e04f68f8bd8f4ca3682103d4b91937e817"
+    },
+    {
+      "file": "assets/fonts/impact/impact-Regular.eot",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/fonts/impact/impact-Regular.eot",
+      "bytes": 54584,
+      "sha256": "dace4b7de54a58870a6c029d1fd6143feda21e868d1a5f927fc0f0a441ddf55c"
+    },
+    {
+      "file": "assets/fonts/impact/impact-Regular.svg",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/fonts/impact/impact-Regular.svg",
+      "bytes": 277142,
+      "sha256": "0dc1bfab0f4acf179a3f2fc4abe4c5cd25738896b8d2530f31eb648f316b03c2"
+    },
+    {
+      "file": "assets/fonts/impact/impact-Regular.ttf",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/fonts/impact/impact-Regular.ttf",
+      "bytes": 111140,
+      "sha256": "85b42530f17d1bad58a805ab566f0c55a5ee347c9e1ec6004852b467e59a7db5"
+    },
+    {
+      "file": "assets/fonts/impact/impact-Regular.woff",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/fonts/impact/impact-Regular.woff",
+      "bytes": 68616,
+      "sha256": "18d15fe63235ee7bc9989f11576958d5fcb26e3f3b3b39ba8262d9fd1a44c605"
+    },
+    {
+      "file": "assets/game_objects/animations/arrow_anim/arrow_anim.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/arrow_anim/arrow_anim.json",
+      "bytes": 2048,
+      "sha256": "1ba1ae58a9e9a522e6b88374595a7f4c5c23f99c73f3cd7a2182c5e2bd661157"
+    },
+    {
+      "file": "assets/game_objects/animations/bomb/bomb_stand.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/bomb/bomb_stand.json",
+      "bytes": 1500,
+      "sha256": "7b79a105c0fa7ba1e745e70ede5af2ae3ded50f351916f0394d48dbf5284b01e"
+    },
+    {
+      "file": "assets/game_objects/animations/death/hero_blue_green_death.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/death/hero_blue_green_death.json",
+      "bytes": 2159,
+      "sha256": "c8dae67ac5af63df718b1b10cda8349d8fe04af77fb5b09f136126d8a7b1c1f1"
+    },
+    {
+      "file": "assets/game_objects/animations/death/hero_pink_yellow_death.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/death/hero_pink_yellow_death.json",
+      "bytes": 2160,
+      "sha256": "359fdb85b29a43fade37eb9f6424d72d8958cc223276db4f89babb08d179f099"
+    },
+    {
+      "file": "assets/game_objects/animations/explosion/explosion_anim.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/explosion/explosion_anim.json",
+      "bytes": 957,
+      "sha256": "da3e48daac49a0cf6bdc00fc86bbdbdb9be2b27772b4693ab89ba94be1580a94"
+    },
+    {
+      "file": "assets/game_objects/animations/fire/fire_in.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/fire/fire_in.json",
+      "bytes": 358,
+      "sha256": "5d5c7efdf02f5ed82f970b9c094e84f7cc57dc96206f97c0209f563204807f5f"
+    },
+    {
+      "file": "assets/game_objects/animations/fire/fire_out.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/fire/fire_out.json",
+      "bytes": 358,
+      "sha256": "2014b8e3d3c42755e8548caa5fa8fb0bb4aa02d491cd94be6cebddce3ac3a5d4"
+    },
+    {
+      "file": "assets/game_objects/animations/grenade/grenade_down.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/grenade/grenade_down.json",
+      "bytes": 2865,
+      "sha256": "2595975581cce5202931d56075b050e0e858ff892d89a7bb9c7a85aad64903ee"
+    },
+    {
+      "file": "assets/game_objects/animations/grenade/grenade_right.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/grenade/grenade_right.json",
+      "bytes": 3057,
+      "sha256": "e700e035f9b5bd049497a3277aad5cbf34fb6197d05c14327a9bacf746d29d58"
+    },
+    {
+      "file": "assets/game_objects/animations/grenade/grenade_up.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/grenade/grenade_up.json",
+      "bytes": 2747,
+      "sha256": "72950252f60b2dc862bdc78ac4fcf08ed48beebe70afd7a5483707d07b071568"
+    },
+    {
+      "file": "assets/game_objects/animations/hero_blue/hero_blue_down.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/hero_blue/hero_blue_down.json",
+      "bytes": 5397,
+      "sha256": "4fd4fbb2d25a9e6625f6936a15b4ff14be89c649541324581ae6093f8fbdd5bc"
+    },
+    {
+      "file": "assets/game_objects/animations/hero_blue/hero_blue_side.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/hero_blue/hero_blue_side.json",
+      "bytes": 7411,
+      "sha256": "d8495febf59409e37291f16eeef481b8a348c7f1c83060eef6be429b6fa97ea8"
+    },
+    {
+      "file": "assets/game_objects/animations/hero_blue/hero_blue_up.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/hero_blue/hero_blue_up.json",
+      "bytes": 5532,
+      "sha256": "d85198dbfd9d0f63940125e870eee9839b53cd4fe2ed7ef4512624ef1973f26a"
+    },
+    {
+      "file": "assets/game_objects/animations/hero_green/hero_green_down.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/hero_green/hero_green_down.json",
+      "bytes": 5399,
+      "sha256": "a4be39280e3bfdc44dc6d88080acd78205207ba5cf283e7e15c757a7eb1e4d8e"
+    },
+    {
+      "file": "assets/game_objects/animations/hero_green/hero_green_side.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/hero_green/hero_green_side.json",
+      "bytes": 7415,
+      "sha256": "53561894e85f878c53e015878df7eeda0029157fa64fbb995ae65b325a22087c"
+    },
+    {
+      "file": "assets/game_objects/animations/hero_green/hero_green_up.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/hero_green/hero_green_up.json",
+      "bytes": 5395,
+      "sha256": "764398241f79dd662a7513a8691f693e64a1d9c755053ca1ea848d3cdd53ed32"
+    },
+    {
+      "file": "assets/game_objects/animations/hero_pink/hero_pink_down.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/hero_pink/hero_pink_down.json",
+      "bytes": 5121,
+      "sha256": "6eb3cd587d1f29c7bcd850972cc385e3c6f13fd449f79b98ef6cf0a5ecb41b9f"
+    },
+    {
+      "file": "assets/game_objects/animations/hero_pink/hero_pink_side.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/hero_pink/hero_pink_side.json",
+      "bytes": 7392,
+      "sha256": "0c0c2d7ec886843dadd2d6e982e4fdaef087806d94f11a0773ccdbcf0e019600"
+    },
+    {
+      "file": "assets/game_objects/animations/hero_pink/hero_pink_up.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/hero_pink/hero_pink_up.json",
+      "bytes": 5392,
+      "sha256": "1d8cf8b32d5ee11358910420baaaa209ddb8e7078df3543f13034ecd77132e2a"
+    },
+    {
+      "file": "assets/game_objects/animations/hero_yellow/hero_yellow_down.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/hero_yellow/hero_yellow_down.json",
+      "bytes": 5395,
+      "sha256": "c725a220ee85ed075d67c56c561d01bb0aeff05f238029f42bb0934d4ffd885d"
+    },
+    {
+      "file": "assets/game_objects/animations/hero_yellow/hero_yellow_side.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/hero_yellow/hero_yellow_side.json",
+      "bytes": 7400,
+      "sha256": "219339ebb047f82a34c42fc98cae4fd8bbffb1c2982695caa311d791f698a6ae"
+    },
+    {
+      "file": "assets/game_objects/animations/hero_yellow/hero_yellow_up.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/hero_yellow/hero_yellow_up.json",
+      "bytes": 5392,
+      "sha256": "05708b6cd8f41137847e3ba1fc298396c0c8233d2d6f2a25daa984b6364c8396"
+    },
+    {
+      "file": "assets/game_objects/animations/ice/ice_in.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/ice/ice_in.json",
+      "bytes": 854,
+      "sha256": "313b0aff112931d5f15a7babc012d99f6f4cd7070f059e0bf7b4294f16f64758"
+    },
+    {
+      "file": "assets/game_objects/animations/ice/ice_out.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/ice/ice_out.json",
+      "bytes": 738,
+      "sha256": "461b514971cc259eb68b15e72283720e1c4d7233979e250d6634b80d34c6e742"
+    },
+    {
+      "file": "assets/game_objects/animations/messege_container/message_gameplay.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/messege_container/message_gameplay.json",
+      "bytes": 1289,
+      "sha256": "cee70add15616672f55cee199ff1cf380312f72d8080ebccaa6f32bbbcd547b8"
+    },
+    {
+      "file": "assets/game_objects/animations/mine/mine_anim.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/mine/mine_anim.json",
+      "bytes": 2293,
+      "sha256": "e9a7218457da9920e1f75c1e5a5ff1d5aa869d72305a4ee395343b3d53e0e42d"
+    },
+    {
+      "file": "assets/game_objects/animations/powerups/powerup_out.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/powerups/powerup_out.json",
+      "bytes": 1035,
+      "sha256": "be1a0d8e698e62bbab59f225db457d72b904e26775f298a110d36cf5816b8805"
+    },
+    {
+      "file": "assets/game_objects/animations/powerups/powerup_stand.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/powerups/powerup_stand.json",
+      "bytes": 1217,
+      "sha256": "13eef1cb59ddbf8c32ebf03f387ad4ad2020162d2da6240c0f4b85c429e1aaa3"
+    },
+    {
+      "file": "assets/game_objects/animations/rocket/rocket_anim.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/rocket/rocket_anim.json",
+      "bytes": 1241,
+      "sha256": "9e834bc4eabdd3f4f74ac5906bb47b8b2980147160a7a308289c7893b3c97a8d"
+    },
+    {
+      "file": "assets/game_objects/animations/selectHero/select_character_hero_stand.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/selectHero/select_character_hero_stand.json",
+      "bytes": 751,
+      "sha256": "bd3d9eabc73e2d902773281e42ad887a53bceff9231990d6a2676a9a37e30b38"
+    },
+    {
+      "file": "assets/game_objects/animations/selectHero/select_character_hero.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/selectHero/select_character_hero.json",
+      "bytes": 3063,
+      "sha256": "b4280f7733e231dea895f0e2fcffaea77fd7ee93bdc731aff87aca599a6d1426"
+    },
+    {
+      "file": "assets/game_objects/animations/tutorial/tutorial_landscape_stand.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/tutorial/tutorial_landscape_stand.json",
+      "bytes": 3864,
+      "sha256": "0302153a977d2baf3985a947d78534ac0a31c203000c5d813e1345a6b97f01d2"
+    },
+    {
+      "file": "assets/game_objects/animations/tutorial/tutorial_portrait_stand.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/animations/tutorial/tutorial_portrait_stand.json",
+      "bytes": 3863,
+      "sha256": "d8aac9b607488a728e8e254201b37f77f5a85353e17b3b663f95ba9e28bb4850"
+    },
+    {
+      "file": "assets/game_objects/bomb.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/bomb.json",
+      "bytes": 821,
+      "sha256": "f83e3c7812929b48bf11000052032ac13f99a2d49a0a1c5eb5c72042d194d3ef"
+    },
+    {
+      "file": "assets/game_objects/confuse.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/confuse.json",
+      "bytes": 774,
+      "sha256": "5834c3158a260337e7434210beb89dc37076208f45e20c3872033260aec467b0"
+    },
+    {
+      "file": "assets/game_objects/death.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/death.json",
+      "bytes": 1093,
+      "sha256": "4e6541541cb24cd2ae7d13810f559d793279768ad8b3694b76f1a10ced62a7c9"
+    },
+    {
+      "file": "assets/game_objects/explosion.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/explosion.json",
+      "bytes": 458,
+      "sha256": "a2e3ad61f219171d6872666177320191459552c9bbc2c881a468b39b67ddac62"
+    },
+    {
+      "file": "assets/game_objects/fire.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/fire.json",
+      "bytes": 685,
+      "sha256": "0433a83d990fee95ff73898fa33592dbc5d1af95942841f8cc17f6147eca9370"
+    },
+    {
+      "file": "assets/game_objects/grenade.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/grenade.json",
+      "bytes": 518,
+      "sha256": "478eb3cc7373eda55b67bed43f47778f4228c854dce7fb13193767805da50af3"
+    },
+    {
+      "file": "assets/game_objects/hero_blue_arrow.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/hero_blue_arrow.json",
+      "bytes": 773,
+      "sha256": "0dcfcb0e533e3159c2c6595b78829002320cfb9863b5b106f96be42d6e4b5ed4"
+    },
+    {
+      "file": "assets/game_objects/hero_blue.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/hero_blue.json",
+      "bytes": 2837,
+      "sha256": "da399de90d31bd14dd0b2f8091f63d516a7c442acff46951fc81711586fdc4be"
+    },
+    {
+      "file": "assets/game_objects/hero_green_arrow.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/hero_green_arrow.json",
+      "bytes": 774,
+      "sha256": "851f297c5c264170f4f95c62104adb49df65fdeb30eb2c0152b62a46e8765c88"
+    },
+    {
+      "file": "assets/game_objects/hero_green.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/hero_green.json",
+      "bytes": 2842,
+      "sha256": "2f32993b1cbb2d0695025f3f5f5a0e86ec43b533e23ad4d7fae66c06ddbd85ad"
+    },
+    {
+      "file": "assets/game_objects/hero_pink_arrow.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/hero_pink_arrow.json",
+      "bytes": 773,
+      "sha256": "c781e0c366741adc665b412dc1182596735465617ab5e1758092279363c7cd0b"
+    },
+    {
+      "file": "assets/game_objects/hero_pink.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/hero_pink.json",
+      "bytes": 2837,
+      "sha256": "3bbf24e52548da9c72965788903a3a00574ae01a5eff3c71a7010550a0a776f5"
+    },
+    {
+      "file": "assets/game_objects/hero_yellow_arrow.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/hero_yellow_arrow.json",
+      "bytes": 775,
+      "sha256": "c69ac0455f4767b8ad4e9fc435120f57836dfdac98fa3cc8f31e4f42c0a8808f"
+    },
+    {
+      "file": "assets/game_objects/hero_yellow.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/hero_yellow.json",
+      "bytes": 2845,
+      "sha256": "f865359cebed1efc02a73e6197a54c7872f68f1005d7e5710ba71024e1cbd6eb"
+    },
+    {
+      "file": "assets/game_objects/heroes.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/heroes.json",
+      "bytes": 6909,
+      "sha256": "4a00bb6ed1a3686366b5a2a12c3ba5eeb38d3a83c3896b341cf49660188264e3"
+    },
+    {
+      "file": "assets/game_objects/ice.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/ice.json",
+      "bytes": 593,
+      "sha256": "2e499bce919bafd8ed5cb47755f13d9dac8c19334bb6810bbd0e661bebfeb8ab"
+    },
+    {
+      "file": "assets/game_objects/messege_container.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/messege_container.json",
+      "bytes": 785,
+      "sha256": "d0aafdfa6eead67340b49a62b69df9695e3bcd4c2a5c54712dcc6422ffaac446"
+    },
+    {
+      "file": "assets/game_objects/mine.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/mine.json",
+      "bytes": 569,
+      "sha256": "782cee6f7a931a3234b8ab2013a7bd664a0ddcf60badec76550ae7e98e8134d6"
+    },
+    {
+      "file": "assets/game_objects/powerup_bigger_explosion.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/powerup_bigger_explosion.json",
+      "bytes": 794,
+      "sha256": "a2f727c5908af5d7b105e937baf72f712bc204ef5c0351a9dd9187d45538ff35"
+    },
+    {
+      "file": "assets/game_objects/powerup_bomb.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/powerup_bomb.json",
+      "bytes": 780,
+      "sha256": "0692a930910d8e7d30898db0d9004eb63a859010becab1cd3962bc851af6109c"
+    },
+    {
+      "file": "assets/game_objects/powerup_confuse.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/powerup_confuse.json",
+      "bytes": 782,
+      "sha256": "8944d3725499303c53a9409e3deb5c33bbd274df0562380162b97cb06fdc8a76"
+    },
+    {
+      "file": "assets/game_objects/powerup_fast.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/powerup_fast.json",
+      "bytes": 780,
+      "sha256": "4b37c033d75d06e273ba0361ce82cc15ff8d04e1818a0016c6de218fdf278094"
+    },
+    {
+      "file": "assets/game_objects/powerup_fire.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/powerup_fire.json",
+      "bytes": 780,
+      "sha256": "1c95aa84071e1c9e08fcd3afc910d9a6700bb98bb12a4bd7c67e7ab8257090e5"
+    },
+    {
+      "file": "assets/game_objects/powerup_freeze.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/powerup_freeze.json",
+      "bytes": 781,
+      "sha256": "4048287f8ef9b57fe6e5491cc7cd546c104fa4e48156a266d65280ffaa8eed77"
+    },
+    {
+      "file": "assets/game_objects/powerup_grenade.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/powerup_grenade.json",
+      "bytes": 786,
+      "sha256": "bd4c72d2464f6d1fafb4f50b088aa0856fccb6bd7d1545b08920d84c6dcc5028"
+    },
+    {
+      "file": "assets/game_objects/powerup_life.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/powerup_life.json",
+      "bytes": 780,
+      "sha256": "9b93fb5e980b9712216c85b69a7c8ef58f2a0b1ba74a9fbd6e83e338545489bf"
+    },
+    {
+      "file": "assets/game_objects/powerup_minebomb.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/powerup_minebomb.json",
+      "bytes": 784,
+      "sha256": "5f40b7329ef0bde9f18131e5a06dc4ac15f42aae4056249efcc9e4c3155185f2"
+    },
+    {
+      "file": "assets/game_objects/powerup_number.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/powerup_number.json",
+      "bytes": 791,
+      "sha256": "4c7ad219244da21fd900d4888289f5ccfb9f8976bdc0a2311a1b587a7176cc4e"
+    },
+    {
+      "file": "assets/game_objects/powerup_push.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/powerup_push.json",
+      "bytes": 780,
+      "sha256": "714f3d692c0b9c16ffd751f2720baf5135fdd1db810f32d738ca7e8e6f723d3e"
+    },
+    {
+      "file": "assets/game_objects/powerup_rocket.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/powerup_rocket.json",
+      "bytes": 784,
+      "sha256": "26e6a431ba3c0ea46eee6837bf04b602276a5a9e9518a8c650ddad6ff6e12ce2"
+    },
+    {
+      "file": "assets/game_objects/powerup_shield.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/powerup_shield.json",
+      "bytes": 784,
+      "sha256": "dd7b636cc8a3f5d6002b73e1cf9e490aa991cbfa254640ee5552dc6825fa9730"
+    },
+    {
+      "file": "assets/game_objects/rocket.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/rocket.json",
+      "bytes": 868,
+      "sha256": "160a95198b95d027d63f64f2b44323bd50e1dc619f81816ab24b12c72a4b8540"
+    },
+    {
+      "file": "assets/game_objects/tutorial.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/game_objects/tutorial.json",
+      "bytes": 3336,
+      "sha256": "7d5b715d3ca4586f339c0ba0230c5f45638b70395bdc521237d15c7ce0dcdd64"
+    },
+    {
+      "file": "assets/json/balance.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/json/balance.json",
+      "bytes": 1329,
+      "sha256": "ff9e6554ec019935462857adcfd42ecbec219954e5b5e9c37b83f3a81270c5a9"
+    },
+    {
+      "file": "assets/json/localization.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/json/localization.json",
+      "bytes": 5851,
+      "sha256": "9d67605a293424ef6557e58db978e86951baeaa53bb7c5189192fa607384efaf"
+    },
+    {
+      "file": "assets/json/maps.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/json/maps.json",
+      "bytes": 12260,
+      "sha256": "9b215259a7fa09026c60bfba9077406e26a9b0473658c3fae66b1febb3cb669a"
+    },
+    {
+      "file": "assets/uis/controls.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/uis/controls.json",
+      "bytes": 13662,
+      "sha256": "7c2b08e5cbd3946e8c2534b408e2a30100de5405573cc2f261f9740c3bd6fe46"
+    },
+    {
+      "file": "assets/uis/game_completed1player.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/uis/game_completed1player.json",
+      "bytes": 11693,
+      "sha256": "ad8a2af642357e896ce28fd0362263bbb2077f721a52a551e0f0393f3b9910de"
+    },
+    {
+      "file": "assets/uis/game_completed2player.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/uis/game_completed2player.json",
+      "bytes": 18469,
+      "sha256": "60671c3328107282cfec99f46928890d2681765eb799a3726635db4bd3de62e3"
+    },
+    {
+      "file": "assets/uis/game_settings.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/uis/game_settings.json",
+      "bytes": 7708,
+      "sha256": "53f01d690a4d8db93291f481322399dcd618e9e49ba3ffcbd082635344a8ffd4"
+    },
+    {
+      "file": "assets/uis/gameover_2player.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/uis/gameover_2player.json",
+      "bytes": 6532,
+      "sha256": "446bc9bc8bf2c39f7db4acd01d9eeeeacd6d93fdb5cce7925980d2296dd6d196"
+    },
+    {
+      "file": "assets/uis/gameover.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/uis/gameover.json",
+      "bytes": 4947,
+      "sha256": "ceb32f288a2ea19378919fcd3cb38ca18e1944d1c8b9c18e0aad8787764f3965"
+    },
+    {
+      "file": "assets/uis/gameplay_landscape.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/uis/gameplay_landscape.json",
+      "bytes": 34190,
+      "sha256": "5e5717bb708387ed44bd1dc625533232a670655909a635023321408c135d7982"
+    },
+    {
+      "file": "assets/uis/gameplay_portrait.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/uis/gameplay_portrait.json",
+      "bytes": 34596,
+      "sha256": "924eca07436f0482e5dce3b19989ce63f4fd3f157c943737936b4e3d16d83e6b"
+    },
+    {
+      "file": "assets/uis/gameplay.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/uis/gameplay.json",
+      "bytes": 38415,
+      "sha256": "708b3ae278cc250616bd9773ce1f884e92585a0acae55e7950d31521b906e17b"
+    },
+    {
+      "file": "assets/uis/highscore.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/uis/highscore.json",
+      "bytes": 23673,
+      "sha256": "b4701e655182c3df7fc1909e24bbfa5c2ff025ad3f2506f27ab31bbfd9f2ff7b"
+    },
+    {
+      "file": "assets/uis/main_menu.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/uis/main_menu.json",
+      "bytes": 27448,
+      "sha256": "5798bed6ee7e946eb6e28cba7a8db40f200aae8e0e57bd0421cfde7906acbf56"
+    },
+    {
+      "file": "assets/uis/powerups.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/assets/uis/powerups.json",
+      "bytes": 14637,
+      "sha256": "55aadd03604e780216a2f2addbc85b9ec5d2daebe4f201161c85ab23a2a45022"
+    },
+    {
+      "file": "azerion-libs.min.js",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/azerion-libs.min.js",
+      "bytes": 1223985,
+      "sha256": "4b4836e2f0002ded1cd8459bcfbf6884cbace75270b00bf2403c285e4ef1be37"
+    },
+    {
+      "file": "bombit-1.min.js",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/bombit-1.min.js",
+      "bytes": 190969,
+      "sha256": "23573ca890f38198342761a2fd51294215ffddf61bb70ba626721ece39361877"
+    },
+    {
+      "file": "game-libs.min.js",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/game-libs.min.js",
+      "bytes": 304706,
+      "sha256": "39b9ec6267cd34e6ccb3557731b6c1cd2f98f5b8fb4d24d019e8ef263864f3af"
+    },
+    {
+      "file": "index.html",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/index.html",
+      "bytes": 1400,
+      "sha256": "42e7773fb10d6ba25584e1752cd190c95048d38358b3669ab78dd569796c97a3"
+    },
+    {
+      "file": "plugins/phaser-cachebuster.min.js",
+      "url": "https://cdn.jsdelivr.net/npm/@azerion/phaser-cachebuster@2.0/build/phaser-cachebuster.min.js",
+      "bytes": 974,
+      "sha256": "d2e23d0f20a349624a23d1f9cd11e585090c220718455ac24c51f37a5cc23d46"
+    },
+    {
+      "file": "plugins/phaser-input.min.js",
+      "url": "https://cdn.jsdelivr.net/npm/@azerion/phaser-input@2.0/build/phaser-input.min.js",
+      "bytes": 16109,
+      "sha256": "4111cb3fde90fe7cb8ed2bd933babb4a4c38e7b12a6bee348a65b2b3e298c14e"
+    },
+    {
+      "file": "plugins/phaser-nineslice.min.js",
+      "url": "https://cdn.jsdelivr.net/npm/@azerion/phaser-nineslice@2.0/build/phaser-nineslice.min.js",
+      "bytes": 3304,
+      "sha256": "b0d73e9147a38fbb4a213ae7e7274e359bb75da28bb545e250531ca572098c12"
+    },
+    {
+      "file": "plugins/phaser-spine.min.js",
+      "url": "https://cdn.jsdelivr.net/npm/@azerion/phaser-spine@3.0/build/phaser-spine.min.js",
+      "bytes": 55817,
+      "sha256": "f7e573f04441915cbafe7d0b17124bd66963eaf12a952679ba276d586fbade1e"
+    },
+    {
+      "file": "plugins/phaser-super-storage.min.js",
+      "url": "https://cdn.jsdelivr.net/npm/@azerion/phaser-super-storage@1.0/build/phaser-super-storage.min.js",
+      "bytes": 10708,
+      "sha256": "9718bf277cfce9e39bbdd2de78a9ff7ed472a216eba6fb97c8268a985fcb5c63"
+    },
+    {
+      "file": "resources.json",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/resources.json",
+      "bytes": 4507,
+      "sha256": "dc3cf9c3155032ca7428287908d726de3de54d035917faa02cfab46de478d258"
+    },
+    {
+      "file": "version.js",
+      "url": "https://html5.gamedistribution.com/rvvASMiM/bf359863a59f41c7b7e06ab637d009e4/version.js",
+      "bytes": 475,
+      "sha256": "7d7a9487f74b33a3fef2e57609f763ebc56ef0254f1eb27e0d6f14550e53d7bc"
+    }
+  ]
+}

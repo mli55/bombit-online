@@ -1,0 +1,12 @@
+/* Webfont: impact-Regular */@font-face {
+    font-family: 'impact';
+    src: url('impact-Regular.eot'); /* IE9 Compat Modes */
+    src: url('impact-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('impact-Regular.woff') format('woff'), /* Modern Browsers */
+         url('impact-Regular.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('impact-Regular.svg#impact-Regular') format('svg'); /* Legacy iOS */
+    font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+

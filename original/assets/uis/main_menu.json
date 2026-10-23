@@ -1,0 +1,874 @@
+{
+    "hierarchy": {
+        "name": "Canvas",
+        "children": [
+            {
+                "name": "hero"
+            },
+            {
+                "name": "logo"
+            },
+            {
+                "name": "settings_buttons_container",
+                "children": [
+                    {
+                        "name": "container_mm_buttons",
+                        "children": [
+                            {
+                                "name": "start_game_button",
+                                "children": [
+                                    {
+                                        "name": "text"
+                                    },
+                                    {
+                                        "name": "icon"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "bombit2_button",
+                                "children": [
+                                    {
+                                        "name": "text"
+                                    },
+                                    {
+                                        "name": "icon"
+                                    },
+                                    {
+                                        "name": "new"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "how_to_play_button",
+                                "children": [
+                                    {
+                                        "name": "text"
+                                    },
+                                    {
+                                        "name": "icon"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "highscore_button",
+                                "children": [
+                                    {
+                                        "name": "text"
+                                    },
+                                    {
+                                        "name": "icon"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "more_games_button",
+                                "children": [
+                                    {
+                                        "name": "text"
+                                    },
+                                    {
+                                        "name": "icon"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "container_mode_buttons",
+                        "children": [
+                            {
+                                "name": "easy_button",
+                                "children": [
+                                    {
+                                        "name": "text"
+                                    },
+                                    {
+                                        "name": "icon"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "hard_button",
+                                "children": [
+                                    {
+                                        "name": "text"
+                                    },
+                                    {
+                                        "name": "icon"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "normal_button",
+                                "children": [
+                                    {
+                                        "name": "text"
+                                    },
+                                    {
+                                        "name": "icon"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "container_players_buttons",
+                        "children": [
+                            {
+                                "name": "2players_button",
+                                "children": [
+                                    {
+                                        "name": "text"
+                                    },
+                                    {
+                                        "name": "icon"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "1player_button",
+                                "children": [
+                                    {
+                                        "name": "text"
+                                    },
+                                    {
+                                        "name": "icon"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "audio_buttons_container",
+                "children": [
+                    {
+                        "name": "audio_button"
+                    }
+                ]
+            },
+            {
+                "name": "container_flag",
+                "children": [
+                    {
+                        "name": "flag1"
+                    },
+                    {
+                        "name": "flag2"
+                    }
+                ]
+            },
+            {
+                "name": "container_select",
+                "children": [
+                    {
+                        "name": "flag_select"
+                    }
+                ]
+            },
+            {
+                "name": "sprite"
+            }
+        ]
+    },
+    "properties": {
+        "Canvas": {
+            "design": {
+                "width": 1280,
+                "height": 720
+            },
+            "type": "canvas"
+        },
+        "hero": {
+            "file": "mm_hero.png",
+            "image": "SIMPLE",
+            "type": "sprite",
+            "alignment": {
+                "type": "CENTER",
+                "offset": {
+                    "x": -148,
+                    "y": 171
+                }
+            },
+            "orientation": {
+                "landscape": {
+                    "properties": {},
+                    "alignment": {
+                        "type": "CENTER",
+                        "offset": {
+                            "x": -148,
+                            "y": 171
+                        }
+                    }
+                },
+                "portrait": {
+                    "properties": {},
+                    "alignment": {
+                        "type": "CENTER",
+                        "offset": {
+                            "x": 1,
+                            "y": 397
+                        }
+                    }
+                }
+            }
+        },
+        "logo": {
+            "file": "mm_logo.png",
+            "image": "SIMPLE",
+            "type": "sprite",
+            "alignment": {
+                "type": "CENTER",
+                "offset": {
+                    "x": -35,
+                    "y": -207
+                }
+            },
+            "orientation": {
+                "landscape": {
+                    "properties": {},
+                    "alignment": {
+                        "type": "CENTER",
+                        "offset": {
+                            "x": -35,
+                            "y": -207
+                        }
+                    }
+                },
+                "portrait": {
+                    "properties": {},
+                    "alignment": {
+                        "type": "CENTER",
+                        "offset": {
+                            "x": 0,
+                            "y": -357
+                        }
+                    }
+                }
+            }
+        },
+        "settings_buttons_container": {
+            "type": "container",
+            "alignment": {
+                "type": "CENTER",
+                "offset": {
+                    "x": 248,
+                    "y": 0
+                }
+            },
+            "orientation": {
+                "landscape": {
+                    "properties": {},
+                    "alignment": {
+                        "type": "CENTER",
+                        "offset": {
+                            "x": 248,
+                            "y": 0
+                        }
+                    }
+                },
+                "portrait": {
+                    "properties": {
+                        "scale": {
+                            "x": 1.4,
+                            "y": 1.4
+                        }
+                    },
+                    "alignment": {
+                        "type": "CENTER"
+                    }
+                }
+            }
+        },
+        "settings_buttons_container/container_mm_buttons": {
+            "position": {
+                "x": 21,
+                "y": 0
+            },
+            "type": "container"
+        },
+        "settings_buttons_container/container_mm_buttons/start_game_button": {
+            "file": "pink_button.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "pink_button.png",
+                "pressed": "pink_button.png",
+                "hover": "pink_button_over.png"
+            },
+            "position": {
+                "x": 0,
+                "y": -144
+            },
+            "type": "button"
+        },
+        "settings_buttons_container/container_mm_buttons/start_game_button/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": "START GAME",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 3
+            },
+            "type": "text"
+        },
+        "settings_buttons_container/container_mm_buttons/start_game_button/icon": {
+            "file": "mm_brick2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -99,
+                "y": -5
+            },
+            "type": "sprite"
+        },
+        "settings_buttons_container/container_mm_buttons/bombit2_button": {
+            "file": "pink_button.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "pink_button.png",
+                "pressed": "pink_button.png",
+                "hover": "pink_button_over.png"
+            },
+            "position": {
+                "x": 0,
+                "y": -72
+            },
+            "type": "button"
+        },
+        "settings_buttons_container/container_mm_buttons/bombit2_button/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": "BOMB IT 2",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 3
+            },
+            "type": "text"
+        },
+        "settings_buttons_container/container_mm_buttons/bombit2_button/icon": {
+            "file": "mm_brick4.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -98.8,
+                "y": 1.7
+            },
+            "scale": {
+                "x": 0.7,
+                "y": 0.7
+            },
+            "type": "sprite"
+        },
+        "settings_buttons_container/container_mm_buttons/bombit2_button/new": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": "NEW",
+            "align": "center",
+            "stroke": "#000000",
+            "strokeThickness": 5,
+            "position": {
+                "x": -94.9,
+                "y": -2.7
+            },
+            "angle": -19,
+            "color": "#f2da04",
+            "type": "text"
+        },
+        "settings_buttons_container/container_mm_buttons/how_to_play_button": {
+            "file": "pink_button.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "pink_button.png",
+                "pressed": "pink_button.png",
+                "hover": "pink_button_over.png"
+            },
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "button"
+        },
+        "settings_buttons_container/container_mm_buttons/how_to_play_button/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": "HOW TO PLAY",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 3
+            },
+            "type": "text"
+        },
+        "settings_buttons_container/container_mm_buttons/how_to_play_button/icon": {
+            "file": "mm_brick1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -98.2,
+                "y": 2
+            },
+            "type": "sprite"
+        },
+        "settings_buttons_container/container_mm_buttons/highscore_button": {
+            "file": "pink_button.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "pink_button.png",
+                "pressed": "pink_button.png",
+                "hover": "pink_button_over.png"
+            },
+            "position": {
+                "x": 0,
+                "y": 72
+            },
+            "type": "button"
+        },
+        "settings_buttons_container/container_mm_buttons/highscore_button/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": "HIGHSCORE",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 3
+            },
+            "type": "text"
+        },
+        "settings_buttons_container/container_mm_buttons/highscore_button/icon": {
+            "file": "mm_brick5.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -96,
+                "y": 3
+            },
+            "type": "sprite"
+        },
+        "settings_buttons_container/container_mm_buttons/more_games_button": {
+            "file": "pink_button.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "pink_button.png",
+                "pressed": "pink_button.png",
+                "hover": "pink_button_over.png"
+            },
+            "position": {
+                "x": 0,
+                "y": 144
+            },
+            "type": "button"
+        },
+        "settings_buttons_container/container_mm_buttons/more_games_button/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": "MORE GAMES",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 3
+            },
+            "type": "text"
+        },
+        "settings_buttons_container/container_mm_buttons/more_games_button/icon": {
+            "file": "mm_brick3.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -99,
+                "y": -2
+            },
+            "type": "sprite"
+        },
+        "settings_buttons_container/container_mode_buttons": {
+            "position": {
+                "x": 21,
+                "y": 0
+            },
+            "type": "container"
+        },
+        "settings_buttons_container/container_mode_buttons/easy_button": {
+            "file": "pink_button.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "pink_button.png",
+                "pressed": "pink_button.png",
+                "hover": "pink_button_over.png"
+            },
+            "position": {
+                "x": 0,
+                "y": -108.9
+            },
+            "type": "button"
+        },
+        "settings_buttons_container/container_mode_buttons/easy_button/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": "EASY",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 3
+            },
+            "type": "text"
+        },
+        "settings_buttons_container/container_mode_buttons/easy_button/icon": {
+            "file": "mm_brick2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -99,
+                "y": -5
+            },
+            "type": "sprite"
+        },
+        "settings_buttons_container/container_mode_buttons/hard_button": {
+            "file": "pink_button.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "pink_button.png",
+                "pressed": "pink_button.png",
+                "hover": "pink_button_over.png"
+            },
+            "position": {
+                "x": 1,
+                "y": 109.1
+            },
+            "type": "button"
+        },
+        "settings_buttons_container/container_mode_buttons/hard_button/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": "HARD",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 3
+            },
+            "type": "text"
+        },
+        "settings_buttons_container/container_mode_buttons/hard_button/icon": {
+            "file": "mm_brick1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -102,
+                "y": -4
+            },
+            "type": "sprite"
+        },
+        "settings_buttons_container/container_mode_buttons/normal_button": {
+            "file": "pink_button.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "pink_button.png",
+                "pressed": "pink_button.png",
+                "hover": "pink_button_over.png"
+            },
+            "position": {
+                "x": 1,
+                "y": 0.1
+            },
+            "type": "button"
+        },
+        "settings_buttons_container/container_mode_buttons/normal_button/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": "NORMAL",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 3
+            },
+            "type": "text"
+        },
+        "settings_buttons_container/container_mode_buttons/normal_button/icon": {
+            "file": "mm_brick5.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -96,
+                "y": 3
+            },
+            "type": "sprite"
+        },
+        "settings_buttons_container/container_players_buttons": {
+            "position": {
+                "x": 21,
+                "y": 0
+            },
+            "type": "container"
+        },
+        "settings_buttons_container/container_players_buttons/2players_button": {
+            "file": "pink_button.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "pink_button.png",
+                "pressed": "pink_button.png",
+                "hover": "pink_button_over.png"
+            },
+            "position": {
+                "x": 0,
+                "y": 54.2
+            },
+            "type": "button"
+        },
+        "settings_buttons_container/container_players_buttons/2players_button/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": "2 PLAYERS",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 3
+            },
+            "type": "text"
+        },
+        "settings_buttons_container/container_players_buttons/2players_button/icon": {
+            "file": "mm_brick1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -102,
+                "y": -4
+            },
+            "type": "sprite"
+        },
+        "settings_buttons_container/container_players_buttons/1player_button": {
+            "file": "pink_button.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "pink_button.png",
+                "pressed": "pink_button.png",
+                "hover": "pink_button_over.png"
+            },
+            "position": {
+                "x": -1,
+                "y": -53.8
+            },
+            "type": "button"
+        },
+        "settings_buttons_container/container_players_buttons/1player_button/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": "1 PLAYER",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 3
+            },
+            "type": "text"
+        },
+        "settings_buttons_container/container_players_buttons/1player_button/icon": {
+            "file": "mm_brick5.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -96,
+                "y": 3
+            },
+            "type": "sprite"
+        },
+        "audio_buttons_container": {
+            "type": "container",
+            "alignment": {
+                "type": "BOTTOM_RIGHT",
+                "offset": {
+                    "x": "-26%",
+                    "y": "-18%"
+                }
+            },
+            "orientation": {
+                "landscape": {
+                    "properties": {},
+                    "alignment": {
+                        "type": "BOTTOM_RIGHT",
+                        "offset": {
+                            "x": "-26%",
+                            "y": "-18%"
+                        }
+                    }
+                },
+                "portrait": {
+                    "properties": {},
+                    "alignment": {
+                        "type": "BOTTOM_RIGHT",
+                        "offset": {
+                            "x": "-16%",
+                            "y": "-10%"
+                        }
+                    }
+                }
+            }
+        },
+        "audio_buttons_container/audio_button": {
+            "file": "audio.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "audio.png",
+                "pressed": "audio.png",
+                "hover": "audio_press.png"
+            },
+            "position": {
+                "x": 36,
+                "y": -8
+            },
+            "type": "button"
+        },
+        "container_flag": {
+            "file": "menu.png",
+            "image": "SIMPLE",
+            "type": "sprite",
+            "alignment": {
+                "type": "BOTTOM_CENTER",
+                "offset": {
+                    "x": -379.6,
+                    "y": -67.9
+                }
+            },
+            "orientation": {
+                "landscape": {
+                    "properties": {},
+                    "alignment": {
+                        "type": "BOTTOM_CENTER",
+                        "offset": {
+                            "x": -379.6,
+                            "y": -67.9
+                        }
+                    }
+                },
+                "portrait": {
+                    "properties": {},
+                    "alignment": {
+                        "type": "BOTTOM_CENTER",
+                        "offset": {
+                            "x": -270,
+                            "y": -146
+                        }
+                    }
+                }
+            }
+        },
+        "container_flag/flag1": {
+            "file": "esp.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 23.2
+            },
+            "type": "sprite"
+        },
+        "container_flag/flag2": {
+            "file": "hol.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": -72
+            },
+            "type": "sprite"
+        },
+        "container_select": {
+            "file": "select.png",
+            "image": "SIMPLE",
+            "type": "sprite",
+            "alignment": {
+                "type": "BOTTOM_CENTER",
+                "offset": {
+                    "x": -379.7,
+                    "y": -21.5
+                }
+            },
+            "orientation": {
+                "landscape": {
+                    "properties": {},
+                    "alignment": {
+                        "type": "BOTTOM_CENTER",
+                        "offset": {
+                            "x": -379.7,
+                            "y": -21.5
+                        }
+                    }
+                },
+                "portrait": {
+                    "properties": {},
+                    "alignment": {
+                        "type": "BOTTOM_CENTER",
+                        "offset": {
+                            "x": -270,
+                            "y": -97.5
+                        }
+                    }
+                }
+            }
+        },
+        "container_select/flag_select": {
+            "file": "eng.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "sprite": {
+            "file": "Agame.png",
+            "image": "SIMPLE",
+            "type": "sprite",
+            "alignment": {
+                "type": "CENTER",
+                "offset": {
+                    "x": 226,
+                    "y": 311
+                }
+            },
+            "orientation": {
+                "landscape": {
+                    "properties": {},
+                    "alignment": {
+                        "type": "CENTER",
+                        "offset": {
+                            "x": 226,
+                            "y": 311
+                        }
+                    }
+                },
+                "portrait": {
+                    "properties": {},
+                    "alignment": {
+                        "type": "CENTER",
+                        "offset": {
+                            "x": 208,
+                            "y": 605.7
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

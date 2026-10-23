@@ -1,0 +1,15 @@
+Ready. Each scenario loads four fresh independent replicas.
+Loading 1-human scenario…
+Start 1: 011e7939 011e7939 011e7939 011e7939
+PASS 1 humans / 6000 frames / 200 simulated seconds / result {"winner":2,"canContinue":false,"level":1,"scores":[0,20,320,320]}
+Loading 2-human scenario…
+Start 2: 56b93808 56b93808 56b93808 56b93808
+Continue original campaign at tick 610
+PASS 2 humans / 6000 frames / 200 simulated seconds / result {"winner":null,"canContinue":true,"win":false,"level":1,"scores":[160,60,410,130]}
+Loading 3-human scenario…
+Start 3: 4e64a428 4e64a428 4e64a428 4e64a428
+PASS 3 humans / 6000 frames / 200 simulated seconds / result {"winner":3,"canContinue":false,"level":1,"scores":[0,0,10,20]}
+Loading 4-human scenario…
+Start 4: e9f5f262 e9f5f262 e9f5f262 e9f5f262
+PASS 4 humans / 6000 frames / 200 simulated seconds / result {"winner":0,"canContinue":false,"level":1,"scores":[0,10,0,10]}
+ALL PASS

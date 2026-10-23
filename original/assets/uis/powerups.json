@@ -1,0 +1,539 @@
+{
+    "hierarchy": {
+        "name": "Canvas",
+        "children": [
+            {
+                "name": "start_game_button",
+                "children": [
+                    {
+                        "name": "text"
+                    },
+                    {
+                        "name": "icon"
+                    }
+                ]
+            },
+            {
+                "name": "how_to_play_button",
+                "children": [
+                    {
+                        "name": "text"
+                    },
+                    {
+                        "name": "icon"
+                    }
+                ]
+            },
+            {
+                "name": "container",
+                "children": [
+                    {
+                        "name": "life_icon",
+                        "children": [
+                            {
+                                "name": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "walk_faster_icon",
+                        "children": [
+                            {
+                                "name": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bigger_explosion_icon",
+                        "children": [
+                            {
+                                "name": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "protection_shield_icon",
+                        "children": [
+                            {
+                                "name": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "grenade_icon",
+                        "children": [
+                            {
+                                "name": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "minerbomb_icon",
+                        "children": [
+                            {
+                                "name": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "rocket_icon",
+                        "children": [
+                            {
+                                "name": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "confuse_icon",
+                        "children": [
+                            {
+                                "name": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "push_bomb_icon",
+                        "children": [
+                            {
+                                "name": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bomb_icon",
+                        "children": [
+                            {
+                                "name": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "freeze_icon",
+                        "children": [
+                            {
+                                "name": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "fire_icon",
+                        "children": [
+                            {
+                                "name": "text"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "properties": {
+        "Canvas": {
+            "design": {
+                "width": 1280,
+                "height": 720
+            },
+            "type": "canvas"
+        },
+        "start_game_button": {
+            "file": "pink_button.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "pink_button.png",
+                "pressed": "pink_button.png",
+                "hover": "pink_button_over.png"
+            },
+            "type": "button",
+            "alignment": {
+                "type": "CENTER",
+                "offset": {
+                    "x": 181.1,
+                    "y": 309
+                }
+            }
+        },
+        "start_game_button/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": "START GAME",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 3
+            },
+            "type": "text"
+        },
+        "start_game_button/icon": {
+            "file": "tutorial_icon2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -85.9,
+                "y": -10.9
+            },
+            "type": "sprite"
+        },
+        "how_to_play_button": {
+            "file": "pink_button.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "pink_button.png",
+                "pressed": "pink_button.png",
+                "hover": "pink_button_over.png"
+            },
+            "type": "button",
+            "alignment": {
+                "type": "CENTER",
+                "offset": {
+                    "x": -179.8,
+                    "y": 309
+                }
+            }
+        },
+        "how_to_play_button/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": "HOW TO PLAY",
+            "align": "center",
+            "position": {
+                "x": 0,
+                "y": 3
+            },
+            "type": "text"
+        },
+        "how_to_play_button/icon": {
+            "file": "tutorial_icon1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -89.8,
+                "y": -1.8
+            },
+            "type": "sprite"
+        },
+        "container": {
+            "file": "tutorial_container.png",
+            "image": "SIMPLE",
+            "type": "sprite",
+            "alignment": {
+                "type": "CENTER"
+            }
+        },
+        "container/life_icon": {
+            "file": "tools_1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -272,
+                "y": -169
+            },
+            "type": "sprite"
+        },
+        "container/life_icon/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": ": LIFE+1",
+            "align": "center",
+            "position": {
+                "x": 26.9,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0,
+                "y": 0.5
+            },
+            "type": "text"
+        },
+        "container/walk_faster_icon": {
+            "file": "tools_6.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -270.5,
+                "y": -120
+            },
+            "type": "sprite"
+        },
+        "container/walk_faster_icon/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": ": WALK FASTER",
+            "align": "center",
+            "position": {
+                "x": 26.9,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0,
+                "y": 0.5
+            },
+            "type": "text"
+        },
+        "container/bigger_explosion_icon": {
+            "file": "tools_5.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -271.5,
+                "y": -72
+            },
+            "type": "sprite"
+        },
+        "container/bigger_explosion_icon/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": ": BIGGER EXPLOSION",
+            "align": "center",
+            "position": {
+                "x": 28.9,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0,
+                "y": 0.5
+            },
+            "type": "text"
+        },
+        "container/protection_shield_icon": {
+            "file": "tools_4.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -272.5,
+                "y": -27
+            },
+            "type": "sprite"
+        },
+        "container/protection_shield_icon/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": ": PROTECTION SHIELD",
+            "align": "center",
+            "position": {
+                "x": 29.9,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0,
+                "y": 0.5
+            },
+            "type": "text"
+        },
+        "container/grenade_icon": {
+            "file": "tools_9.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -272,
+                "y": 21.8
+            },
+            "type": "sprite"
+        },
+        "container/grenade_icon/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": ": TROW GRENADE OVER WALLS",
+            "align": "center",
+            "position": {
+                "x": 28.4,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0,
+                "y": 0.5
+            },
+            "type": "text"
+        },
+        "container/minerbomb_icon": {
+            "file": "tools_8.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -271.5,
+                "y": 70.7
+            },
+            "type": "sprite"
+        },
+        "container/minerbomb_icon/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": ": PLACE MINERBOMBS",
+            "align": "center",
+            "position": {
+                "x": 26.9,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0,
+                "y": 0.5
+            },
+            "type": "text"
+        },
+        "container/rocket_icon": {
+            "file": "tools_7.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -273,
+                "y": 118.9
+            },
+            "type": "sprite"
+        },
+        "container/rocket_icon/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": ": SHOOTS ROCKET",
+            "align": "center",
+            "position": {
+                "x": 29.4,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0,
+                "y": 0.5
+            },
+            "type": "text"
+        },
+        "container/confuse_icon": {
+            "file": "tools_10.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -272,
+                "y": 167
+            },
+            "type": "sprite"
+        },
+        "container/confuse_icon/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": ": CONFUSE ENEMY",
+            "align": "center",
+            "position": {
+                "x": 27.9,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0,
+                "y": 0.5
+            },
+            "type": "text"
+        },
+        "container/push_bomb_icon": {
+            "file": "tools_2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 58.5,
+                "y": -169
+            },
+            "type": "sprite"
+        },
+        "container/push_bomb_icon/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": ": PUSH BOMB",
+            "align": "center",
+            "position": {
+                "x": 26.9,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0,
+                "y": 0.5
+            },
+            "type": "text"
+        },
+        "container/bomb_icon": {
+            "file": "tools_3.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 58,
+                "y": -120
+            },
+            "type": "sprite"
+        },
+        "container/bomb_icon/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": ": BOMB+1",
+            "align": "center",
+            "position": {
+                "x": 27.4,
+                "y": -1
+            },
+            "anchor": {
+                "x": 0,
+                "y": 0.5
+            },
+            "type": "text"
+        },
+        "container/freeze_icon": {
+            "file": "tools_11.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 60,
+                "y": -70.8
+            },
+            "type": "sprite"
+        },
+        "container/freeze_icon/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": ": FREEZES THE ENEMY",
+            "align": "center",
+            "position": {
+                "x": 27.4,
+                "y": -2
+            },
+            "anchor": {
+                "x": 0,
+                "y": 0.5
+            },
+            "type": "text"
+        },
+        "container/fire_icon": {
+            "file": "tools_12.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 58,
+                "y": -22.3
+            },
+            "type": "sprite"
+        },
+        "container/fire_icon/text": {
+            "font": {
+                "name": "impact",
+                "fontSize": 25
+            },
+            "text": ": SHOOT FIRE",
+            "align": "center",
+            "position": {
+                "x": 29.4,
+                "y": -3
+            },
+            "anchor": {
+                "x": 0,
+                "y": 0.5
+            },
+            "type": "text"
+        }
+    }
+}

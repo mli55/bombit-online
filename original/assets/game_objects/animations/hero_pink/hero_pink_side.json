@@ -1,0 +1,298 @@
+{
+    "name": "hero_pink_side",
+    "speed": 1,
+    "mode": "loop",
+    "data": {
+        "hero2_head": {
+            "frameName": [
+                {
+                    "frame": 0,
+                    "value": "hero2_head_side.png"
+                }
+            ]
+        },
+        "hero2_arm_r": {
+            "position": [
+                {
+                    "frame": 0,
+                    "value": [
+                        2,
+                        -27.5
+                    ]
+                },
+                {
+                    "frame": 91,
+                    "value": [
+                        -0.1,
+                        -28.2
+                    ]
+                },
+                {
+                    "frame": 182,
+                    "value": [
+                        2,
+                        -27.5
+                    ]
+                },
+                {
+                    "frame": 273,
+                    "value": [
+                        3.4,
+                        -28.9
+                    ]
+                },
+                {
+                    "frame": 364,
+                    "value": [
+                        2,
+                        -27.5
+                    ]
+                }
+            ],
+            "angle": [
+                {
+                    "frame": 0,
+                    "value": -12
+                },
+                {
+                    "frame": 91,
+                    "value": 20
+                },
+                {
+                    "frame": 182,
+                    "value": -12
+                },
+                {
+                    "frame": 273,
+                    "value": -50
+                },
+                {
+                    "frame": 364,
+                    "value": -12
+                }
+            ]
+        },
+        "hero2_body": {
+            "position": [
+                {
+                    "frame": 0,
+                    "value": [
+                        0,
+                        -19.2
+                    ]
+                },
+                {
+                    "frame": 91,
+                    "value": [
+                        0,
+                        -20
+                    ]
+                },
+                {
+                    "frame": 182,
+                    "value": [
+                        0,
+                        -19.2
+                    ]
+                },
+                {
+                    "frame": 273,
+                    "value": [
+                        0,
+                        -20
+                    ]
+                },
+                {
+                    "frame": 364,
+                    "value": [
+                        0,
+                        -19.2
+                    ]
+                }
+            ]
+        },
+        "hero2_arm_l": {
+            "position": [
+                {
+                    "frame": 0,
+                    "value": [
+                        -3.4,
+                        -26.9
+                    ]
+                },
+                {
+                    "frame": 91,
+                    "value": [
+                        0.1,
+                        -26.4
+                    ]
+                },
+                {
+                    "frame": 182,
+                    "value": [
+                        -3.4,
+                        -26.9
+                    ]
+                },
+                {
+                    "frame": 273,
+                    "value": [
+                        -5.8,
+                        -29.8
+                    ]
+                },
+                {
+                    "frame": 364,
+                    "value": [
+                        -3.4,
+                        -26.9
+                    ]
+                }
+            ],
+            "angle": [
+                {
+                    "frame": 0,
+                    "value": 3
+                },
+                {
+                    "frame": 91,
+                    "value": -31
+                },
+                {
+                    "frame": 182,
+                    "value": 3
+                },
+                {
+                    "frame": 273,
+                    "value": 38
+                },
+                {
+                    "frame": 364,
+                    "value": 3
+                }
+            ]
+        },
+        "hero2_leg_r": {
+            "angle": [
+                {
+                    "frame": 0,
+                    "value": 0
+                },
+                {
+                    "frame": 91,
+                    "value": -27
+                },
+                {
+                    "frame": 182,
+                    "value": 0
+                },
+                {
+                    "frame": 273,
+                    "value": 19
+                },
+                {
+                    "frame": 364,
+                    "value": 0
+                }
+            ],
+            "position": [
+                {
+                    "frame": 0,
+                    "value": [
+                        0.3,
+                        -15.3
+                    ]
+                },
+                {
+                    "frame": 91,
+                    "value": [
+                        2.9,
+                        -13.7
+                    ]
+                },
+                {
+                    "frame": 182,
+                    "value": [
+                        0.3,
+                        -15.3
+                    ]
+                },
+                {
+                    "frame": 273,
+                    "value": [
+                        -3.3,
+                        -17.6
+                    ]
+                },
+                {
+                    "frame": 364,
+                    "value": [
+                        0.3,
+                        -15.3
+                    ]
+                }
+            ]
+        },
+        "hero2_leg_l": {
+            "position": [
+                {
+                    "frame": 0,
+                    "value": [
+                        0,
+                        -15.5
+                    ]
+                },
+                {
+                    "frame": 91,
+                    "value": [
+                        -2.3,
+                        -16.2
+                    ]
+                },
+                {
+                    "frame": 182,
+                    "value": [
+                        0,
+                        -15.5
+                    ]
+                },
+                {
+                    "frame": 273,
+                    "value": [
+                        2.2,
+                        -14.6
+                    ]
+                },
+                {
+                    "frame": 364,
+                    "value": [
+                        0,
+                        -15.5
+                    ]
+                }
+            ],
+            "angle": [
+                {
+                    "frame": 0,
+                    "value": 0
+                },
+                {
+                    "frame": 91,
+                    "value": 24
+                },
+                {
+                    "frame": 182,
+                    "value": 0
+                },
+                {
+                    "frame": 273,
+                    "value": -30
+                },
+                {
+                    "frame": 364,
+                    "value": 0
+                }
+            ]
+        }
+    }
+}
