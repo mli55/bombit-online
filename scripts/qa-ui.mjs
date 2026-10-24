@@ -90,6 +90,9 @@ async function setPanel(page, open) {
 }
 async function nativeClick(page, property) {
   const frame = await gameFrame(page);
+  // Consecutive native menu clicks can arrive before Phaser refreshes the new
+  // screen's transforms and input hit areas. Wait for a render before measuring.
+  await frame.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
   const position = await frame.evaluate(property => {
     const game = Game.App.getInstance(), state = game.state.getCurrentState();
     const target = state[property];

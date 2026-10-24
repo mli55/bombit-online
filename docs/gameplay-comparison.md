@@ -1,5 +1,8 @@
 # Original HTML5 comparison
 
+Historical HTML5-port baseline. The 2026-10-24 [Flash timing audit](classic-timing.md)
+supersedes the timing choices below; the Flash original has different values.
+
 Measured on 2026-10-23 using the preserved engine, its native single-player clock, and the online 60 Hz clock. Values are observed behavior rather than config constants alone.
 
 | Effect | Native clock | Online clock |

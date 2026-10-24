@@ -1,5 +1,25 @@
 # Verification
 
+2026-10-24, Flash timing and online loss follow-up:
+
+- `npm run check`, `npm run build:pages`, and all 61 Node tests pass.
+- `scripts/qa-classic.mjs` passes against real Chrome engines: two eliminated
+  humans stop both surviving CPUs, both clients show `YOU LOSE` with identical
+  result hashes, and 1–4-human losing/winning cases handle shuffled characters.
+  It also checks bomb/freeze/slow/column/mine timings, pause, frozen-opponent
+  kills, explosion cleanup and fresh rounds. See [timing evidence](classic-timing.md).
+- The complete `scripts/qa-ui.mjs` suite passes: four-client hashes, 60 Hz,
+  uninterrupted reconnection, pause/resume, difficulty, native Single Player,
+  NEXT ROUND and refresh behavior. Native test clicks now wait for Phaser's
+  rendered hit areas before measuring their positions.
+- Direct 4399 follow-up: traced game 3881 through its official wrapper and
+  loader to `game.swf`. Both SWFs run at 35 fps, and both core gameplay scripts
+  exactly match the archived Flash scripts used for the timing changes. Source
+  URLs, file sizes and SHA-256 evidence are recorded in `classic-timing.md`.
+- No manual deployment was performed during this verification.
+
+---
+
 2026-10-23. Final Single Player / Multiplayer entry flow.
 
 - `npm run check` and all **45 tests** pass. The real four-WebSocket test covers automatic P1–P4 identities, 60 Hz, repeated rounds, score carry, and uninterrupted reconnection. Sixty frames took 999 ms locally.

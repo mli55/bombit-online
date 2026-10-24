@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
 
 const upstream = readFileSync(new URL('../original/bombit-1.min.js', import.meta.url), 'utf8');
-const fixes = readFileSync(new URL('../public/gameplay-fixes.js', import.meta.url), 'utf8');
+const fixes = readFileSync(new URL('../public/classic-timing.js', import.meta.url), 'utf8');
 
 function definition(className, namespace) {
   const endMarker = `${namespace}.${className}=t}`;
@@ -37,6 +37,8 @@ function fixture({ patched = true, power = 1 } = {}) {
     MAP: { FREE: 0, ITEM: 1, BOMB: 2, MINE: 3, BLOCK: 4 },
     SETTINGS: { SCALE: 1, GRID_WIDTH: 13, GRID_HEIGHT: 13 },
     Player: function Player() {},
+    GameplayState: function () {}, WeaponExplosion: function () {},
+    Grid: function () {}, Mine: function () {}, Rocket: function () {}, Columns: function () {},
   };
   Game.Player.prototype.update = function () {};
   const context = vm.createContext({
@@ -122,10 +124,10 @@ test('the preserved upstream flame and danger duration is 500 ms at 60 Hz', () =
   assertFinished(f);
 });
 
-test('flames and dangerous cells finish together at 300 ms at 60 Hz', () => {
+test('flames and dangerous cells finish together after the Flash 11-frame lifetime (315–317 ms at 60 Hz)', () => {
   const f = fixture();
   f.explosion.makeExplosion();
-  f.advance(17);
+  f.advance(18);
   assert.equal(f.visibleFlames().length, 5);
   assert.equal(f.dangerousCells().length, 5);
   f.advance(1);
@@ -135,14 +137,14 @@ test('flames and dangerous cells finish together at 300 ms at 60 Hz', () => {
 test('maximum-power rays finish propagating before cleanup and never reappear', () => {
   const f = fixture({ power: 5 });
   f.explosion.makeExplosion();
-  assert.equal(f.pending.length, 20, 'Each ray cell uses the original 25 ms per-cell delay');
+  assert.equal(f.pending.length, 20, 'Each ray cell uses the original 35 Hz per-cell delay');
   f.advance(1);
   assert.equal(f.visibleFlames().length, 1, 'Only the center appears before the first delayed segment');
-  f.advance(7);
-  assert.equal(f.pending.length, 0, 'All maximum-power segments have appeared by 133 ms');
+  f.advance(8);
+  assert.equal(f.pending.length, 0, 'All maximum-power segments have appeared by 150 ms');
   assert.equal(f.visibleFlames().length, 21);
   assert.equal(f.dangerousCells().length, 21);
-  f.advance(10);
+  f.advance(17);
   assertFinished(f);
   f.advance(42);
   assertFinished(f);
@@ -159,7 +161,7 @@ test('pause preserves the remaining flame duration and resumes cleanup', () => {
   assert.equal(f.visibleFlames().length, 5);
   assert.equal(f.dangerousCells().length, 5);
   f.explosion.gameStatus = f.Game.GAME_STATUS.PLAYING;
-  f.advance(12);
+  f.advance(13);
   assertFinished(f);
 });
 
@@ -171,7 +173,7 @@ test('an untriggered explosion does not consume its flame lifetime', () => {
   assert.equal(f.visibleFlames().length, 0);
   assert.equal(f.dangerousCells().length, 0);
   f.explosion.makeExplosion();
-  f.advance(18);
+  f.advance(19);
   assertFinished(f);
 });
 
@@ -180,6 +182,6 @@ test('a round ending does not freeze its final explosion', () => {
   f.explosion.makeExplosion();
   f.advance(3);
   f.explosion.gameStatus = f.Game.GAME_STATUS.GAME_OVER;
-  f.advance(15);
+  f.advance(16);
   assertFinished(f);
 });

@@ -145,9 +145,11 @@
   Game.GameplayState.prototype.gameOver = function (timedOut) {
     if (!active) return gameOver.call(this, timedOut);
     if (roundOutcome) return;
-    // The original score manager ranks surviving players, including its tie order.
-    const winner = this.scoreManager.getMaxScore(this.grid.players) ?? null;
-    roundOutcome = { winner, canContinue: true, level: config.round || 1 };
+    const humansEliminated = !this.grid.players.some(p => !p.dead && config.players.some(h => h.character === p.playerID));
+    // Do not crown a CPU while other CPUs are still alive after the humans lose.
+    const winner = humansEliminated ? null : this.scoreManager.getMaxScore(this.grid.players) ?? null;
+    const win = winner !== null && config.players.some(p => p.character === winner);
+    roundOutcome = { winner, humansEliminated, win, canContinue: true, level: config.round || 1 };
     if (winner !== null) {
       this.scoreManager.addLeftOverTime(this.gameTimer, winner);
       this.scoreManager.addExtraScore(winner);
@@ -155,14 +157,14 @@
     this.gameTimer = 0;
     this.gameStatus = this.grid.gameStatus = Game.GAME_STATUS.GAME_OVER;
     for (const p of this.grid.players) p.onMatchEnd();
-    game.ph2AudioManager.stopMusic(); game.ph2AudioManager.playEffect('level_complete', false);
+    game.ph2AudioManager.stopMusic(); game.ph2AudioManager.playEffect(win ? 'level_complete' : 'level_failed', false);
     const message = Ph2.AnimationSystem.findObject('message/image', this.animationLevelEnd);
-    message.frameName = timedOut ? 'message1.png' : 'message3.png';
+    message.frameName = win ? (timedOut ? 'message1.png' : 'message3.png') : (timedOut ? 'message4.png' : 'message2.png');
     this.animationLevelEnd.visible = true;
     this.animationLevelEnd.ph2Animations.play('message_gameplay', 1, false);
     game.time.events.add(5000, () => game.state.start('gameOverState', true, false,
       this.gameMode, this.difficulty, Game.PLAYER_MODE.SINGLE_PLAYER, this.grid.mapTheme,
-      this.characters, this.scoreManager, false, Game.GAME_END.WIN, config.round || 1), this);
+      this.characters, this.scoreManager, false, win ? Game.GAME_END.WIN : Game.GAME_END.LOSE, config.round || 1), this);
   };
   // Original buttons request a shared action; only server frames advance gameplay.
   const pausePressed = Game.GameplayState.prototype.pausePressed;
@@ -187,7 +189,7 @@
       this[text].setText(String(this.scoreManager[scores][character]));
     }
     const winner = config.players.find(p => p.character === roundOutcome.winner);
-    const title = roundOutcome.winner === null ? 'DRAW' : winner ? `P${winner.seat + 1} WINS` : 'CPU WINS';
+    const title = roundOutcome.humansEliminated ? 'YOU LOSE' : roundOutcome.winner === null ? 'DRAW' : winner ? `P${winner.seat + 1} WINS` : 'CPU WINS';
     Ph2.UISystem.findObject('container_title/title', this.uiScore).setText(title);
     Game.Instances.LocalizationManager.fitFontSizeUI('container_title/title', this.uiScore,
       125 * Game.SETTINGS.SCALE, -1, 25 * Game.SETTINGS.SCALE);
@@ -254,7 +256,11 @@
       }
       clockStep();
       const current = game.state.getCurrentState();
-      if (game.state.current === 'gameplayState' && !pendingResult && !roundOutcome && current.grid.players.filter(p => !p.dead).length <= 1) current.gameOver(false);
+      if (game.state.current === 'gameplayState' && !pendingResult && !roundOutcome) {
+        const survivors = current.grid.players.filter(p => !p.dead);
+        const humanAlive = survivors.some(p => config.players.some(h => h.character === p.playerID));
+        if (!humanAlive || survivors.length <= 1) current.gameOver(false);
+      }
       frame = n;
     });
     if (replay) window.bombItAudio.replay(simulate);
