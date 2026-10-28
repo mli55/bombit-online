@@ -64,6 +64,15 @@ have a brief nonzero detonation window. We preserve that window and clear the
 cell and explosion registry afterward. Mine hiding time is separate from its
 detonation; no guessed Flash hiding time is introduced.
 
+A shield also blocks a mine. Checked 2026-10-28 against 4399's `game.swf` (same
+SHA-256 as above), `DefineSprite_554/frame_1`: a triggered mine only calls
+`addBrickExp`, and every explosion cell damages through the one `hurtHero`,
+which spends the shield before taking a life. Upstream HTML5 kills a mine victim
+through a separate `activateMine` that skips the shield check, so
+`public/gameplay-fixes.js` spends the shield there instead. The HTML5 2 s
+invulnerability is kept (Flash `varShield = 60`, 1.714 s); both cover the
+10-frame mine blast.
+
 `public/classic-timing.js` applies these timing rules to native Single Player
 and online games while preserving the upstream files. All timers use simulation
 time, including pause and replay. Removing the second weapon update also stops

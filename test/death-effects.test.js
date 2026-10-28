@@ -45,7 +45,10 @@ function fixture({ patched = true, weapon = 'grenade' } = {}) {
     dangerOwner: { playerID: 1 },
   })));
   const player = Object.assign(Object.create(Game.Player.prototype), {
-    game: { time: { elapsedMS: 1000 / 60 }, ph2NotificationManager: { postNotification() {} } },
+    game: {
+      time: { elapsedMS: 1000 / 60 }, ph2NotificationManager: { postNotification() {} },
+      add: { tween: () => ({ to() { return this; } }) },
+    },
     grid: { cells, mines: [], weapons: [firedWeapon], rowsGroup: cells.map(() => ({ add() {} })) },
     gridCell: cells[1][1], gridPositionX: 1, gridPositionY: 1,
     playerID: 0, lives: 3, dead: false, gameScale: 1,
@@ -108,6 +111,31 @@ test('the separate mine-death path also clears detached indicators', () => {
   assert.equal(player.grenadeIndicator.visible, false);
   assert.equal(player.grid.weapons[0], firedWeapon);
   assert.equal(firedWeapon.alive, true);
+});
+
+test('upstream mine kills a shielded player', () => {
+  const { player } = fixture({ patched: false });
+  player.shieldActive = true;
+  player.activateMine(player.gridCell);
+  assert.equal(player.dead, true);
+  assert.equal(player.lives, 2);
+});
+
+test('a shield absorbs a stepped-on mine and its blast', () => {
+  const { player, Game } = fixture();
+  player.shieldActive = true;
+  player.activateMine(player.gridCell);
+  assert.equal(player.dead, false);
+  assert.equal(player.lives, 3);
+  assert.equal(player.shieldActive, false);
+  assert.equal(player.invulnerable, true);
+  player.gridCell.isDangerCell = true;
+  player.update();
+  assert.equal(player.dead, false, 'Invulnerability covers the mine explosion');
+  player.invulnerable = false;
+  player.activateMine(player.gridCell);
+  assert.equal(player.dead, true, 'A second mine without a shield still kills');
+  assert.equal(player.gameStatus, Game.GAME_STATUS.GAME_OVER);
 });
 
 test('living players retain their held weapon, indicators, and input', () => {
