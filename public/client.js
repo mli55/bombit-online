@@ -36,7 +36,7 @@ function input(code, down) {
 function loadGame() {
   const id = ++loadId;
   iframe?.contentWindow?.bombItAudio?.dispose();
-  bridge = null; iframe?.remove();
+  bridge = null; liveFrames = []; playing = false; iframe?.remove();
   iframe = document.createElement('iframe'); iframe.title = 'Bomb It 1'; iframe.allow = 'autoplay; fullscreen'; iframe.src = '/game/?v=9';
   $('game-mount').replaceChildren(iframe); $('loading').textContent = 'Loading Bomb It 1…'; $('loading').hidden = false;
   loadPromise = new Promise((resolve, reject) => {
@@ -45,8 +45,40 @@ function loadGame() {
   });
   return loadPromise;
 }
+// Live frames arrive in bursts and gaps (p99 ~120 ms apart on Cloudflare).
+// Stepping on arrival turned that jitter into freezes and jumps, so play them
+// back at a steady 60 Hz behind a small buffer that grows after each underrun
+// and shrinks after a calm stretch. Order and content are unchanged.
+const frameMS = 1000 / 60;
+let liveFrames = [], bufferTarget = 3, playClock = null, playing = false, calmSince = 0;
+function stepLive() {
+  try { bridge.advance(liveFrames.shift()); return true; }
+  catch (error) { liveFrames = []; notice(error.message); send({ type: 'fault' }); return false; }
+}
+function playFrame(frame) {
+  liveFrames.push(frame);
+  // Hidden tabs get no animation frames; keep acking so the server need not replay us.
+  if (document.hidden) { while (liveFrames.length) if (!stepLive()) return; }
+}
+function playLoop(time) {
+  requestAnimationFrame(playLoop);
+  if (!bridge || preparing || !liveFrames.length) {
+    if (playing && bridge && !preparing && room?.phase === 'playing') { playing = false; bufferTarget = Math.min(bufferTarget + 1, 8); calmSince = time; }
+    if (room?.phase !== 'playing') playing = false;
+    playClock = null; return;
+  }
+  if (!playing) { if (liveFrames.length < bufferTarget) return; playing = true; playClock = time; }
+  if (time - calmSince > 5000 && bufferTarget > 2) { bufferTarget--; calmSince = time; }
+  // Run slightly fast when the buffer is long and catch up at once after a stall.
+  const excess = liveFrames.length - bufferTarget;
+  const rate = excess > 30 ? 8 : excess > 2 ? 1.1 : 1;
+  let due = Math.floor((time - playClock) * rate / frameMS);
+  playClock += due * frameMS / rate;
+  while (due-- > 0 && liveFrames.length) if (!stepLive()) return;
+}
+requestAnimationFrame(playLoop);
 async function prepare(msg) {
-  const id = ++prepareId; generation = msg.generation; packetQueue = []; preparing = true; release();
+  const id = ++prepareId; generation = msg.generation; packetQueue = []; liveFrames = []; playing = false; preparing = true; release();
   try {
     const game = await loadGame(); if (id !== prepareId) return;
     game.start(msg.config, identity.seat);
@@ -100,7 +132,7 @@ function connect(code, create = false, token) {
     } else if (msg.type === 'prepare') prepare(msg);
     else if (msg.type === 'frame' && msg.generation === generation) {
       if (preparing || !bridge) packetQueue.push(msg.frame);
-      else try { bridge.advance(msg.frame); } catch (error) { notice(error.message); send({ type: 'fault' }); }
+      else playFrame(msg.frame);
     } else if (msg.type === 'verified') $('sync').textContent = `In sync · Frame ${msg.tick}`;
     else if (msg.type === 'pong') { if (room?.phase !== 'paused') { const offline = room?.players.filter(p => p && !p.online).map(p => `P${p.seat + 1} disconnected`) || []; status([...offline, `${Math.max(0, Date.now() - msg.time)} ms`].join(' · ')); } }
     else if (msg.type === 'error') {
