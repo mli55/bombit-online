@@ -1,5 +1,6 @@
 # Flash Bomb It 1 timing audit
 
+后续原生单人高刷新率、碰弹、黄色投掷武器及双人复查见 [单人/双人完整规则对照](single-double-audit-2026-11-04.md)。
 2026-11-04 follow-up: [full settings audit](settings-audit-2026-11-04.md).
 That audit found rockets still used their own 500 ms timer. The subsequent
 [explosion regression fix](explosion-regressions.md) now routes rocket impact

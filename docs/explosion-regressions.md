@@ -1,5 +1,6 @@
 # Explosion and rocket regressions — 2026-11-04
 
+后续原生单人高刷新率、碰弹、黄色投掷武器及双人复查见 [单人/双人完整规则对照](single-double-audit-2026-11-04.md)。
 ## Repeated explosion updates
 
 The bundled Phaser `Group.update` traverses the live children array backwards.

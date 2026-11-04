@@ -1,0 +1,1604 @@
+{
+  "clock": {
+    "baseURL": "http://localhost:3000",
+    "results": [
+      {
+        "hz": 30,
+        "count": 1,
+        "fuse": {
+          "first": 1733.3291015625,
+          "last": 1733.3291015625,
+          "ended": 2033.328369140625,
+          "matchMS": 2033.3333333333364,
+          "wallMS": 2033.328369140625
+        },
+        "pause": {
+          "bomb": true,
+          "match": true,
+          "resumed": true
+        },
+        "lives": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "hz": 30,
+        "count": 10,
+        "fuse": {
+          "first": 1733.3291015625,
+          "last": 1733.3291015625,
+          "ended": 2033.328369140625,
+          "matchMS": 2033.3333333333364,
+          "wallMS": 2033.328369140625
+        },
+        "pause": {
+          "bomb": true,
+          "match": true,
+          "resumed": true
+        },
+        "lives": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "hz": 30,
+        "count": 100,
+        "fuse": {
+          "first": 1733.3291015625,
+          "last": 1733.3291015625,
+          "ended": 2033.328369140625,
+          "matchMS": 2033.3333333333364,
+          "wallMS": 2033.328369140625
+        },
+        "pause": {
+          "bomb": true,
+          "match": true,
+          "resumed": true
+        },
+        "lives": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "hz": 60,
+        "count": 1,
+        "fuse": {
+          "first": 1716.675048828125,
+          "last": 1716.675048828125,
+          "ended": 2033.34326171875,
+          "matchMS": 2033.3333333333364,
+          "wallMS": 2033.34326171875
+        },
+        "pause": {
+          "bomb": true,
+          "match": true,
+          "resumed": true
+        },
+        "lives": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "hz": 60,
+        "count": 10,
+        "fuse": {
+          "first": 1716.675048828125,
+          "last": 1716.675048828125,
+          "ended": 2033.34326171875,
+          "matchMS": 2033.3333333333364,
+          "wallMS": 2033.34326171875
+        },
+        "pause": {
+          "bomb": true,
+          "match": true,
+          "resumed": true
+        },
+        "lives": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "hz": 60,
+        "count": 100,
+        "fuse": {
+          "first": 1716.675048828125,
+          "last": 1716.675048828125,
+          "ended": 2033.34326171875,
+          "matchMS": 2033.3333333333364,
+          "wallMS": 2033.34326171875
+        },
+        "pause": {
+          "bomb": true,
+          "match": true,
+          "resumed": true
+        },
+        "lives": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "hz": 120,
+        "count": 1,
+        "fuse": {
+          "first": 1708.316650390625,
+          "last": 1708.316650390625,
+          "ended": 2024.980224609375,
+          "matchMS": 2033.3333333333364,
+          "wallMS": 2024.980224609375
+        },
+        "pause": {
+          "bomb": true,
+          "match": true,
+          "resumed": true
+        },
+        "lives": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "hz": 120,
+        "count": 10,
+        "fuse": {
+          "first": 1708.316650390625,
+          "last": 1708.316650390625,
+          "ended": 2024.980224609375,
+          "matchMS": 2033.3333333333364,
+          "wallMS": 2024.980224609375
+        },
+        "pause": {
+          "bomb": true,
+          "match": true,
+          "resumed": true
+        },
+        "lives": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "hz": 120,
+        "count": 100,
+        "fuse": {
+          "first": 1716.64990234375,
+          "last": 1716.64990234375,
+          "ended": 2033.3134765625,
+          "matchMS": 2033.3333333333364,
+          "wallMS": 2033.3134765625
+        },
+        "pause": {
+          "bomb": true,
+          "match": true,
+          "resumed": true
+        },
+        "lives": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "hz": 144,
+        "count": 1,
+        "fuse": {
+          "first": 1701.3623046875,
+          "last": 1701.3623046875,
+          "ended": 2020.8017578125,
+          "matchMS": 2033.3333333333364,
+          "wallMS": 2020.8017578125
+        },
+        "pause": {
+          "bomb": true,
+          "match": true,
+          "resumed": true
+        },
+        "lives": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "hz": 144,
+        "count": 10,
+        "fuse": {
+          "first": 1701.3623046875,
+          "last": 1701.3623046875,
+          "ended": 2020.8017578125,
+          "matchMS": 2033.3333333333364,
+          "wallMS": 2020.8017578125
+        },
+        "pause": {
+          "bomb": true,
+          "match": true,
+          "resumed": true
+        },
+        "lives": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "hz": 144,
+        "count": 100,
+        "fuse": {
+          "first": 1708.306640625,
+          "last": 1708.306640625,
+          "ended": 2020.8017578125,
+          "matchMS": 2033.3333333333364,
+          "wallMS": 2020.8017578125
+        },
+        "pause": {
+          "bomb": true,
+          "match": true,
+          "resumed": true
+        },
+        "lives": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "hz": 240,
+        "count": 1,
+        "fuse": {
+          "first": 1716.7001953125,
+          "last": 1716.7001953125,
+          "ended": 2033.373046875,
+          "matchMS": 2033.3333333333364,
+          "wallMS": 2033.373046875
+        },
+        "pause": {
+          "bomb": true,
+          "match": true,
+          "resumed": true
+        },
+        "lives": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "hz": 240,
+        "count": 10,
+        "fuse": {
+          "first": 1716.7001953125,
+          "last": 1716.7001953125,
+          "ended": 2033.373046875,
+          "matchMS": 2033.3333333333364,
+          "wallMS": 2033.373046875
+        },
+        "pause": {
+          "bomb": true,
+          "match": true,
+          "resumed": true
+        },
+        "lives": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "hz": 240,
+        "count": 100,
+        "fuse": {
+          "first": 1716.7001953125,
+          "last": 1716.7001953125,
+          "ended": 2033.373046875,
+          "matchMS": 2033.3333333333364,
+          "wallMS": 2033.373046875
+        },
+        "pause": {
+          "bomb": true,
+          "match": true,
+          "resumed": true
+        },
+        "lives": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "hz": "120-to-30",
+        "count": 1,
+        "fuse": {
+          "first": 1708.3232421875,
+          "last": 1708.3232421875,
+          "ended": 2041.65576171875,
+          "matchMS": 2050.000000000003,
+          "wallMS": 2041.65576171875
+        },
+        "pause": {
+          "bomb": true,
+          "match": true,
+          "resumed": true
+        },
+        "lives": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "hz": "120-to-30",
+        "count": 10,
+        "fuse": {
+          "first": 1741.656494140625,
+          "last": 1741.656494140625,
+          "ended": 2041.65576171875,
+          "matchMS": 2033.3333333333364,
+          "wallMS": 2041.65576171875
+        },
+        "pause": {
+          "bomb": true,
+          "match": true,
+          "resumed": true
+        },
+        "lives": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "hz": "120-to-30",
+        "count": 100,
+        "fuse": {
+          "first": 1708.3232421875,
+          "last": 1708.3232421875,
+          "ended": 2041.65576171875,
+          "matchMS": 2050.000000000003,
+          "wallMS": 2041.65576171875
+        },
+        "pause": {
+          "bomb": true,
+          "match": true,
+          "resumed": true
+        },
+        "lives": [
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    ]
+  },
+  "singleRules": {
+    "baseURL": "http://localhost:3000",
+    "result": {
+      "difficulty": [
+        {
+          "difficulty": 0,
+          "lives": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "shield": true,
+          "blockAndPickup": 105,
+          "hit": 1000,
+          "win": 1000,
+          "time": 1500
+        },
+        {
+          "difficulty": 1,
+          "lives": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "shield": false,
+          "blockAndPickup": 110,
+          "hit": 1000,
+          "win": 1000,
+          "time": 1500
+        },
+        {
+          "difficulty": 2,
+          "lives": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "shield": false,
+          "blockAndPickup": 115,
+          "hit": 1000,
+          "win": 1000,
+          "time": 1500
+        }
+      ],
+      "speeds": [
+        {
+          "shoes": 0,
+          "cells": 2.9166666666666647,
+          "wallMS": 500.00244140625
+        },
+        {
+          "shoes": 1,
+          "cells": 3.5000000000000013,
+          "wallMS": 500.00244140625
+        },
+        {
+          "shoes": 2,
+          "cells": 4.375000000000001,
+          "wallMS": 500.00244140625
+        },
+        {
+          "shoes": 3,
+          "cells": 5.8333333333333295,
+          "wallMS": 500.00244140625
+        },
+        {
+          "shoes": 4,
+          "cells": 5.8333333333333295,
+          "wallMS": 500.00244140625
+        }
+      ],
+      "status": [
+        {
+          "flag": "frozen",
+          "ms": 8583.375244140625
+        },
+        {
+          "flag": "slowed",
+          "ms": 17150.083740234375
+        }
+      ],
+      "weapons": [
+        {
+          "type": "BATTERY",
+          "charges": 2,
+          "launched": 1
+        },
+        {
+          "type": "FIRE",
+          "charges": 2,
+          "launched": 1
+        },
+        {
+          "type": "FREEZE",
+          "charges": 1,
+          "launched": 1
+        },
+        {
+          "type": "GRENADE",
+          "charges": 2,
+          "launched": 1
+        },
+        {
+          "type": "MINE",
+          "charges": 2,
+          "launched": 1
+        },
+        {
+          "type": "ROCKET",
+          "charges": 2,
+          "launched": 1
+        }
+      ],
+      "pairs": [
+        [
+          "grenade",
+          "mine"
+        ],
+        [
+          "freeze",
+          "fire"
+        ],
+        [
+          "rocket",
+          "battery"
+        ]
+      ],
+      "mineHideMS": 3516.683837890625,
+      "shieldMS": 2000.009765625,
+      "settings": {
+        "SCALE": 1,
+        "CURRENT_ORIENTATION": 0,
+        "CELL_WIDTH": 49,
+        "CELL_HEIGHT": 49,
+        "GRID_WIDTH": 15,
+        "GRID_HEIGHT": 13,
+        "INITIAL_BLINKING_TIME": 2000,
+        "INITIAL_SPEED": 0.28583333333333333,
+        "SPEED_INCREASE": 0,
+        "INITIAL_LIVES": 1,
+        "BOMB_TIMER": 1714.2857142857144,
+        "SLOW_TIME": 17142.857142857145,
+        "SLOW_SPEED": 0.08575,
+        "FROZEN_TIME": 8571.428571428572,
+        "ROCKET_SPEED": 0.5,
+        "BOMB_SPEED_KICKED": 0.5,
+        "MAX_BOMB_POWER": 10,
+        "MAX_SPEED": 0.5716666666666667,
+        "MAX_BOMBS": 9007199254740991,
+        "CHANCE_POWER_UP": 65,
+        "TIME_TO_HIDE_MINE": 3500,
+        "TIME_FIRE_ON": 1500,
+        "TIME_ICE_ON": 1500,
+        "CHANCE_POWER_UP_BEING_WEAPON": 20,
+        "POWER_UP_CHANCES": [
+          {
+            "name": "heart",
+            "chance": 1
+          },
+          {
+            "name": "push",
+            "chance": 14
+          },
+          {
+            "name": "bomb",
+            "chance": 25
+          },
+          {
+            "name": "shield",
+            "chance": 10
+          },
+          {
+            "name": "power",
+            "chance": 25
+          },
+          {
+            "name": "speed",
+            "chance": 25
+          }
+        ],
+        "WEAPON_CHANCES": [
+          {
+            "name": "grenade",
+            "chance": 50
+          },
+          {
+            "name": "mine",
+            "chance": 50
+          }
+        ],
+        "POINTS_BLOCK_DESTROY": [
+          5,
+          10,
+          15
+        ],
+        "POINTS_POWER_UP": [
+          100,
+          100,
+          100
+        ],
+        "POINTS_PLAYER_KILL": 1000,
+        "POINTS_PER_WIN": 1000,
+        "MATCH_TIME": 180000,
+        "TOTAL_ROUNDS": 5
+      },
+      "ai": [
+        {
+          "difficulty": 0,
+          "moved": 49,
+          "bombs": 35,
+          "gameMS": 20066.666666666697
+        },
+        {
+          "difficulty": 1,
+          "moved": 51,
+          "bombs": 29,
+          "gameMS": 20066.666666666697
+        },
+        {
+          "difficulty": 2,
+          "moved": 52,
+          "bombs": 26,
+          "gameMS": 20066.666666666697
+        }
+      ]
+    }
+  },
+  "collisions": {
+    "baseURL": "http://localhost:3000",
+    "results": [
+      {
+        "mode": "single",
+        "cases": [
+          {
+            "kind": "bomb-contact",
+            "direction": "LEFT",
+            "obstacle": "wall",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "LEFT",
+            "obstacle": "brick",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "LEFT",
+            "obstacle": "bomb",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "LEFT",
+            "obstacle": "edge",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "LEFT",
+            "obstacle": "no-kick",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "LEFT",
+            "obstacle": "open",
+            "alive": true,
+            "kicked": true
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "RIGHT",
+            "obstacle": "wall",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "RIGHT",
+            "obstacle": "brick",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "RIGHT",
+            "obstacle": "bomb",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "RIGHT",
+            "obstacle": "edge",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "RIGHT",
+            "obstacle": "no-kick",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "RIGHT",
+            "obstacle": "open",
+            "alive": true,
+            "kicked": true
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "UP",
+            "obstacle": "wall",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "UP",
+            "obstacle": "brick",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "UP",
+            "obstacle": "bomb",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "UP",
+            "obstacle": "edge",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "UP",
+            "obstacle": "no-kick",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "UP",
+            "obstacle": "open",
+            "alive": true,
+            "kicked": true
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "DOWN",
+            "obstacle": "wall",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "DOWN",
+            "obstacle": "brick",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "DOWN",
+            "obstacle": "bomb",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "DOWN",
+            "obstacle": "edge",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "DOWN",
+            "obstacle": "no-kick",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "DOWN",
+            "obstacle": "open",
+            "alive": true,
+            "kicked": true
+          },
+          {
+            "kind": "grenade",
+            "direction": "LEFT",
+            "steps": 30,
+            "target": [
+              4,
+              6
+            ],
+            "damage": [
+              [
+                3,
+                6
+              ],
+              [
+                4,
+                5
+              ],
+              [
+                4,
+                6
+              ],
+              [
+                4,
+                7
+              ],
+              [
+                5,
+                6
+              ]
+            ],
+            "paused": true
+          },
+          {
+            "kind": "grenade-edge",
+            "direction": "LEFT",
+            "rejected": true
+          },
+          {
+            "kind": "grenade",
+            "direction": "RIGHT",
+            "steps": 30,
+            "target": [
+              8,
+              6
+            ],
+            "damage": [
+              [
+                7,
+                6
+              ],
+              [
+                8,
+                5
+              ],
+              [
+                8,
+                6
+              ],
+              [
+                8,
+                7
+              ],
+              [
+                9,
+                6
+              ]
+            ],
+            "paused": true
+          },
+          {
+            "kind": "grenade-edge",
+            "direction": "RIGHT",
+            "rejected": true
+          },
+          {
+            "kind": "grenade",
+            "direction": "UP",
+            "steps": 30,
+            "target": [
+              7,
+              3
+            ],
+            "damage": [
+              [
+                6,
+                3
+              ],
+              [
+                7,
+                2
+              ],
+              [
+                7,
+                3
+              ],
+              [
+                7,
+                4
+              ],
+              [
+                8,
+                3
+              ]
+            ],
+            "paused": true
+          },
+          {
+            "kind": "grenade-edge",
+            "direction": "UP",
+            "rejected": true
+          },
+          {
+            "kind": "grenade",
+            "direction": "DOWN",
+            "steps": 30,
+            "target": [
+              7,
+              7
+            ],
+            "damage": [
+              [
+                6,
+                7
+              ],
+              [
+                7,
+                6
+              ],
+              [
+                7,
+                7
+              ],
+              [
+                7,
+                8
+              ],
+              [
+                8,
+                7
+              ]
+            ],
+            "paused": true
+          },
+          {
+            "kind": "grenade-edge",
+            "direction": "DOWN",
+            "rejected": true
+          }
+        ],
+        "replayFingerprint": null
+      },
+      {
+        "mode": "native-two",
+        "cases": [
+          {
+            "kind": "bomb-contact",
+            "direction": "LEFT",
+            "obstacle": "wall",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "LEFT",
+            "obstacle": "brick",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "LEFT",
+            "obstacle": "bomb",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "LEFT",
+            "obstacle": "edge",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "LEFT",
+            "obstacle": "no-kick",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "LEFT",
+            "obstacle": "open",
+            "alive": true,
+            "kicked": true
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "RIGHT",
+            "obstacle": "wall",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "RIGHT",
+            "obstacle": "brick",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "RIGHT",
+            "obstacle": "bomb",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "RIGHT",
+            "obstacle": "edge",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "RIGHT",
+            "obstacle": "no-kick",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "RIGHT",
+            "obstacle": "open",
+            "alive": true,
+            "kicked": true
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "UP",
+            "obstacle": "wall",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "UP",
+            "obstacle": "brick",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "UP",
+            "obstacle": "bomb",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "UP",
+            "obstacle": "edge",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "UP",
+            "obstacle": "no-kick",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "UP",
+            "obstacle": "open",
+            "alive": true,
+            "kicked": true
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "DOWN",
+            "obstacle": "wall",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "DOWN",
+            "obstacle": "brick",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "DOWN",
+            "obstacle": "bomb",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "DOWN",
+            "obstacle": "edge",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "DOWN",
+            "obstacle": "no-kick",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "DOWN",
+            "obstacle": "open",
+            "alive": true,
+            "kicked": true
+          },
+          {
+            "kind": "grenade",
+            "direction": "LEFT",
+            "steps": 30,
+            "target": [
+              4,
+              6
+            ],
+            "damage": [
+              [
+                3,
+                6
+              ],
+              [
+                4,
+                5
+              ],
+              [
+                4,
+                6
+              ],
+              [
+                4,
+                7
+              ],
+              [
+                5,
+                6
+              ]
+            ],
+            "paused": true
+          },
+          {
+            "kind": "grenade-edge",
+            "direction": "LEFT",
+            "rejected": true
+          },
+          {
+            "kind": "grenade",
+            "direction": "RIGHT",
+            "steps": 30,
+            "target": [
+              8,
+              6
+            ],
+            "damage": [
+              [
+                7,
+                6
+              ],
+              [
+                8,
+                5
+              ],
+              [
+                8,
+                6
+              ],
+              [
+                8,
+                7
+              ],
+              [
+                9,
+                6
+              ]
+            ],
+            "paused": true
+          },
+          {
+            "kind": "grenade-edge",
+            "direction": "RIGHT",
+            "rejected": true
+          },
+          {
+            "kind": "grenade",
+            "direction": "UP",
+            "steps": 30,
+            "target": [
+              7,
+              3
+            ],
+            "damage": [
+              [
+                6,
+                3
+              ],
+              [
+                7,
+                2
+              ],
+              [
+                7,
+                3
+              ],
+              [
+                7,
+                4
+              ],
+              [
+                8,
+                3
+              ]
+            ],
+            "paused": true
+          },
+          {
+            "kind": "grenade-edge",
+            "direction": "UP",
+            "rejected": true
+          },
+          {
+            "kind": "grenade",
+            "direction": "DOWN",
+            "steps": 30,
+            "target": [
+              7,
+              7
+            ],
+            "damage": [
+              [
+                6,
+                7
+              ],
+              [
+                7,
+                6
+              ],
+              [
+                7,
+                7
+              ],
+              [
+                7,
+                8
+              ],
+              [
+                8,
+                7
+              ]
+            ],
+            "paused": true
+          },
+          {
+            "kind": "grenade-edge",
+            "direction": "DOWN",
+            "rejected": true
+          }
+        ],
+        "replayFingerprint": null
+      },
+      {
+        "mode": "online-two",
+        "cases": [
+          {
+            "kind": "bomb-contact",
+            "direction": "LEFT",
+            "obstacle": "wall",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "LEFT",
+            "obstacle": "brick",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "LEFT",
+            "obstacle": "bomb",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "LEFT",
+            "obstacle": "edge",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "LEFT",
+            "obstacle": "no-kick",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "LEFT",
+            "obstacle": "open",
+            "alive": true,
+            "kicked": true
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "RIGHT",
+            "obstacle": "wall",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "RIGHT",
+            "obstacle": "brick",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "RIGHT",
+            "obstacle": "bomb",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "RIGHT",
+            "obstacle": "edge",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "RIGHT",
+            "obstacle": "no-kick",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "RIGHT",
+            "obstacle": "open",
+            "alive": true,
+            "kicked": true
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "UP",
+            "obstacle": "wall",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "UP",
+            "obstacle": "brick",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "UP",
+            "obstacle": "bomb",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "UP",
+            "obstacle": "edge",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "UP",
+            "obstacle": "no-kick",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "UP",
+            "obstacle": "open",
+            "alive": true,
+            "kicked": true
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "DOWN",
+            "obstacle": "wall",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "DOWN",
+            "obstacle": "brick",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "DOWN",
+            "obstacle": "bomb",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "DOWN",
+            "obstacle": "edge",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "DOWN",
+            "obstacle": "no-kick",
+            "alive": true,
+            "kicked": false
+          },
+          {
+            "kind": "bomb-contact",
+            "direction": "DOWN",
+            "obstacle": "open",
+            "alive": true,
+            "kicked": true
+          },
+          {
+            "kind": "grenade",
+            "direction": "LEFT",
+            "steps": 30,
+            "target": [
+              4,
+              6
+            ],
+            "damage": [
+              [
+                3,
+                6
+              ],
+              [
+                4,
+                5
+              ],
+              [
+                4,
+                6
+              ],
+              [
+                4,
+                7
+              ],
+              [
+                5,
+                6
+              ]
+            ],
+            "paused": true
+          },
+          {
+            "kind": "grenade-edge",
+            "direction": "LEFT",
+            "rejected": true
+          },
+          {
+            "kind": "grenade",
+            "direction": "RIGHT",
+            "steps": 30,
+            "target": [
+              8,
+              6
+            ],
+            "damage": [
+              [
+                7,
+                6
+              ],
+              [
+                8,
+                5
+              ],
+              [
+                8,
+                6
+              ],
+              [
+                8,
+                7
+              ],
+              [
+                9,
+                6
+              ]
+            ],
+            "paused": true
+          },
+          {
+            "kind": "grenade-edge",
+            "direction": "RIGHT",
+            "rejected": true
+          },
+          {
+            "kind": "grenade",
+            "direction": "UP",
+            "steps": 30,
+            "target": [
+              7,
+              3
+            ],
+            "damage": [
+              [
+                6,
+                3
+              ],
+              [
+                7,
+                2
+              ],
+              [
+                7,
+                3
+              ],
+              [
+                7,
+                4
+              ],
+              [
+                8,
+                3
+              ]
+            ],
+            "paused": true
+          },
+          {
+            "kind": "grenade-edge",
+            "direction": "UP",
+            "rejected": true
+          },
+          {
+            "kind": "grenade",
+            "direction": "DOWN",
+            "steps": 30,
+            "target": [
+              7,
+              7
+            ],
+            "damage": [
+              [
+                6,
+                7
+              ],
+              [
+                7,
+                6
+              ],
+              [
+                7,
+                7
+              ],
+              [
+                7,
+                8
+              ],
+              [
+                8,
+                7
+              ]
+            ],
+            "paused": true
+          },
+          {
+            "kind": "grenade-edge",
+            "direction": "DOWN",
+            "rejected": true
+          }
+        ],
+        "replayFingerprint": "3970861084"
+      }
+    ]
+  }
+}

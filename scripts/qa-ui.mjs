@@ -1,6 +1,6 @@
 /* Real-browser UI/network smoke test. Run after npm run build and npm start.
    BASE_URL=http://localhost:3000 node scripts/qa-ui.mjs
-   Optional: PLAYWRIGHT_MODULE, CHROME_BIN, QA_OUTPUT_DIR, QA_RESULT_UI=0.
+   Optional: PLAYWRIGHT_MODULE, CHROME_BIN, QA_OUTPUT_DIR, QA_RESULT_UI=0, QA_PLAYERS=2.
    The live room is driven only by clicks and keys. A separate, clearly isolated
    engine fixture fast-forwards its public replay API to check the result button. */
 import assert from 'node:assert/strict';
@@ -11,9 +11,11 @@ import { fileURLToPath } from 'node:url';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const baseURL = (process.env.BASE_URL || 'http://localhost:3000').replace(/\/$/, '');
 const output = resolve(process.env.QA_OUTPUT_DIR || resolve(root, 'docs'));
+const playerCount = Number(process.env.QA_PLAYERS || 4);
+assert.ok([2, 4].includes(playerCount), 'QA_PLAYERS must be 2 or 4');
 const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const chrome = process.env.CHROME_BIN || undefined;
-const started = Date.now(), evidence = { baseURL, startedAt: new Date().toISOString(), checks: [] }, errors = [];
+const started = Date.now(), evidence = { baseURL, startedAt: new Date().toISOString(), players: playerCount, checks: [] }, errors = [];
 const contexts = [], pages = [], observations = new Map();
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 const record = (name, detail = {}) => { evidence.checks.push({ name, ...detail }); console.log('PASS ' + name + (Object.keys(detail).length ? ' ' + JSON.stringify(detail) : '')); };
@@ -126,14 +128,14 @@ async function commonHash(afterTick = 0) {
     for (const [key, hash] of [...host.checks].reverse()) {
       const tick = Number(key.split(':').at(-1));
       if (tick <= afterTick || !key.startsWith(host.generation + ':')) continue;
-      const hashes = pages.slice(0, 4).map(page => observations.get(page).checks.get(key));
+      const hashes = pages.slice(0, playerCount).map(page => observations.get(page).checks.get(key));
       if (hashes.every(Boolean)) {
-        assert(hashes.every(value => value === hash), `Four peers diverged at exact tick ${tick}: ${hashes.join(', ')}`);
-        if (pages.slice(0, 4).every(page => observations.get(page).verified >= tick)) return { tick, hash };
+        assert(hashes.every(value => value === hash), `Peers diverged at exact tick ${tick}: ${hashes.join(', ')}`);
+        if (pages.slice(0, playerCount).every(page => observations.get(page).verified >= tick)) return { tick, hash };
       }
     }
     return false;
-  }, 'Four clients did not verify the same post-reconnection frame/hash', 45000);
+  }, 'Clients did not verify the same post-reconnection frame/hash', 45000);
 }
 
 await mkdir(output, { recursive: true });
@@ -166,8 +168,8 @@ try {
   await nativeClick(host, 'hero3');
   await waitRoom(host, room => room.players[0]?.character === 2, 'Clicking the original blue robot did not select blue');
   record('Native Multiplayer and difficulty create a room; native robot selects blue', { room: code });
-  const guests = [], names = ['P1', 'P2', 'P3', 'P4'];
-  for (let seat = 1; seat < 4; seat++) {
+  const guests = [], names = ['P1', 'P2', 'P3', 'P4'].slice(0, playerCount);
+  for (let seat = 1; seat < playerCount; seat++) {
     const guest = await newPlayer(browser, `guest-${seat}`, `${baseURL}/?room=${code}`); guests.push(guest);
     assert.equal(await guest.page.locator('#name, input[name="name"]').count(), 0, 'Joining must not require a name');
     await stateIs(guest.page, 'characterSelectState');
@@ -175,20 +177,20 @@ try {
     assert.equal(new URL(guest.page.url()).searchParams.has('room'), false, 'An invitation must be consumed after opening it');
     assert.equal(await guest.page.evaluate(() => sessionStorage.getItem('bomb-it-room')), null, 'Joining must not persist a room identity');
   }
-  await waitRoom(host, room => room.players.filter(Boolean).length === 4, 'All four original selectors must share one room');
-  const characters = observations.get(host).room.players.map(player => player.character);
-  assert.equal(new Set(characters).size, 4);
-  assert.deepEqual(observations.get(host).room.players.map(player => player.name), names, 'Players must be automatically named P1–P4 by seat');
+  await waitRoom(host, room => room.players.filter(Boolean).length === playerCount, 'All joined original selectors must share one room');
+  const characters = observations.get(host).room.players.filter(Boolean).map(player => player.character);
+  assert.equal(new Set(characters).size, playerCount);
+  assert.deepEqual(observations.get(host).room.players.filter(Boolean).map(player => player.name), names, 'Players must be automatically named P1–P4 by seat');
   for (let i = 0; i < guests.length; i++) await readyByKeyboard(guests[i].page, i + 1);
   await nativeClick(host, 'buttonMobile');
-  await waitRoom(host, room => room.players.every(player => player?.ready), 'Host native confirmation did not ready every player');
+  await waitRoom(host, room => room.players.filter(Boolean).every(player => player?.ready), 'Host native confirmation did not ready every player');
   await until(async () => (await (await gameFrame(host)).evaluate(() => Game.App.getInstance().state.getCurrentState().onlineConfirmText.text)) === 'START', 'Native confirm button did not switch to START');
   await host.locator('#notice').waitFor({ state: 'hidden' });
   await screenshotGame(host, 'online-lobby.png');
-  record('Four original character selectors, Space readiness, and native START', { characters });
+  record('Original character selectors, Space readiness, and native START', { characters });
   await nativeClick(host, 'buttonMobile');
-  await Promise.all(pages.slice(0, 4).map(page => stateIs(page, 'gameplayState')));
-  await waitRoom(host, room => room.phase === 'playing', 'Four players did not start together');
+  await Promise.all(pages.slice(0, playerCount).map(page => stateIs(page, 'gameplayState')));
+  await waitRoom(host, room => room.phase === 'playing', 'Players did not start together');
   const initialSync = await commonHash();
   assert.deepEqual(await (await gameFrame(host)).evaluate(() => Game.App.getInstance().state.getCurrentState().grid.players.map(p => p.lives)), [1,1,1,1]);
   assert.match(await host.locator('#sync').textContent(), /In sync/);
@@ -198,7 +200,7 @@ try {
   const fps = (afterFrame - beforeFrame) * 1000 / elapsed;
   assert(fps >= 48 && fps <= 70, `Expected about 60 ordered frames/sec; observed ${fps.toFixed(2)}`);
   await screenshotGame(host, 'online-battle.png');
-  record('Real-time 60 Hz room and matching four-client hashes', { frames: afterFrame - beforeFrame, elapsedMs: Math.round(elapsed), fps: Number(fps.toFixed(2)), ...initialSync });
+  record('Real-time 60 Hz room and matching client hashes', { frames: afterFrame - beforeFrame, elapsedMs: Math.round(elapsed), fps: Number(fps.toFixed(2)), ...initialSync });
 
   await host.keyboard.down('ArrowUp');
   await until(() => observations.get(host).masks?.[0] === 1, 'Up input was not delivered');
@@ -236,45 +238,45 @@ try {
 
   await setPanel(host, false);
   await nativeClick(host, 'buttonPause');
-  await Promise.all(pages.slice(0, 4).map(page => waitRoom(page, room => room.phase === 'paused', 'Native pause did not pause every player')));
+  await Promise.all(pages.slice(0, playerCount).map(page => waitRoom(page, room => room.phase === 'paused', 'Native pause did not pause every player')));
   // The server stops at a known ordered frame. WAN clients can still have
   // pre-pause frames in their playback buffers when the room message arrives.
   const pausedTick = observations.get(host).room.tick;
-  await until(async () => (await Promise.all(pages.slice(0, 4).map(frameNumber))).every(frame => frame === pausedTick),
+  await until(async () => (await Promise.all(pages.slice(0, playerCount).map(frameNumber))).every(frame => frame === pausedTick),
     'Replicas did not drain to the server pause frame', 10000);
-  const pausedFrames = await Promise.all(pages.slice(0, 4).map(frameNumber));
+  const pausedFrames = await Promise.all(pages.slice(0, playerCount).map(frameNumber));
   await delay(600);
-  assert.deepEqual(await Promise.all(pages.slice(0, 4).map(frameNumber)), pausedFrames, 'Some replica advanced while the room was paused');
+  assert.deepEqual(await Promise.all(pages.slice(0, playerCount).map(frameNumber)), pausedFrames, 'Some replica advanced while the room was paused');
   assert.equal(new Set(pausedFrames).size, 1, 'Peers paused at different ordered frames');
   // Close the small network panel so it cannot cover the native canvas button.
   await setPanel(host, false); await nativeClick(host, 'buttonPause');
   await waitRoom(host, room => room.phase === 'playing', 'Native pause button did not resume the room');
   await until(async () => await frameNumber(host) > pausedFrames[0] + 30, 'The resumed room did not advance');
-  record('Original pause button pauses and resumes all four replicas', { pausedAt: pausedFrames[0] });
+  record('Original pause button pauses and resumes all replicas', { pausedAt: pausedFrames[0] });
 
   // Change only difficulty through the original menu, preserving the room and
-  // its four automatic player identities through the Multiplayer branch.
+  // its automatic player identities through the Multiplayer branch.
   await setPanel(host, true); await host.locator('#back').click();
-  await Promise.all(pages.slice(0, 4).map(page => stateIs(page, 'characterSelectState')));
+  await Promise.all(pages.slice(0, playerCount).map(page => stateIs(page, 'characterSelectState')));
   await setPanel(host, true); await host.locator('#difficulty-settings').click();
   await stateIs(host, 'mainMenuState');
   await nativeClick(host, 'buttonStartGame');
   await nativeClick(host, 'button2Player');
   await nativeClick(host, 'buttonHard');
   await stateIs(host, 'characterSelectState');
-  await waitRoom(host, room => room.settings.difficulty === 2 && room.players.filter(Boolean).length === 4,
-    'The original difficulty selector must preserve all four joined players');
+  await waitRoom(host, room => room.settings.difficulty === 2 && room.players.filter(Boolean).length === playerCount,
+    'The original difficulty selector must preserve all joined players');
   assert.equal(new URL(await host.locator('#invite').inputValue()).searchParams.get('room'), code, 'Changing difficulty must preserve the room invitation');
-  assert.deepEqual(observations.get(host).room.players.map(player => player.name), names);
+  assert.deepEqual(observations.get(host).room.players.filter(Boolean).map(player => player.name), names);
   for (let i = 0; i < guests.length; i++) await readyByKeyboard(guests[i].page, i + 1);
   await nativeClick(host, 'buttonMobile');
-  await waitRoom(host, room => room.players.every(player => player?.ready), 'All four players must be ready after changing difficulty');
+  await waitRoom(host, room => room.players.filter(Boolean).every(player => player?.ready), 'All players must be ready after changing difficulty');
   await until(async () => (await (await gameFrame(host)).evaluate(() => Game.App.getInstance().state.getCurrentState().onlineConfirmText.text)) === 'START', 'The updated room did not expose native START');
   await nativeClick(host, 'buttonMobile');
-  await Promise.all(pages.slice(0, 4).map(page => stateIs(page, 'gameplayState')));
-  await waitRoom(host, room => room.phase === 'playing' && room.settings.difficulty === 2, 'Four players failed to start at the new difficulty');
+  await Promise.all(pages.slice(0, playerCount).map(page => stateIs(page, 'gameplayState')));
+  await waitRoom(host, room => room.phase === 'playing' && room.settings.difficulty === 2, 'Players failed to start at the new difficulty');
   const difficultySync = await commonHash();
-  record('Native difficulty changes preserve P1–P4 and synchronized play', difficultySync);
+  record('Native difficulty changes preserve player identities and synchronized play', difficultySync);
 
   // A separate browser follows the untouched original single-player path. It
   // must neither open a WebSocket nor display the multiplayer room controls.
