@@ -59,7 +59,7 @@
     }
   };
   // Keep per-browser saved lives/tutorial preferences out of the shared simulation.
-  const onlineInitialLives = 1;
+  const onlineInitialLives = Game.SETTINGS.INITIAL_LIVES;
   const memory = { lives1: onlineInitialLives, lives2: onlineInitialLives };
   const onlineData = {
     getLivesPlayer1: () => memory.lives1,

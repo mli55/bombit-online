@@ -1,5 +1,8 @@
 /* Gameplay timing and player lifecycle adjustments around the original engine. */
 (() => {
+  // New games and newly created players start with one life in every mode.
+  Game.SETTINGS.INITIAL_LIVES = 1;
+
   const activateMine = Game.Player.prototype.activateMine;
   Game.Player.prototype.activateMine = function (cell) {
     // Upstream kills on a stepped-on mine without checking the shield. Spend it
