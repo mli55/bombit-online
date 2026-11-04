@@ -2,6 +2,13 @@
 (() => {
   // New games and newly created players start with one life in every mode.
   Game.SETTINGS.INITIAL_LIVES = 1;
+  const checkBalanceData = Game.PreloaderState.prototype.checkBalanceData;
+  Game.PreloaderState.prototype.checkBalanceData = function (...args) {
+    const result = checkBalanceData.apply(this, args);
+    // The upstream balance file loads later and otherwise restores three lives.
+    Game.SETTINGS.INITIAL_LIVES = 1;
+    return result;
+  };
 
   const activateMine = Game.Player.prototype.activateMine;
   Game.Player.prototype.activateMine = function (cell) {

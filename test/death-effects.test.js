@@ -21,11 +21,17 @@ const fixes = readFileSync(new URL('../public/gameplay-fixes.js', import.meta.ur
 
 function fixture({ patched = true, weapon = 'grenade' } = {}) {
   const Game = {
+    PreloaderState: function PreloaderState() {},
     GAME_STATUS: { PLAYING: 0, GAME_OVER: 1, PAUSED: 2 },
     DIRECTION: { UP: 0, DOWN: 1, LEFT: 2, RIGHT: 3 },
     ITEM_TYPE: { GRENADE: 'grenade' },
     MAP: { FREE: 0, MINE: 1, WALL: 2 },
     SETTINGS: { CELL_WIDTH: 50, CELL_HEIGHT: 50, GRID_WIDTH: 6, GRID_HEIGHT: 6 },
+  };
+  Game.PreloaderState.prototype.checkBalanceData = function () {
+    Game.SETTINGS.INITIAL_LIVES = 3;
+    Game.SETTINGS.BOMB_TIMER = 2500;
+    return 'balance loaded';
   };
   const context = vm.createContext({
     Game, Phaser: { Group: function Group() {}, Sprite: function Sprite() {} },
@@ -67,6 +73,15 @@ function fixture({ patched = true, weapon = 'grenade' } = {}) {
   });
   return { player, Game, firedWeapon };
 }
+
+test('one initial life survives the later upstream balance load', () => {
+  const { Game } = fixture();
+  const preloader = new Game.PreloaderState();
+  assert.equal(Game.SETTINGS.INITIAL_LIVES, 1);
+  assert.equal(preloader.checkBalanceData(), 'balance loaded');
+  assert.equal(Game.SETTINGS.INITIAL_LIVES, 1);
+  assert.equal(Game.SETTINGS.BOMB_TIMER, 2500, 'Other balance settings still load');
+});
 
 test('upstream death leaves a held weapon icon and grenade target visible', () => {
   const { player } = fixture({ patched: false });
