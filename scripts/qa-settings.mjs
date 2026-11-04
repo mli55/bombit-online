@@ -37,9 +37,9 @@ try {
   flames.push({power,frames,ms:frames*1000/60});
  }
  let {grid,p}=start();p.direction=Game.DIRECTION.RIGHT;p.createWeapon(Game.ITEM_TYPE.ROCKET);p.useWeapon();
- const rocket=grid.weapons[0];rocket.gridCell.isDangerCell=true;rocket.gridCell.dangerOwner=p;rocket.createExplosion();
- let rocketFrames=0;while(rocket.exists&&rocketFrames<100){advance(1);rocketFrames++;}
- const rocketImpact={frames:rocketFrames,ms:rocketFrames*1000/60,cleared:!rocket.gridCell.isDangerCell};
+ const rocket=grid.weapons[0];rocket.createExplosion();const impact=rocket.impactExplosion;
+ let rocketFrames=0;while(impact.exists&&rocketFrames<100){advance(1);rocketFrames++;}
+ const rocketImpact={frames:rocketFrames,ms:rocketFrames*1000/60,cleared:!impact.gridCell.isDangerCell};
  ({grid,p}=start());p.createWeapon(Game.ITEM_TYPE.MINE);p.useWeapon();const mine=grid.mines[0];
  let hideFrames=0;while(mine.visible&&hideFrames<300){advance(1);hideFrames++;}
  const mineHide={frames:hideFrames,ms:hideFrames*1000/60};

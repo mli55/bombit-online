@@ -2,6 +2,32 @@
    Source and limits: docs/classic-timing.md. Never use wall-clock timers here. */
 (() => {
   const frameMS = 1000 / 35;
+
+  // Phaser's reverse live-array walk revisits the current child if a chain
+  // explosion removes an earlier bomb. Snapshot each gameplay row, and share
+  // one visited set across rows so moving/reparented players also tick once.
+  const createTileGroups = Game.Grid.prototype.createTileGroups;
+  Game.Grid.prototype.createTileGroups = function (...args) {
+    const result = createTileGroups.apply(this, args);
+    const grid = this;
+    for (const row of this.rowsGroup) row.update = function () {
+      const children = this.children.slice();
+      for (let i = children.length - 1; i >= 0; i--) {
+        const child = children[i];
+        if (child.parent !== this || grid.classicUpdatedChildren?.has(child)) continue;
+        grid.classicUpdatedChildren?.add(child);
+        child.update();
+      }
+    };
+    return result;
+  };
+  const updateGrid = Game.Grid.prototype.update;
+  Game.Grid.prototype.update = function (...args) {
+    this.classicUpdatedChildren = new WeakSet();
+    try { return updateGrid.apply(this, args); }
+    finally { this.classicUpdatedChildren = null; }
+  };
+
   const init = Game.GameplayState.prototype.init;
   Game.GameplayState.prototype.init = function (...args) {
     Object.assign(Game.SETTINGS, {
