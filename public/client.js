@@ -37,7 +37,7 @@ function loadGame() {
   const id = ++loadId;
   iframe?.contentWindow?.bombItAudio?.dispose();
   bridge = null; liveFrames = []; playing = false; iframe?.remove();
-  iframe = document.createElement('iframe'); iframe.title = 'Bomb It 1'; iframe.allow = 'autoplay; fullscreen'; iframe.src = '/game/?v=9';
+  iframe = document.createElement('iframe'); iframe.title = 'Bomb It 1'; iframe.allow = 'autoplay; fullscreen'; iframe.src = '/game/?v=10';
   $('game-mount').replaceChildren(iframe); $('loading').textContent = 'Loading Bomb It 1…'; $('loading').hidden = false;
   loadPromise = new Promise((resolve, reject) => {
     const timeout = setTimeout(() => { if (id === loadId) reject(new Error('Loading timed out. Please refresh the page.')); }, 45000);
@@ -81,7 +81,7 @@ async function prepare(msg) {
   const id = ++prepareId; generation = msg.generation; packetQueue = []; liveFrames = []; playing = false; preparing = true; release();
   try {
     const game = await loadGame(); if (id !== prepareId) return;
-    game.start(msg.config, identity.seat);
+    game.start({ ...msg.config, campaignSeed: identity.code }, identity.seat);
     for (let i = 0; i < msg.history.length; i++) {
       game.advance(msg.history[i], true);
       if (i % 240 === 0) { $('loading').hidden = false; $('loading').textContent = `Restoring game ${Math.round(i / Math.max(1, msg.history.length) * 100)}%`; await new Promise(r => setTimeout(r, 0)); if (id !== prepareId) return; }

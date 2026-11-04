@@ -224,6 +224,7 @@
       for (const root of [gsRoot, gsFrames]) root._time = root._totalTime = root._startTime = 0;
       TweenLite.ticker.time = TweenLite.ticker.frame = 0;
       game.rnd.sow([config.seed]);
+      Game.ClassicRules.configureRound(game, config.weaponOrder, config.round || 1, config.campaignSeed);
       memory.lives1 = memory.lives2 = onlineInitialLives;
       game.time.removeAll(); game.tweens.removeAll();
       game.time.time = game.time.now = game.time.prevTime = now;

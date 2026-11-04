@@ -1,0 +1,134 @@
+[
+  {
+    "check": "actual movement, delayed chain, weapon cycle, time bonus and shield score",
+    "speeds": [
+      {
+        "shoes": 0,
+        "cellsInHalfSecond": 2.9166666666666647,
+        "framesPerCell": 6
+      },
+      {
+        "shoes": 1,
+        "cellsInHalfSecond": 3.5000000000000013,
+        "framesPerCell": 5
+      },
+      {
+        "shoes": 2,
+        "cellsInHalfSecond": 4.375000000000001,
+        "framesPerCell": 4
+      },
+      {
+        "shoes": 3,
+        "cellsInHalfSecond": 5.8333333333333295,
+        "framesPerCell": 3
+      },
+      {
+        "shoes": 4,
+        "cellsInHalfSecond": 5.8333333333333295,
+        "framesPerCell": 3
+      }
+    ],
+    "pairs": [
+      [
+        "battery",
+        "fire"
+      ],
+      [
+        "freeze",
+        "grenade"
+      ],
+      [
+        "mine",
+        "rocket"
+      ]
+    ],
+    "timeBonus": 1500
+  },
+  {
+    "check": "20-second actual AI run and fresh replica replay",
+    "difficulty": 0,
+    "hashes": [
+      "9a6fd034",
+      "7e7f834f",
+      "d2d3c126",
+      "8bb359fd",
+      "5706ff33",
+      "9e2c5764",
+      "a07dd8c7",
+      "3fcd838b",
+      "12caed31",
+      "7dbd33a1",
+      "7407ab78",
+      "ee8a7bf5",
+      "be113241",
+      "76205718",
+      "b595d3af",
+      "56311e9a",
+      "9c8d74f8",
+      "36467a8c",
+      "d054eaad",
+      "5d9a4d7c"
+    ],
+    "moves": 51,
+    "bombs": 25,
+    "result": null
+  },
+  {
+    "check": "20-second actual AI run and fresh replica replay",
+    "difficulty": 1,
+    "hashes": [
+      "6937ab7d",
+      "9aee7cff",
+      "233e1e69",
+      "050698a6",
+      "2315dad9",
+      "803ebf44",
+      "f5ee6b32",
+      "b26515e7",
+      "ad3ceec8",
+      "b6229205",
+      "9759b31a",
+      "ebf04549",
+      "6cb424f7",
+      "10e878ac",
+      "b17ecac7",
+      "aae610e8",
+      "e58f99d4",
+      "64905ee7",
+      "ae03504f",
+      "df928626"
+    ],
+    "moves": 50,
+    "bombs": 25,
+    "result": null
+  },
+  {
+    "check": "20-second actual AI run and fresh replica replay",
+    "difficulty": 2,
+    "hashes": [
+      "dde8adc2",
+      "be77631f",
+      "d5a2f0ca",
+      "7dc01841",
+      "cf880de2",
+      "20ee3e7d",
+      "390a02a7",
+      "08834715",
+      "beb4b229",
+      "5f9b8283",
+      "987fd65d",
+      "e7956805",
+      "d8e64041",
+      "1300a783",
+      "ef9bf194",
+      "553ba6aa",
+      "e46ba71e",
+      "18c55202",
+      "1e0e4075",
+      "ea10a7cb"
+    ],
+    "moves": 51,
+    "bombs": 26,
+    "result": null
+  }
+]

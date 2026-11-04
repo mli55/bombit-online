@@ -34,7 +34,7 @@ function fixture({ patched = true, power = 1 } = {}) {
   const Game = {
     GAME_STATUS: { PLAYING: 0, PAUSED: 1, GAME_OVER: 2 },
     DIRECTION: { ALL: 0, UP: 1, DOWN: 2, LEFT: 3, RIGHT: 4 },
-    MAP: { FREE: 0, ITEM: 1, BOMB: 2, MINE: 3, BLOCK: 4 },
+    MAP: { FREE: 0, ITEM: 1, BOMB: 2, MINE: 3, BLOCK: 4, WALL: 5 },
     SETTINGS: { SCALE: 1, GRID_WIDTH: 13, GRID_HEIGHT: 13 },
     Player: function Player() {},
     GameplayState: function () {}, WeaponExplosion: function () {},
@@ -55,6 +55,7 @@ function fixture({ patched = true, power = 1 } = {}) {
   let elapsed = 0;
   const pending = [];
   const game = {
+    ph2NotificationManager: { postNotification() {} },
     time: { elapsedMS: frameMs, events: {
       add(delay, callback, owner) { pending.push({ due: elapsed + delay, callback, owner }); },
     } },
@@ -65,6 +66,7 @@ function fixture({ patched = true, power = 1 } = {}) {
   })));
   const grid = {
     cells,
+    bombs: [],
     bombExplosions: [],
     astarGrid: { grid: cells.map(column => column.map(() => ({ weight: 1 }))) },
     rowsGroup: cells.map(() => ({
@@ -134,14 +136,12 @@ test('flames and dangerous cells finish together after the Flash 11-frame lifeti
   assertFinished(f);
 });
 
-test('maximum-power rays finish propagating before cleanup and never reappear', () => {
+test('five-cell rays finish propagating before cleanup and never reappear', () => {
   const f = fixture({ power: 5 });
   f.explosion.makeExplosion();
-  assert.equal(f.pending.length, 20, 'Each ray cell uses the original 35 Hz per-cell delay');
   f.advance(1);
   assert.equal(f.visibleFlames().length, 1, 'Only the center appears before the first delayed segment');
   f.advance(8);
-  assert.equal(f.pending.length, 0, 'All maximum-power segments have appeared by 150 ms');
   assert.equal(f.visibleFlames().length, 21);
   assert.equal(f.dangerousCells().length, 21);
   f.advance(17);
@@ -183,5 +183,68 @@ test('a round ending does not freeze its final explosion', () => {
   f.advance(3);
   f.explosion.gameStatus = f.Game.GAME_STATUS.GAME_OVER;
   f.advance(16);
+  assertFinished(f);
+});
+
+test('a chain bomb is triggered when the wave reaches its cell, even if placed after ignition', () => {
+  const f = fixture({ power: 5 });
+  let hit = false;
+  f.grid.explodeBomb = cell => { hit = true; cell.cellContains = f.Game.MAP.FREE; };
+  f.explosion.makeExplosion();
+  const target = f.grid.cells[9][6];
+  target.cellContains = f.Game.MAP.BOMB; target.isEmpty = false;
+  f.advance(5); // 83.3 ms, before the third Flash frame.
+  assert.equal(hit, false);
+  f.advance(1);
+  assert.equal(hit, true);
+  f.advance(3);
+  assert.equal(f.grid.cells[10][6].isDangerCell, true, 'The ray continues through a chained bomb');
+});
+
+test('a box blocks the ray and is destroyed only on arrival; hard walls block without damage', () => {
+  const f = fixture({ power: 5 });
+  const box = f.grid.cells[9][6], wall = f.grid.cells[3][6];
+  box.cellContains = f.Game.MAP.BLOCK; box.isEmpty = false;
+  wall.cellContains = f.Game.MAP.WALL; wall.isEmpty = false;
+  let destroyed = 0;
+  f.grid.destroyBox = cell => { destroyed++; cell.cellContains = f.Game.MAP.FREE; cell.isEmpty = true; };
+  f.explosion.makeExplosion();
+  f.advance(5); assert.equal(destroyed, 0);
+  f.advance(1); assert.equal(destroyed, 1); assert.equal(box.isDangerCell, true);
+  f.advance(3);
+  assert.equal(f.grid.cells[10][6].isDangerCell, false);
+  assert.equal(wall.isDangerCell, false);
+  f.advance(20);
+  assert.equal(box.cellContains, f.Game.MAP.FREE, 'Cleanup does not restore a destroyed box');
+});
+
+test('pausing before the first wave stops both propagation and damage lifetime', () => {
+  const f = fixture({ power: 5 });
+  f.explosion.makeExplosion(); f.advance(1);
+  f.explosion.gameStatus = f.Game.GAME_STATUS.PAUSED;
+  f.advance(60);
+  assert.equal(f.dangerousCells().length, 1);
+  f.explosion.gameStatus = f.Game.GAME_STATUS.PLAYING;
+  f.advance(1);
+  assert.equal(f.dangerousCells().length, 5);
+});
+
+test('one blast ending cannot clear a later overlapping blast', () => {
+  const f = fixture();
+  f.explosion.makeExplosion(); f.advance(2);
+  const overlap = f.grid.cells[7][6];
+  const later = { exists: true, hasExploded: true, gridCell: overlap, cellsUsed: [], player: { playerID: 1 } };
+  f.grid.bombExplosions.push(later);
+  f.advance(17);
+  assert.equal(overlap.isDangerCell, true);
+  assert.equal(overlap.dangerOwner.playerID, 1);
+});
+
+
+test('power ten retains its full twenty-Flash-frame damage lifetime', () => {
+  const f = fixture({ power: 10 });
+  f.explosion.makeExplosion(); f.advance(34);
+  assert.equal(f.explosion.exists, true);
+  f.advance(1);
   assertFinished(f);
 });

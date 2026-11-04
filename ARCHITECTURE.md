@@ -6,12 +6,12 @@
 
 `public/adapter.js` 在运行时接入原版引擎：
 
-- 游戏逻辑仍使用原版碰撞、地图、道具、伤害、AI 和积分规则。
+- 使用 HTML5 引擎与素材；`classic-rules.js`、`classic-ai.js` 和 `classic-timing.js` 按 4399 核验结果适配角色移速、道具、AI、计分与连锁传播，详见 `docs/classic-parity.md`。
 - 直接驱动原版 InputController，让最多四个角色接受远端真人输入。
 - 将 Phaser 和 GSAP 两套时间源统一到固定 60 Hz。GSAP 的回调也会改变游戏状态，只固定 Phaser 时钟不足以同步。
 - Phaser RNG 使用共同 seed，原版 Lodash 随机采样也接入该 RNG。原版存档里的生命和教学偏好不影响对局。
 - 浏览器负责本地模拟与渲染；游戏逻辑只随服务器编号帧推进。网络与逻辑均为 60 Hz，每个网络帧执行一个逻辑步。
-- 原版 Single Player 保留本地输入、时钟、选人和游戏流程，不创建 WebSocket。Multiplayer 提供一个 1–4 人联机玩法，空位由原版 AI 补齐。每局沿用原版积分规则，复用原版 GameOverState 结算界面。房主点击 NEXT ROUND 后，服务器创建新的 generation 和随机种子，各客户端重新创建本局引擎、地图与角色生命，并带入累计积分；可以一直开始下一局。
+- 原版 Single Player 保留本地输入、时钟、选人和游戏流程，不创建 WebSocket。Multiplayer 提供一个 1–4 人联机玩法，空位由按 4399 规则适配的 AI 补齐。每局使用适配后的积分规则，复用原版 GameOverState 结算界面。房主点击 NEXT ROUND 后，服务器创建新的 generation 和随机种子，各客户端重新创建本局引擎、地图与角色生命，并带入累计积分；可以一直开始下一局。
 - `public/original-ui.js` 复用原版主菜单和角色选择。START 后仍显示原按钮，其中 Single Player 走原单人流程，原 2 Player 按钮改为 Multiplayer。只有选择 Multiplayer 或打开邀请链接后，原版画面上才显示建房、加入和邀请控件；单人界面完全隐藏这些控件。联机选人补充 P1–P4 标识与准备状态，结算按钮由适配器接入服务器续局。广告入口和外链跳转不进入好友对局流程。
 - `public/gameplay-fixes.js` 清理死亡角色的技能图标、瞄准圈与按键状态；已经发射的武器保留原有生命周期。
 - `public/audio-fixes.js` 保留原版菜单曲、游戏选曲和声音开关，只在资源已加载且音频上下文可播放时启动当前 BGM。旧 Howler 的 `stop()` 不会取消等待恢复的播放回调，因此不向它排队过期曲目。菜单和选人播放菜单曲，进入游戏切换到原版选定的游戏曲；浏览器允许时进入画面即播放，需要用户手势时在首次点击、触摸或按键后播放。重建 iframe 前销毁旧音频，联机历史回放跳过音效，正常实时音效保留。

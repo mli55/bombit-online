@@ -15,34 +15,78 @@
   Game.BombExplosion.prototype.checkTimer = function () {
     if (!this.hasExploded) return;
     this.timer += this.game.time.elapsedMS;
+    while (this.classicRayDistance < this.power &&
+      this.timer + 1e-7 >= (this.classicRayDistance + 1) * frameMS) {
+      this.classicPropagate(++this.classicRayDistance);
+    }
     // The Flash rays grow one cell per frame, then remain dangerous for 10 frames.
     if (this.timer >= (this.power + 10) * frameMS) this.endExplosion();
   };
-  Game.BombExplosion.prototype.checkEmpty = function (x, y, distance, direction) {
-    const cell = this.grid.cells[x][y];
-    const angle = y === this.gridPositionY ? 0 : 90;
-    this.game.time.events.add(distance * frameMS, () => {
-      if (!this.exists) return;
-      if (cell.cellContains === Game.MAP.MINE) this.grid.destroyMine(cell);
-      if ([Game.MAP.FREE, Game.MAP.ITEM, Game.MAP.MINE].includes(cell.cellContains)) {
-        this.createFire(x, y, angle, direction, distance === this.power);
-      }
-    }, this);
-    return distance;
+  Game.BombExplosion.prototype.createExplosion = function () {
+    this.classicStoppedRays = 0;
+    this.classicRayDistance = 0;
   };
+  Game.BombExplosion.prototype.classicPropagate = function (distance) {
+    const rays = [[-1, 0, Game.DIRECTION.LEFT], [0, -1, Game.DIRECTION.UP],
+      [1, 0, Game.DIRECTION.RIGHT], [0, 1, Game.DIRECTION.DOWN]];
+    rays.forEach(([dx, dy, direction], index) => {
+      if (this.classicStoppedRays & (1 << index) ||
+          (this.direction !== Game.DIRECTION.ALL && this.direction !== direction)) return;
+      const x = this.gridPositionX + dx * distance, y = this.gridPositionY + dy * distance;
+      const cell = this.grid.cells[x]?.[y];
+      if (!cell || cell.cellContains === Game.MAP.WALL) {
+        this.classicStoppedRays |= 1 << index;
+        return;
+      }
+      const block = cell.cellContains === Game.MAP.BLOCK;
+      if (block) {
+        this.classicStoppedRays |= 1 << index;
+        this.grid.destroyBox(cell);
+        this.game.ph2NotificationManager.postNotification('_ADD_SCORE_BLOCK', this.player.playerID);
+      } else if (cell.cellContains === Game.MAP.BOMB) this.grid.explodeBomb(cell);
+      else if (cell.cellContains === Game.MAP.MINE) this.grid.destroyMine(cell);
+      // Read occupancy when the wave arrives. A newly placed bomb must also
+      // chain, and a box must never disappear before its wave reaches it.
+      this.createFire(x, y, dy ? 90 : 0, direction, block || distance === this.power);
+    });
+  };
+
+  // Each overlapping blast owns its own lifetime. The upstream cleanup clears
+  // a boolean globally and can restore a stale BOMB/BLOCK after a chain reaction.
+  function finishExplosion() {
+    const cells = [this.gridCell, ...this.cellsUsed];
+    const contents = cells.map(cell => cell.cellContains);
+    const grid = this.grid;
+    for (const key of ['bombExplosions', 'weaponExplosions']) {
+      const index = grid[key]?.indexOf(this) ?? -1;
+      if (index !== -1) grid[key].splice(index, 1);
+    }
+    for (const sprite of this.explosion) sprite.visible = false;
+    this.destroy();
+    cells.forEach((cell, index) => {
+      const atCell = obj => obj.gridPositionX === cell.gridPositionX && obj.gridPositionY === cell.gridPositionY;
+      const bomb = grid.bombs?.find(atCell), mine = grid.mines?.find(atCell);
+      const item = grid.getItemAtCell(cell);
+      cell.cellContains = bomb ? Game.MAP.BOMB : mine ? Game.MAP.MINE : item != null ? Game.MAP.ITEM :
+        [Game.MAP.BOMB, Game.MAP.BLOCK, Game.MAP.ITEM, Game.MAP.MINE].includes(contents[index]) ? Game.MAP.FREE : contents[index];
+      cell.isEmpty = !bomb && cell.cellContains !== Game.MAP.WALL && cell.cellContains !== Game.MAP.BLOCK;
+      const blast = [...grid.bombExplosions, ...(grid.weaponExplosions || [])].find(other =>
+        other !== this && other.exists && other.hasExploded && (other.gridCell === cell || other.cellsUsed.includes(cell)));
+      const weapon = grid.weapons?.find(other => other.exists &&
+        ((other.weaponType === Game.ITEM_TYPE?.FIRE && other.columnSprites?.some(sprite => sprite.x === cell.centerX && sprite.y === cell.centerY)) ||
+         (other instanceof Game.Rocket && other.active && other.gridCell === cell)));
+      cell.isDangerCell = !!(blast || weapon);
+      if (blast || weapon) cell.dangerOwner = (blast || weapon).player;
+      grid.astarGrid.grid[cell.gridPositionX][cell.gridPositionY].weight = bomb ? 0 : 1;
+    });
+  }
+  Game.BombExplosion.prototype.endExplosion = finishExplosion;
+  Game.WeaponExplosion.prototype.endExplosion = finishExplosion;
 
   Game.WeaponExplosion.prototype.checkTimer = function () {
     if (!this.hasExploded || this.grid.gameStatus === Game.GAME_STATUS.PAUSED) return;
     this.timer += this.game.time.elapsedMS;
     if (this.timer >= 10 * frameMS) this.endExplosion();
-  };
-  const endWeaponExplosion = Game.WeaponExplosion.prototype.endExplosion;
-  Game.WeaponExplosion.prototype.endExplosion = function () {
-    // Upstream accidentally removes from bombExplosions twice and never removes
-    // weaponExplosions. A spent mine/grenade/rocket must not stay in that registry.
-    const index = this.grid.weaponExplosions.indexOf(this);
-    if (index !== -1) this.grid.weaponExplosions.splice(index, 1);
-    endWeaponExplosion.call(this);
   };
 
   // Weapons already belong to Phaser's scene graph. Updating them again from
