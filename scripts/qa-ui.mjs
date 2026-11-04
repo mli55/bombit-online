@@ -237,7 +237,11 @@ try {
   await setPanel(host, false);
   await nativeClick(host, 'buttonPause');
   await Promise.all(pages.slice(0, 4).map(page => waitRoom(page, room => room.phase === 'paused', 'Native pause did not pause every player')));
-  await delay(120);
+  // The server stops at a known ordered frame. WAN clients can still have
+  // pre-pause frames in their playback buffers when the room message arrives.
+  const pausedTick = observations.get(host).room.tick;
+  await until(async () => (await Promise.all(pages.slice(0, 4).map(frameNumber))).every(frame => frame === pausedTick),
+    'Replicas did not drain to the server pause frame', 10000);
   const pausedFrames = await Promise.all(pages.slice(0, 4).map(frameNumber));
   await delay(600);
   assert.deepEqual(await Promise.all(pages.slice(0, 4).map(frameNumber)), pausedFrames, 'Some replica advanced while the room was paused');
