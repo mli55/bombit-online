@@ -1,5 +1,10 @@
 # Flash Bomb It 1 timing audit
 
+2026-11-04 follow-up: [full settings audit](settings-audit-2026-11-04.md).
+That audit corrects the rocket-impact claim below: rockets use their own 500 ms
+timer, so changing `WeaponExplosion` did not align rocket impacts. It also
+verifies the mine's hiding timeline and other differences beyond these timers.
+
 Checked 2026-10-24. The previous comparison in `gameplay-comparison.md`
 measured the HTML5 port, not the original Flash game. They differ substantially.
 
@@ -57,7 +62,8 @@ timers; it does not claim that every HTML5 animation or collision rule matches
 | Confuse / slow | `slowTime` countdown of 600 | 17.143 | 20 |
 | Ice / fire column | Create cells at frames 4, 8, 12; clear area at frame 49 | 1.4 from activation; cell lifetimes 1.286 / 1.171 / 1.057 | 1.5 active timer, but weapons updated twice per frame |
 | Mine detonation | Remove mine immediately; `addBrickExp` lasts 10 frames | 0.286 short single-cell hit window | 0.5 hit window; spent explosion left in registry |
-| Grenade / rocket impact | Same 10-frame `addBrickExp` hit window | 0.286 | 0.5 |
+| Grenade impact | 10-frame `addBrickExp` hit window | 0.286 | 0.5; adapted via `WeaponExplosion` |
+| Rocket impact | 10-frame `addBrickExp` hit window | 0.286 | Still 0.5: separate `Rocket.update` timer, not adapted |
 
 The mine is **not** a persistent fire area or a reusable trap. The original does
 have a brief nonzero detonation window. We preserve that window and clear the

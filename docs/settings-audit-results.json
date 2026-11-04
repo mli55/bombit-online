@@ -1,0 +1,284 @@
+{
+  "checkedAt": "2026-11-04",
+  "baselineCommit": "765bafa",
+  "source": {
+    "url": "https://sxiao.4399.com/4399swf/upload_swf/ftp18/liuxy/20160125/04/game.swf",
+    "bytes": 2167060,
+    "sha256": "a2b4cc65115e4b6eb813962d80e91f1e65746a91f27e91d5e86fa1963ed5b54d",
+    "fps": 35
+  },
+  "clockHz": 60,
+  "beforeLifeFix": [
+    3,
+    1,
+    1,
+    1
+  ],
+  "afterLifeFix": {
+    "menu": {
+      "SCALE": 1,
+      "CURRENT_ORIENTATION": 0,
+      "CELL_WIDTH": 49,
+      "CELL_HEIGHT": 49,
+      "GRID_WIDTH": 15,
+      "GRID_HEIGHT": 13,
+      "INITIAL_BLINKING_TIME": 2000,
+      "INITIAL_SPEED": 0.2375,
+      "SPEED_INCREASE": 0.02375,
+      "INITIAL_LIVES": 1,
+      "BOMB_TIMER": 2500,
+      "SLOW_TIME": 20000,
+      "SLOW_SPEED": 0.05,
+      "FROZEN_TIME": 3000,
+      "ROCKET_SPEED": 0.5,
+      "BOMB_SPEED_KICKED": 0.5,
+      "MAX_BOMB_POWER": 5,
+      "MAX_SPEED": 9,
+      "MAX_BOMBS": 9,
+      "CHANCE_POWER_UP": 40,
+      "TIME_TO_HIDE_MINE": 3500,
+      "TIME_FIRE_ON": 1500,
+      "TIME_ICE_ON": 1500,
+      "CHANCE_POWER_UP_BEING_WEAPON": 30,
+      "POWER_UP_CHANCES": [
+        {
+          "name": "bomb",
+          "chance": 20
+        },
+        {
+          "name": "power",
+          "chance": 20
+        },
+        {
+          "name": "speed",
+          "chance": 20
+        },
+        {
+          "name": "push",
+          "chance": 20
+        },
+        {
+          "name": "shield",
+          "chance": 18
+        },
+        {
+          "name": "heart",
+          "chance": 2
+        }
+      ],
+      "WEAPON_CHANCES": [
+        {
+          "name": "battery",
+          "chance": 20
+        },
+        {
+          "name": "fire",
+          "chance": 10
+        },
+        {
+          "name": "freeze",
+          "chance": 20
+        },
+        {
+          "name": "grenade",
+          "chance": 20
+        },
+        {
+          "name": "mine",
+          "chance": 20
+        },
+        {
+          "name": "rocket",
+          "chance": 10
+        }
+      ],
+      "POINTS_BLOCK_DESTROY": [
+        5,
+        10,
+        15
+      ],
+      "POINTS_POWER_UP": [
+        100,
+        100,
+        100
+      ],
+      "POINTS_PLAYER_KILL": 1000,
+      "POINTS_PER_WIN": 1000,
+      "MATCH_TIME": 180000,
+      "TOTAL_ROUNDS": 5
+    },
+    "single": {
+      "settings": {
+        "SCALE": 1,
+        "CURRENT_ORIENTATION": 0,
+        "CELL_WIDTH": 49,
+        "CELL_HEIGHT": 49,
+        "GRID_WIDTH": 15,
+        "GRID_HEIGHT": 13,
+        "INITIAL_BLINKING_TIME": 2000,
+        "INITIAL_SPEED": 0.2375,
+        "SPEED_INCREASE": 0.02375,
+        "INITIAL_LIVES": 1,
+        "BOMB_TIMER": 1714.2857142857144,
+        "SLOW_TIME": 17142.857142857145,
+        "SLOW_SPEED": 0.05,
+        "FROZEN_TIME": 8571.428571428572,
+        "ROCKET_SPEED": 0.5,
+        "BOMB_SPEED_KICKED": 0.5,
+        "MAX_BOMB_POWER": 5,
+        "MAX_SPEED": 9,
+        "MAX_BOMBS": 9,
+        "CHANCE_POWER_UP": 40,
+        "TIME_TO_HIDE_MINE": 3500,
+        "TIME_FIRE_ON": 1500,
+        "TIME_ICE_ON": 1500,
+        "CHANCE_POWER_UP_BEING_WEAPON": 30,
+        "POWER_UP_CHANCES": [
+          {
+            "name": "bomb",
+            "chance": 20
+          },
+          {
+            "name": "power",
+            "chance": 20
+          },
+          {
+            "name": "speed",
+            "chance": 20
+          },
+          {
+            "name": "push",
+            "chance": 20
+          },
+          {
+            "name": "shield",
+            "chance": 18
+          },
+          {
+            "name": "heart",
+            "chance": 2
+          }
+        ],
+        "WEAPON_CHANCES": [
+          {
+            "name": "battery",
+            "chance": 20
+          },
+          {
+            "name": "fire",
+            "chance": 10
+          },
+          {
+            "name": "freeze",
+            "chance": 20
+          },
+          {
+            "name": "grenade",
+            "chance": 20
+          },
+          {
+            "name": "mine",
+            "chance": 20
+          },
+          {
+            "name": "rocket",
+            "chance": 10
+          }
+        ],
+        "POINTS_BLOCK_DESTROY": [
+          5,
+          10,
+          15
+        ],
+        "POINTS_POWER_UP": [
+          100,
+          100,
+          100
+        ],
+        "POINTS_PLAYER_KILL": 1000,
+        "POINTS_PER_WIN": 1000,
+        "MATCH_TIME": 180000,
+        "TOTAL_ROUNDS": 5
+      },
+      "lives": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "measured": {
+      "flames": [
+        {
+          "power": 1,
+          "frames": 19,
+          "ms": 316.6666666666667
+        },
+        {
+          "power": 5,
+          "frames": 26,
+          "ms": 433.3333333333333
+        }
+      ],
+      "rocketImpact": {
+        "frames": 30,
+        "ms": 500,
+        "cleared": true
+      },
+      "mineHide": {
+        "frames": 211,
+        "ms": 3516.6666666666665
+      },
+      "shield": {
+        "frames": 120,
+        "ms": 2000,
+        "lives": 1
+      },
+      "onlineLives": [
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  "classicRegression": [
+    {
+      "check": "two humans lose while both CPUs survive; identical results across seats",
+      "hash": "f6e1e9b6",
+      "result": {
+        "winner": null,
+        "canContinue": true,
+        "win": false,
+        "level": 1,
+        "humansEliminated": true,
+        "scores": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "check": "one through four humans: complete elimination and sole human winner, with shuffled characters"
+    },
+    {
+      "check": "actual engine timers, pauses, cleanup and next round",
+      "bombFuseMS": 1716.6666666666667,
+      "freezeMS": 8583.333333333334,
+      "slowMS": 17150,
+      "columns": [
+        {
+          "weaponType": 8,
+          "durationMS": 1400
+        },
+        {
+          "weaponType": 7,
+          "durationMS": 1400
+        }
+      ],
+      "mineBlastMS": 300
+    }
+  ]
+}
