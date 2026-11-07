@@ -37,7 +37,7 @@ function loadGame() {
   const id = ++loadId;
   iframe?.contentWindow?.bombItAudio?.dispose();
   bridge = null; liveFrames = []; playing = false; iframe?.remove();
-  iframe = document.createElement('iframe'); iframe.title = 'Bomb It 1'; iframe.allow = 'autoplay; fullscreen'; iframe.src = '/game/?v=12';
+  iframe = document.createElement('iframe'); iframe.title = 'Bomb It 1'; iframe.allow = 'autoplay; fullscreen'; iframe.src = '/game/?v=13';
   $('game-mount').replaceChildren(iframe); $('loading').textContent = 'Loading Bomb It 1…'; $('loading').hidden = false;
   loadPromise = new Promise((resolve, reject) => {
     const timeout = setTimeout(() => { if (id === loadId) reject(new Error('Loading timed out. Please refresh the page.')); }, 45000);

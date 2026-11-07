@@ -42,6 +42,7 @@
     this.classicStartX = this.x; this.classicStartY = this.y;
     this.classicEndX = cell.centerX; this.classicEndY = cell.centerY;
     this.classicMoveStep = 0;
+    this.classicMoveProgress = 0;
     this.moving = this.movingAnimation = true;
     return true;
   };
@@ -82,15 +83,22 @@
     this.classicAITime = (this.classicAITime || 0) + this.game.time.elapsedMS;
     while (this.classicAITime + 1e-7 >= frameMS) {
       this.classicAITime -= frameMS;
+      if (this.frozen) { this.movingAnimation = false; continue; }
       if (this.moving) {
         const frames = this.slowed ? 20 : (this.classicMoveFrames || 6);
-        const progress = Math.min(1, ++this.classicMoveStep / frames);
+        // A status change changes only the next step's speed. Dividing all
+        // elapsed steps by the new duration rewinds/jumps a partially completed
+        // move and breaks the upstream direction-based grid tracking.
+        this.classicMoveStep++;
+        let progress = Math.min(1, this.classicMoveProgress + 1 / frames);
+        if (progress > 1 - 1e-7) progress = 1;
+        this.classicMoveProgress = progress;
         this.x = this.classicStartX + (this.classicEndX - this.classicStartX) * progress;
         this.y = this.classicStartY + (this.classicEndY - this.classicStartY) * progress;
         this.checkActualGridLocation();
         this.movingAnimation = true;
         if (progress === 1) this.moving = false;
-      } else if (!this.frozen) {
+      } else {
         this.movingAnimation = false;
         this.classicThink();
       }
