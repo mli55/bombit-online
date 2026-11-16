@@ -29,6 +29,10 @@
     return directions.filter(([dx, dy]) => this.classicSafe(x + dx, y + dy)).length;
   };
   ai.classicBeginMove = function (index) {
+    // A new leg must start at the logical cell's center. In particular, do not
+    // turn sideways while waiting for a newly placed bomb to clear the path.
+    if (this.moving || Math.abs(this.x - this.gridCell.centerX) > 1e-7 ||
+        Math.abs(this.y - this.gridCell.centerY) > 1e-7) return false;
     const [dx, dy, direction] = directions[index];
     this.direction = direction;
     const x = this.gridPositionX, y = this.gridPositionY;
@@ -41,6 +45,8 @@
     }
     this.classicStartX = this.x; this.classicStartY = this.y;
     this.classicEndX = cell.centerX; this.classicEndY = cell.centerY;
+    this.classicTargetX = x + dx; this.classicTargetY = y + dy;
+    this.classicDirectionIndex = index;
     this.classicMoveStep = 0;
     this.classicMoveProgress = 0;
     this.moving = this.movingAnimation = true;
@@ -85,6 +91,20 @@
       this.classicAITime -= frameMS;
       if (this.frozen) { this.movingAnimation = false; continue; }
       if (this.moving) {
+        const target = cellAt(this.grid, this.classicTargetX, this.classicTargetY);
+        const [dx, dy, direction] = directions[this.classicDirectionIndex];
+        // Occupancy can change after the route was chosen (especially during
+        // a slow move). Do not enter a bomb, or treat a requested kick as an
+        // already cleared cell. A bomb placed under the actor is not an entry.
+        if (brick(target) || (target !== this.gridCell &&
+            (!target.isEmpty || target.cellContains === Game.MAP.BOMB))) {
+          if (target?.cellContains === Game.MAP.BOMB && this.canKickBombs) {
+            const beyond = cellAt(this.grid, this.classicTargetX + dx, this.classicTargetY + dy);
+            if (!brick(beyond) && beyond.isEmpty && beyond.cellContains !== Game.MAP.BOMB) this.kickBomb(target, direction);
+          }
+          this.movingAnimation = false;
+          continue;
+        }
         const frames = this.slowed ? 20 : (this.classicMoveFrames || 6);
         // A status change changes only the next step's speed. Dividing all
         // elapsed steps by the new duration rewinds/jumps a partially completed
@@ -95,8 +115,8 @@
         this.classicMoveProgress = progress;
         this.x = this.classicStartX + (this.classicEndX - this.classicStartX) * progress;
         this.y = this.classicStartY + (this.classicEndY - this.classicStartY) * progress;
-        this.checkActualGridLocation();
         this.movingAnimation = true;
+        this.checkActualGridLocation();
         if (progress === 1) this.moving = false;
       } else {
         this.movingAnimation = false;

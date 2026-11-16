@@ -55,3 +55,26 @@ test('freezing or pausing a bot mid-step preserves its position and remaining mo
  p.gameStatus=Game.GAME_STATUS.PAUSED;for(let i=0;i<10;i++)p.update();assert.equal(p.x,x);
  p.gameStatus=Game.GAME_STATUS.PLAYING;p.update();assert.ok(Math.abs(p.x-x-49/6)<1e-7);
 });
+
+for(const [index,[dx,dy]]of vectors.entries())for(const slowed of[false,true])test(`new bomb blocks an in-progress move and prevents diagonal escape: direction ${index}, slow ${slowed}`,()=>{
+ const {player:p,grid,Game}=fixture();if(slowed)p.activateSlowDown();
+ const target=grid.cells[5+dx][5+dy];p.classicBeginMove(index);p.update();
+ const x=p.x,y=p.y;target.cellContains=Game.MAP.BOMB;target.isEmpty=false;
+ for(let i=0;i<25;i++){p.update();positionConsistent(p);assert.equal(p.x,x);assert.equal(p.y,y);}
+ assert.equal(p.classicBeginMove((index+1)%4),false,'cannot turn while between centers');
+ target.cellContains=Game.MAP.FREE;target.isEmpty=true;
+ for(let i=0;i<20&&p.moving;i++)p.update();
+ assert.equal(p.x,target.centerX);assert.equal(p.y,target.centerY);positionConsistent(p);
+ assert.equal(p.classicBeginMove((index+1)%4),true,'turn allowed after arriving at center');
+ const before={x:p.x,y:p.y};p.update();assert.ok(Math.abs(p.x-before.x)<1e-7||Math.abs(p.y-before.y)<1e-7);
+});
+test('a bot can leave a bomb already underneath it',()=>{
+ const{player:p,Game}=fixture();p.gridCell.cellContains=Game.MAP.BOMB;p.gridCell.isEmpty=false;
+ assert.equal(p.classicBeginMove(2),true);for(let i=0;i<6;i++)p.update();assert.equal(p.moving,false);positionConsistent(p);
+});
+test('a kick must clear the destination before the bot enters it',()=>{
+ const{player:p,grid,Game}=fixture(),target=grid.cells[6][5];target.cellContains=Game.MAP.BOMB;target.isEmpty=false;
+ p.canKickBombs=true;let kicks=0;p.kickBomb=()=>{kicks++;};
+ assert.equal(p.classicBeginMove(2),true);const x=p.x;for(let i=0;i<5;i++)p.update();assert.equal(p.x,x);assert.ok(kicks>0);
+ target.isEmpty=true;target.cellContains=Game.MAP.FREE;for(let i=0;i<6;i++)p.update();assert.equal(p.x,target.centerX);positionConsistent(p);
+});

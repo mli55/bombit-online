@@ -53,3 +53,36 @@ The usual `PLAYWRIGHT_MODULE`, `CHROME_BIN`, `BASE_URL`, and `QA_OUTPUT_DIR`
 variables select runtime and output. Optional `QA_AI_SOURCE` substitutes an
 explicit local AI source in the test browser to reproduce the previous defect.
 Results are saved under `.local/ai-slow-qa/` by default.
+
+## Dynamic bomb obstruction — 2026-11-15
+
+A second independent gap remained: route entry checked occupancy only when a
+move began. A bomb placed in the destination during a slow move did not stop
+position interpolation. The upstream cell tracker refused to enter the occupied
+cell even though the sprite moved into it, leaving physical and logical positions
+different. The next move could then cut diagonally across terrain.
+
+Each AI movement tick now rechecks its destination. A newly obstructed route
+waits without consuming movement progress until the destination clears. A valid
+kick is requested only with a free cell beyond the bomb, and the actor waits for
+the bomb to actually vacate the destination. A bomb already under the actor does
+not prevent departure. New directions cannot begin between cell centers or while
+another leg remains in progress; grid tracking is enabled before resumed motion.
+Target coordinates and direction are scalar fields included in replay checksums.
+
+- Ten added tests cover four-direction dynamic obstruction at normal/slow speed,
+  leaving a bomb underneath the actor, and waiting for a kicked bomb to clear.
+  Nine fail against the previous code, including all eight dynamic obstruction
+  cases. Full suite: 109 passing tests.
+- `scripts/qa-ai-blocked.mjs` places actual bombs through the real player path.
+  The previous AI reproduces the crossing failure in native 30 Hz testing.
+  The fix passes 96 scenarios: four directions, normal/slow movement, late
+  blockage/full enclosure/real kicking, native 30/60/144 Hz and online two-player.
+  Every AI update checks for diagonal displacement, entry into a blocked cell,
+  and disagreement between physical and logical cell coordinates. Independent
+  online clients produce matching per-frame checksum summaries.
+- The 48 gas/slow/freeze cases in `qa-ai-slow.mjs` and three-difficulty independent
+  AI replay in `qa-classic-rules.mjs` still pass.
+
+`qa-ai-blocked.mjs` accepts the same runtime/output/source-override variables as
+`qa-ai-slow.mjs`; its default output is `.local/ai-blocked-qa/`.
