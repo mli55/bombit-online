@@ -42,6 +42,7 @@ function fixture({ patched = true, power = 1 } = {}) {
     Grid: function () {}, Mine: function () {}, Rocket: function () {}, Columns: function () {},
   };
   Game.Player.prototype.update = function () {};
+  Game.Grid.prototype.update = function () {};
   const context = vm.createContext({
     Game, Phaser: { Sprite },
     __extends(derived, base) {
@@ -76,11 +77,13 @@ function fixture({ patched = true, power = 1 } = {}) {
       add(sprite) { this.children.push(sprite); sprite.parent = this; },
       remove(sprite) { this.children.splice(this.children.indexOf(sprite), 1); },
     })),
+    game, gameStatus: Game.GAME_STATUS.PLAYING,
     getItemAtCell() { return null; },
     destroyBombExplosion(cell) {
       this.bombExplosions = this.bombExplosions.filter(explosion => explosion.gridCell !== cell);
     },
   };
+  Object.setPrototypeOf(grid, Game.Grid.prototype);
   const center = cells[6][6];
   center.isEmpty = false;
   center.cellContains = Game.MAP.BOMB;
@@ -100,6 +103,7 @@ function fixture({ patched = true, power = 1 } = {}) {
         event.callback.call(event.owner);
       }
       if (!explosion.destroyed) explosion.update();
+      grid.update();
     }
   }
   const dangerousCells = () => cells.flat().filter(cell => cell.isDangerCell);
@@ -114,11 +118,12 @@ function fixture({ patched = true, power = 1 } = {}) {
   return { Game, explosion, center, grid, pending, advance, advanceToFlashFrame, dangerousCells, visibleFlames };
 }
 
+// Damage is over. The flames may still be fading (see the fade test).
 function assertFinished(f) {
-  assert.equal(f.explosion.destroyed, true, 'Center sprite is destroyed');
+  // Upstream destroys the blast at once; the patch keeps it to fade.
+  assert.ok(f.explosion.destroyed || f.explosion.hasExploded === false, 'The blast no longer deals damage');
   assert.equal(f.grid.bombExplosions.length, 0, 'Explosion is removed from the grid');
-  assert.equal(f.visibleFlames().length, 0, 'All ray segments become invisible with the center');
-  assert.equal(f.dangerousCells().length, 0, 'No invisible dangerous cells remain');
+  assert.equal(f.dangerousCells().length, 0, 'No dangerous cells remain while the flames fade');
   assert.equal(f.center.isEmpty, true);
   assert.equal(f.center.cellContains, f.Game.MAP.FREE);
   for (const cell of f.explosion.cellsUsed) {
@@ -159,6 +164,24 @@ test('five-cell rays finish propagating before cleanup and never reappear', () =
   assertFinished(f);
   f.advance(42);
   assertFinished(f);
+  assert.equal(f.visibleFlames().length, 0);
+});
+
+test('after the damage ends, flames fade 20% per Flash frame and go on the fifth', () => {
+  const f = fixture();
+  f.explosion.makeExplosion();
+  // Power 1: the ray lands on Flash frame 1 and the damage ends on frame 11.
+  f.advanceToFlashFrame(11);
+  assertFinished(f);
+  assert.equal(f.visibleFlames().length, 5, 'Center and four ray ends are still drawn');
+  f.advanceToFlashFrame(12);
+  for (const sprite of f.visibleFlames()) assert.ok(Math.abs(sprite.alpha - 0.8) < 1e-9);
+  f.advanceToFlashFrame(15);
+  assert.equal(f.visibleFlames().length, 5);
+  for (const sprite of f.visibleFlames()) assert.ok(Math.abs(sprite.alpha - 0.2) < 1e-9);
+  f.advanceToFlashFrame(16);
+  assert.equal(f.visibleFlames().length, 0);
+  assert.equal(f.explosion.destroyed, true);
 });
 
 test('pause preserves the remaining flame duration and resumes cleanup', () => {

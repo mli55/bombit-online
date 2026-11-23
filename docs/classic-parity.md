@@ -43,4 +43,6 @@ node scripts/qa-ui.mjs
 
 ## 仍然保留的适配差异
 
+Update 2026-11-23: human cell steps, kicks, rockets, grenades, mines, the gas bomb, ice and fire columns, flame fade, shield and start protection, the clock, the 4399 random map and the single-player result screen are now aligned; see [Remaining 4399 differences aligned](flash-alignment-2026-11-23.md). Kept on purpose: pausing also stops short blasts, the single-player stage cap, and online 1–4 player competitive rounds. The paragraph below is the earlier record.
+
 本次处理的是角色移速、连锁传播、道具分布、AI 决策、计分这五类。没有把 HTML5 引擎改成完整 Flash 模拟器：画面、随机地图、转向/碰撞实现、火箭及踢弹运动、火箭落点伤害时间、地雷隐藏、护盾时长、火焰无伤害淡出、受阻冰火柱、单人通关数量和多人竞争模式仍按此前核验报告描述。AI 的规则与频率按 Flash 实现，但与玩家/伤害碰撞交错的子帧顺序、随机种子和地图仍不同；不声称两引擎逐帧轨迹相同。

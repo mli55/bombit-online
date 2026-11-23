@@ -31,10 +31,12 @@
     const animation = this.animationGrenade.ph2Animations.play(name, 1, false);
     // The artwork's wall-clock tween must not decide when gameplay explodes.
     // Seek the paused timeline from the same simulation clock as the fuse.
+    // Flash lands the grenade when its 19-frame body timeline reaches the last
+    // frame, 18 frames after the throw.
     animation.pause();
     this.classicFlightAnimation = animation;
     this.classicFlightMS = 0;
-    this.classicFlightDuration = animation.timeline.duration() * 1000;
+    this.classicFlightDuration = 18 * 1000 / 35;
     this.animationGrenade.visible = true;
     this.x = this.gridCell.centerX;
     this.y = this.gridCell.centerY;

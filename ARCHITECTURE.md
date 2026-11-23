@@ -24,9 +24,9 @@
 
 服务器负责房间、座位身份、准备、输入排序、暂停和断线回放。房间容量为四人；玩家按座位自动显示为 P1、P2、P3、P4，不收集或保存自定义名字。它不运行游戏物理，不接收任意代码，也不传输视频。状态保存在内存中，最多保留 72,000 帧（约 20 分钟）的当前对局历史。达到限制后需返回房间重开。
 
-每位玩家只提交自己的 5 位按键掩码。移动沿用原版“最后按下方向优先”，松开该方向就停止，旧按键重复事件不抢回方向。服务器帧另带第 6 位新按下标记，避免帧间松开再按造成技能漏发；没有持续心跳输入时释放按键。房主只能在所有真人都加载完成且初始校验一致后开始。
+每位玩家只提交自己的 5 位按键掩码。Every held direction is sent. Heroes move one cell per step like Flash: at rest the held directions are checked in a fixed order (left, up, right, down), and a started step always finishes.服务器帧另带第 6 位新按下标记，避免帧间松开再按造成技能漏发；没有持续心跳输入时释放按键。房主只能在所有真人都加载完成且初始校验一致后开始。
 
-普通炸弹按用户要求支持长按连放，单人和联机共用 `public/player-controls.js`，仍受原版空格子、炸弹数量和冻结/死亡限制。技能沿用原版每次按下使用一次、原瞄准和弹道，不因长按自动消耗新拾取的技能或最后一发后自动切换炸弹。单人新游戏和在线每局的初始生命统一为 1，由 `public/gameplay-fixes.js` 设置；生命道具仍沿用原版加一行为，原版 Single Player 的跨关卡生命保存逻辑保留。
+Fire follows Flash in `public/player-controls.js`, shared by single player and online: holding fire tries a bomb every frame at rest, a press during a step is queued for the arrival cell, and a special needs a release before the next use (`puttAble`); a rejected special is retried while held. Bomb limits, empty cells and freezing still apply.单人新游戏和在线每局的初始生命统一为 1，由 `public/gameplay-fixes.js` 设置；生命道具仍沿用原版加一行为，原版 Single Player 的跨关卡生命保存逻辑保留。
 
 游戏每秒提交一次状态摘要，包含随机数、角色位置/生命、地图、对象、计时器及积分。副本不一致就停止对局，不继续显示相互矛盾的结果。它是好友局的错误检测，不是对抗作弊系统；当前在线且已同步的最前座位提交结算。
 

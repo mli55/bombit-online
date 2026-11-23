@@ -11,6 +11,8 @@
     return order;
   };
   Game.ClassicRules = {
+    // The Flash clock checks every 500 ms: t = 180 - 0.5 * floor(elapsed / 500).
+    clock: elapsed => Game.SETTINGS.MATCH_TIME / 1000 - 0.5 * Math.floor(elapsed / 500 + 1e-9),
     orderForRound(seed, round) {
       // The server-issued random room code survives reconnects and round changes.
       // A private RNG leaves the map/gameplay stream untouched and requires no
@@ -81,7 +83,10 @@
   };
 
   Game.ScoreManager.prototype.addLeftOverTime = function (elapsedMS, playerID) {
-    const score = Math.floor(Math.max(0, Game.SETTINGS.MATCH_TIME - elapsedMS) / 100);
+    // Flash: int(t * 10), with t the remaining seconds on its 500 ms clock.
+    // At timeup (t < 1) Flash sets t to 0.
+    const t = Game.ClassicRules.clock(elapsedMS);
+    const score = t < 1 ? 0 : Math.floor(10 * t + 1e-9);
     this.leftOverScores[playerID] += score;
     this.totalScores[playerID] += score;
     this.finalScores[playerID] += score;

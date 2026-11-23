@@ -83,13 +83,17 @@
     }
     this.classicBeginMove(chosen);
   };
+  ai.checkItemPickUp = function () {
+    if (this.classicPickup) return Game.Player.prototype.checkItemPickUp.call(this);
+  };
   ai.update = function () {
     Game.Player.prototype.update.call(this);
     if (this.dead || this.gameStatus !== Game.GAME_STATUS.PLAYING) return;
     this.classicAITime = (this.classicAITime || 0) + this.game.time.elapsedMS;
     while (this.classicAITime + 1e-7 >= frameMS) {
       this.classicAITime -= frameMS;
-      if (this.frozen) { this.movingAnimation = false; continue; }
+      // Flash stopTime only holds a hero at rest; a step under way finishes.
+      if (this.frozen && !this.moving) { this.movingAnimation = false; continue; }
       if (this.moving) {
         const target = cellAt(this.grid, this.classicTargetX, this.classicTargetY);
         const [dx, dy, direction] = directions[this.classicDirectionIndex];
@@ -117,7 +121,12 @@
         this.y = this.classicStartY + (this.classicEndY - this.classicStartY) * progress;
         this.movingAnimation = true;
         this.checkActualGridLocation();
-        if (progress === 1) this.moving = false;
+        if (progress === 1) {
+          this.moving = false;
+          // Flash picks items up only at the end of a step.
+          this.classicPickup = true;
+          try { this.checkItemPickUp(); } finally { this.classicPickup = false; }
+        }
       } else {
         this.movingAnimation = false;
         this.classicThink();

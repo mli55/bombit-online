@@ -81,7 +81,9 @@ function pickup(f, type) {
   cell.isItemCell = true; cell.cellContains = Game.MAP.ITEM;
   grid.getItemAtCell = () => type;
   grid.removeItemFromArray = c => { c.isItemCell = false; c.cellContains = Game.MAP.FREE; };
-  player.checkItemPickUp();
+  // Flash picks items up at the end of a step.
+  player.classicPickup = true;
+  try { player.checkItemPickUp(); } finally { player.classicPickup = false; }
 }
 test('speed shoes use 6/5/4/3 frames per cell and stop at the original cap', () => {
   const f = fixture(); f.player.isAI = false;

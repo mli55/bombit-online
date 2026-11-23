@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
 
-// Exercise the preserved InputController and Player action methods. Only the
-// keyboard, renderer and weapon effects are substitutes in this fixture.
+// Run the upstream Player, PlayerHuman and InputController with the Flash
+// controls. Only the keyboard, rendering and the map are substitutes.
 const upstream = readFileSync(new URL('../original/bombit-1.min.js', import.meta.url), 'utf8');
 const patch = readFileSync(new URL('../public/player-controls.js', import.meta.url), 'utf8');
 function definition(name, namespace) {
@@ -14,8 +14,9 @@ function definition(name, namespace) {
   assert.ok(start >= 0 && end > start, `Find upstream ${name}`);
   return upstream.slice(start, end + marker.length);
 }
+const frameMs = 1000 / 60, flashFrameMs = 1000 / 35;
 
-function fixture({ offline = false } = {}) {
+function fixture() {
   class Signal {
     listeners = [];
     add(fn, receiver) { this.listeners.push([fn, receiver]); }
@@ -35,10 +36,13 @@ function fixture({ offline = false } = {}) {
   const Game = {
     GAME_STATUS: { PLAYING: 0, GAME_OVER: 1, PAUSED: 2 },
     PLAYER_MODE: { SINGLE_PLAYER: 0, MULTI_PLAYER: 1 },
-    DIRECTION: { UP: 0, DOWN: 1, LEFT: 2, RIGHT: 3 },
-    MAP: { FREE: 0, BOMB: 1, MINE: 2 },
-    Bomb: function Bomb(game, x, y, key, grid, cell, power, owner) {
-      Object.assign(this, { cell, owner, power });
+    DIFFICULTY: { EASY: 0, NORMAL: 1, HARD: 2 },
+    DIRECTION: { ALL: 0, UP: 1, LEFT: 4, RIGHT: 5, DOWN: 8 },
+    MAP: { FREE: 0, WALL: 1, BLOCK: 3, BOMB: 4, MINE: 7 },
+    SETTINGS: { CELL_WIDTH: 49, CELL_HEIGHT: 49, GRID_WIDTH: 7, GRID_HEIGHT: 7, SCALE: 1 },
+    Bomb: function Bomb(game, x, y, key, grid, cell) { Object.assign(this, { gridPositionX: cell.gridPositionX, gridPositionY: cell.gridPositionY }); },
+    ClassicWeapons: {
+      isBrick: (grid, cell) => !cell || cell.cellContains === Game.MAP.WALL || cell.cellContains === Game.MAP.BLOCK || cell.isFreezeCell,
     },
   };
   const context = vm.createContext({
@@ -50,112 +54,174 @@ function fixture({ offline = false } = {}) {
     Ph2: { AnimationSystem: { findObject: () => ({ frameName: '' }) } },
     __extends(derived, base) { derived.prototype = Object.create(base.prototype); derived.prototype.constructor = derived; },
   });
-  vm.runInContext(`(${definition('Player', 'l')})(Game); (${definition('InputController', 'i')})(Game);`, context);
+  vm.runInContext(`(${definition('Player', 'l')})(Game); (${definition('PlayerHuman', 'c')})(Game); (${definition('InputController', 'i')})(Game);`, context);
   vm.runInContext(patch, context);
-  const cells = Array.from({ length: 5 }, (_, x) => [{ isEmpty: true, cellContains: Game.MAP.FREE, centerX: x * 50, centerY: 0 }]);
-  const shots = [], attempts = [], moves = [];
-  const game = { device: { desktop: true }, input: { keyboard }, ph2AudioManager: { playEffect() {} } };
-  const player = Object.assign(Object.create(Game.Player.prototype), {
-    game, playerID: 0, playerMode: Game.PLAYER_MODE.SINGLE_PLAYER,
-    grid: { charactersChosen: [0], cells, weapons: [], addBomb() {} },
-    gridPositionX: 0, gridPositionY: 0, bombs: 2, power: 1, bombsOnGround: [],
-    direction: Game.DIRECTION.DOWN, weaponActive: false, weapons: [],
-    gameStatus: Game.GAME_STATUS.PLAYING, dead: false, frozen: false,
-    movingAnimation: false,
-    ...Object.fromEntries(['Up', 'Down', 'Left', 'Right'].map(direction => [`checkMove${direction}`, function () {
-      moves.push(direction); this.direction = Game.DIRECTION[direction.toUpperCase()]; this.movingAnimation = true;
-    }])),
-  });
-  const controller = new Game.InputController(game, player);
-  const actionKey = controller.actionKey;
-  if (!offline) controller.actionKey = { enabled: true };
-  const equip = (type, uses = 2, valid = true) => {
-    player.weaponActive = true; player.weaponCurrentType = type;
-    player.weaponCurrentUses = 0; player.weaponTotalUses = uses;
-    player.weapons = Array.from({ length: uses }, () => ({
-      useWeapon() { attempts.push(type); if (valid) shots.push({ type, direction: this.direction }); return valid; },
-    }));
+  const pickups = [];
+  Game.Player.prototype.checkItemPickUp = function () { pickups.push(this.gridCell); };
+  const cells = Array.from({ length: 7 }, (_, x) => Array.from({ length: 7 }, (_, y) => ({
+    gridPositionX: x, gridPositionY: y, centerX: (x + 0.5) * 49, centerY: (y + 0.5) * 49,
+    isEmpty: true, cellContains: Game.MAP.FREE,
+  })));
+  const game = { device: { desktop: true }, input: { keyboard }, time: { elapsedMS: frameMs }, ph2AudioManager: { playEffect() {} } };
+  const grid = {
+    charactersChosen: [0], cells, bombs: [], weapons: [], rowsGroup: cells.map(() => ({ add() {} })),
+    addBomb(bomb) { this.bombs.push(bomb); },
   };
-  const moveCell = x => { player.gridPositionX = x; };
-  return { Game, player, controller, actionKey, cells, equip, shots, attempts, moves, moveCell };
-}
-
-test('held online bombs use original cell and capacity limits, and release stops placing', () => {
-  const { controller, player, moveCell } = fixture();
-  controller.applyOnlineInput(48); assert.equal(player.bombsOnGround.length, 1);
-  controller.applyOnlineInput(16); assert.equal(player.bombsOnGround.length, 1, 'No duplicate bomb on the same cell');
-  moveCell(1); controller.applyOnlineInput(16); assert.equal(player.bombsOnGround.length, 2);
-  moveCell(2); controller.applyOnlineInput(16); assert.equal(player.bombsOnGround.length, 2, 'Respect original bomb capacity');
-  player.bombsOnGround.shift(); controller.applyOnlineInput(16); assert.equal(player.bombsOnGround.length, 2, 'Resume once a slot is free');
-  moveCell(3); controller.applyOnlineInput(0); player.bombsOnGround.shift(); controller.applyOnlineInput(0);
-  assert.equal(player.bombsOnGround.length, 1); assert.equal(controller.bombHoldEnabled, false); assert.equal(controller.onlineActionHeld, false);
-});
-
-for (const type of ['grenade', 'rocket', 'fire', 'freeze', 'mine', 'battery']) {
-  test(`${type} retains original per-press dispatch, direction and charge consumption`, () => {
-    const { controller, player, equip, shots, moveCell, Game } = fixture(); equip(type);
-    player.direction = Game.DIRECTION.LEFT; controller.applyOnlineInput(48);
-    for (let i = 0; i < 20; i++) controller.applyOnlineInput(16);
-    assert.equal(shots.length, 1); assert.equal(player.weaponCurrentUses, 1); assert.equal(shots[0].direction, Game.DIRECTION.LEFT);
-    player.direction = Game.DIRECTION.RIGHT; controller.applyOnlineInput(48);
-    assert.equal(shots.length, 2, 'A server pulse preserves rapid release/re-press between adjacent frames');
-    assert.equal(shots[1].direction, Game.DIRECTION.RIGHT); assert.equal(player.weaponActive, false);
-    moveCell(1); controller.applyOnlineInput(16); assert.equal(player.bombsOnGround.length, 0, 'Last skill charge does not turn the same hold into bombs');
-    controller.applyOnlineInput(0); controller.applyOnlineInput(16); assert.equal(player.bombsOnGround.length, 1, 'Legacy frame masks and a fresh bomb press still work');
+  const start = cells[3][3];
+  const player = Object.assign(Object.create(Game.PlayerHuman.prototype), {
+    game, grid, playerID: 0, playerMode: Game.PLAYER_MODE.SINGLE_PLAYER,
+    gridCell: start, gridPositionX: 3, gridPositionY: 3, x: start.centerX, y: start.centerY,
+    bombs: 9, power: 1, bombsOnGround: [], weapons: [], weaponActive: false,
+    direction: Game.DIRECTION.DOWN, gameStatus: Game.GAME_STATUS.PLAYING, dead: false, frozen: false, slowed: false,
+    movingAnimation: false, canKickBombs: false, gameScale: 1,
+    animationMovement: { ph2Animations: { resume() {}, pause() {} } },
   });
+  for (const name of ['checkInitialBlinking', 'checkOwnBombs', 'checkDangerZone', 'checkInvulnerability',
+    'checkInvincibility', 'checkSlow', 'checkFreeze', 'checkAnimation', 'checkIndicators', 'checkPlayerIndicator']) player[name] = () => {};
+  player.inputController = new Game.InputController(game, player);
+  const key = name => player.inputController[`${name}Key`];
+  let steps = 0;
+  // Rules are in Flash frames (1/35 s); the clock steps at 60 Hz. Convert here.
+  function toFlashFrame(flashFrame) {
+    const target = Math.ceil(flashFrame * flashFrameMs / frameMs - 1e-9);
+    assert.ok(target >= steps, `Flash frame ${flashFrame} is already past`);
+    while (steps < target) { steps++; player.update(); }
+  }
+  const equip = (uses, valid = true) => {
+    const shots = [];
+    Object.assign(player, { weaponActive: true, weaponCurrentUses: 0, weaponTotalUses: uses });
+    player.weapons = Array.from({ length: uses }, () => ({ useWeapon() { if (valid) shots.push(player.direction); return valid; } }));
+    return shots;
+  };
+  return { Game, player, cells, grid, key, toFlashFrame, equip, pickups };
 }
 
-test('picking up a skill while holding a bomb never fires the newly collected skill', () => {
-  const { controller, equip, shots, player } = fixture();
-  controller.applyOnlineInput(16); equip('grenade');
-  for (let i = 0; i < 10; i++) controller.applyOnlineInput(16);
-  assert.equal(shots.length, 0); assert.equal(player.weaponCurrentUses, 0);
-  controller.applyOnlineInput(0); controller.applyOnlineInput(48); assert.equal(shots.length, 1);
+test('a step takes 6 Flash frames, keeps going after the key is released, and ends on the center', () => {
+  const { player, cells, key, toFlashFrame, pickups } = fixture();
+  key('right').press();
+  toFlashFrame(1);
+  key('right').release();
+  toFlashFrame(6);
+  assert.ok(player.x < cells[4][3].centerX, 'Still moving on frame 6');
+  toFlashFrame(7);
+  assert.equal(player.x, cells[4][3].centerX);
+  assert.equal(player.gridCell, cells[4][3]);
+  assert.deepEqual(pickups, [cells[4][3]], 'Items are collected on arrival only');
+  toFlashFrame(20);
+  assert.equal(player.x, cells[4][3].centerX, 'No further step without a key');
 });
 
-test('original freeze and pause guards defer held bombs; release and death clear the latch', () => {
-  const { controller, player, moveCell, Game } = fixture();
-  player.frozen = true; controller.applyOnlineInput(48); controller.applyOnlineInput(16);
-  assert.equal(player.bombsOnGround.length, 0); assert.equal(controller.bombHoldEnabled, true);
-  player.frozen = false; controller.applyOnlineInput(16); assert.equal(player.bombsOnGround.length, 1);
-  moveCell(1); player.gameStatus = Game.GAME_STATUS.PAUSED; controller.applyOnlineInput(16);
-  assert.equal(player.bombsOnGround.length, 1);
-  player.gameStatus = Game.GAME_STATUS.PLAYING; controller.applyOnlineInput(16); assert.equal(player.bombsOnGround.length, 2);
-  player.dead = true; controller.applyOnlineInput(24);
-  assert.equal(controller.bombHoldEnabled, false); assert.equal(controller.onlineActionHeld, false); assert.equal(controller.rightPressed, false);
-});
-
-test('a rejected original skill use preserves its charge and does not repeat while held', () => {
-  const { controller, equip, player, shots, attempts } = fixture(); equip('grenade', 2, false);
-  controller.applyOnlineInput(48); controller.applyOnlineInput(16);
-  assert.equal(shots.length, 0); assert.equal(player.weaponCurrentUses, 0); assert.equal(player.weaponActive, true);
-  assert.equal(attempts.length, 1, 'A blocked skill is retried only on a new press');
-  assert.equal(controller.bombHoldEnabled, false);
-});
-
-test('offline Single Player keeps native movement and adds bomb hold without changing skill presses', () => {
-  const { controller, actionKey, player, moveCell, equip, shots, moves } = fixture({ offline: true });
-  controller.leftKey.press(); controller.checkInput(); assert.deepEqual(moves, ['Left']);
-  controller.leftKey.release(); controller.checkInput(); assert.equal(player.movingAnimation, false);
-  actionKey.press(); assert.equal(player.bombsOnGround.length, 1);
-  moveCell(1); controller.checkInput(); assert.equal(player.bombsOnGround.length, 2);
-  actionKey.release(); assert.equal(controller.bombHoldEnabled, false);
-  moveCell(2); player.bombsOnGround.shift(); controller.checkInput(); assert.equal(player.bombsOnGround.length, 1);
-  equip('rocket'); actionKey.press(); for (let i = 0; i < 10; i++) controller.checkInput();
-  assert.equal(shots.length, 1);
-  actionKey.release(); actionKey.press(); controller.checkInput(); assert.equal(shots.length, 2);
-  assert.equal(player.bombsOnGround.length, 1, 'Skill exhaustion does not auto-place a bomb offline either');
-  actionKey.release(); assert.equal(controller.bombHoldEnabled, false);
-});
-
-test('held input and release end with identical controller flags across repeated replicas', () => {
-  const replicas = [fixture(), fixture()];
-  for (const mask of [48, 16, 24, 16, 0, 1, 0, 48, 16, 0]) {
-    for (const { controller } of replicas) controller.applyOnlineInput(mask);
-    assert.deepEqual(
-      Object.fromEntries(Object.entries(replicas[0].controller).filter(([, v]) => typeof v === 'boolean')),
-      Object.fromEntries(Object.entries(replicas[1].controller).filter(([, v]) => typeof v === 'boolean')),
-    );
+test('with several keys held, Flash order left, up, right, down picks the direction', () => {
+  for (const [held, expected] of [[['right', 'up'], [3, 2]], [['down', 'left'], [2, 3]], [['down', 'right'], [4, 3]]]) {
+    const { player, cells, key, toFlashFrame } = fixture();
+    for (const name of held) key(name).press();
+    toFlashFrame(7);
+    assert.equal(player.gridCell, cells[expected[0]][expected[1]], held.join('+'));
   }
-  assert.equal(replicas[0].controller.bombHoldEnabled, false); assert.equal(replicas[0].controller.onlineActionHeld, false);
+});
+
+test('the hero changes cell when Flash rounding does: right at half way, left just after', () => {
+  const { player, cells, key, toFlashFrame } = fixture();
+  key('right').press(); toFlashFrame(3);
+  assert.equal(player.gridCell, cells[3][3], 'Frame 3 is 2/6 of the step');
+  toFlashFrame(4);
+  assert.equal(player.gridCell, cells[4][3], 'Frame 4 is exactly half way');
+  key('right').release(); toFlashFrame(7);
+  key('left').press(); toFlashFrame(11);
+  assert.equal(player.gridCell, cells[4][3], 'Half way left still rounds to the start');
+  toFlashFrame(12);
+  assert.equal(player.gridCell, cells[3][3]);
+});
+
+test('walls, boxes, ice and a bomb without a glove only turn the hero', () => {
+  const { Game, player, cells, grid, key, toFlashFrame } = fixture();
+  cells[4][3].cellContains = Game.MAP.WALL;
+  cells[2][3].isFreezeCell = true;
+  cells[3][2].cellContains = Game.MAP.BLOCK;
+  cells[3][4].cellContains = Game.MAP.BOMB;
+  grid.bombs.push({ gridPositionX: 3, gridPositionY: 4, bombKicked() { throw new Error('No glove'); } });
+  let frame = 0;
+  for (const [name, direction] of [['right', 'RIGHT'], ['left', 'LEFT'], ['up', 'UP'], ['down', 'DOWN']]) {
+    key(name).press(); toFlashFrame(frame += 8); key(name).release();
+    assert.equal(player.gridCell, cells[3][3]);
+    assert.equal(player.direction, Game.DIRECTION[direction]);
+  }
+});
+
+test('with a glove the hero steps into the cell a kicked bomb leaves; a bomb that cannot move stops it', () => {
+  const { Game, player, cells, grid, key, toFlashFrame } = fixture();
+  player.canKickBombs = true;
+  cells[4][3].cellContains = Game.MAP.BOMB;
+  let allowed = false;
+  grid.bombs.push({ gridPositionX: 4, gridPositionY: 3, bombKicked(direction) {
+    assert.equal(direction, Game.DIRECTION.RIGHT);
+    if (allowed) cells[4][3].cellContains = Game.MAP.FREE;
+    return allowed;
+  } });
+  key('right').press(); toFlashFrame(8);
+  assert.equal(player.gridCell, cells[3][3], 'A blocked kick keeps the hero in place');
+  allowed = true; toFlashFrame(16);
+  assert.equal(player.gridCell, cells[4][3]);
+});
+
+test('fire pressed mid-step drops the bomb on the arrival cell; holding fire keeps dropping bombs', () => {
+  const { player, cells, grid, key, toFlashFrame } = fixture();
+  key('right').press(); toFlashFrame(2);
+  key('action').press(); key('action').release();
+  assert.equal(grid.bombs.length, 0, 'A press only queues the bomb');
+  key('right').release(); toFlashFrame(7);
+  assert.deepEqual(grid.bombs.map(b => [b.gridPositionX, b.gridPositionY]), [[4, 3]]);
+  key('action').press(); key('down').press(); toFlashFrame(25);
+  assert.deepEqual(grid.bombs.map(b => [b.gridPositionX, b.gridPositionY]), [[4, 3], [4, 4], [4, 5]],
+    'Each step start places a bomb on the cell being left, as Flash putBomb runs after movHero');
+  assert.equal(player.gridCell, cells[4][6]);
+});
+
+test('a special fires once per press at rest, blocks bombs until release, and is lost if a step starts', () => {
+  const { player, key, toFlashFrame, equip, grid } = fixture();
+  const shots = equip(2);
+  key('action').press(); toFlashFrame(10);
+  assert.equal(shots.length, 1);
+  assert.equal(grid.bombs.length, 0);
+  key('action').release(); key('action').press(); toFlashFrame(11);
+  assert.equal(shots.length, 2);
+  assert.equal(player.weaponActive, false);
+  toFlashFrame(15);
+  assert.equal(grid.bombs.length, 0, 'The same hold does not turn into bombs');
+  key('action').release();
+  const more = equip(2);
+  key('action').press(); key('right').press(); toFlashFrame(16);
+  assert.equal(more.length, 0, 'putSpecial needs a hero at rest');
+});
+
+test('a rejected special is retried every frame while fire is held', () => {
+  const { player, key, toFlashFrame, equip } = fixture();
+  let tries = 0;
+  equip(2, false);
+  player.weapons = player.weapons.map(() => ({ useWeapon() { tries++; return false; } }));
+  key('action').press(); toFlashFrame(5);
+  assert.equal(tries, 5);
+});
+
+test('a frozen hero finishes its step, then neither moves nor fires', () => {
+  const { player, cells, grid, key, toFlashFrame } = fixture();
+  key('right').press(); toFlashFrame(2);
+  player.frozen = true; key('action').press(); toFlashFrame(30);
+  assert.equal(player.gridCell, cells[4][3]);
+  assert.equal(grid.bombs.length, 0);
+});
+
+test('online masks carry every held direction and a fresh press between frames', () => {
+  const { player, cells, grid, toFlashFrame } = fixture();
+  const controller = player.inputController;
+  controller.applyOnlineInput(8 | 1);
+  toFlashFrame(1);
+  controller.applyOnlineInput(0);
+  toFlashFrame(7);
+  assert.equal(player.gridCell, cells[3][2], 'Up wins over right');
+  controller.applyOnlineInput(16 | 32); controller.applyOnlineInput(0);
+  toFlashFrame(8);
+  assert.equal(grid.bombs.length, 1, 'A press and release within one Flash frame still drops a bomb');
+  player.dead = true; controller.applyOnlineInput(16 | 8);
+  assert.equal(controller.onlineActionHeld, false);
 });

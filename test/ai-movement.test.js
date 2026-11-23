@@ -49,9 +49,15 @@ test('a speed pickup mid-move changes only subsequent movement',()=>{
  p.classicMoveFrames=3;p.update();assert.ok(Math.abs(p.x-x-49/3)<1e-7);positionConsistent(p);
  p.update();assert.equal(p.moving,false);assert.equal(p.x,p.grid.cells[6][5].centerX);
 });
-test('freezing or pausing a bot mid-step preserves its position and remaining movement',()=>{
+test('a bot frozen mid-step finishes the step, then waits (Flash stopTime)',()=>{
+ const{player:p}=fixture();p.classicBeginMove(2);p.update();
+ p.frozen=true;p.frozenTimer=0;for(let i=0;i<10;i++)p.update();
+ assert.equal(p.moving,false);assert.equal(p.x,p.grid.cells[6][5].centerX);
+ let thoughts=0;p.classicThink=()=>{thoughts++;};for(let i=0;i<10;i++)p.update();assert.equal(thoughts,0,'no decisions while frozen at rest');
+ p.frozen=false;p.update();assert.equal(thoughts,1);
+});
+test('pausing a bot mid-step preserves its position and remaining movement',()=>{
  const{player:p,Game}=fixture();p.classicBeginMove(2);p.update();const x=p.x;
- p.frozen=true;p.frozenTimer=0;for(let i=0;i<10;i++)p.update();assert.equal(p.x,x);p.frozen=false;
  p.gameStatus=Game.GAME_STATUS.PAUSED;for(let i=0;i<10;i++)p.update();assert.equal(p.x,x);
  p.gameStatus=Game.GAME_STATUS.PLAYING;p.update();assert.ok(Math.abs(p.x-x-49/6)<1e-7);
 });

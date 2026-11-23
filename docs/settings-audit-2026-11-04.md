@@ -5,6 +5,8 @@
 
 随后修复了多炸弹重复计时、火箭撞墙及落点伤害时长，见 [爆炸回归修复](explosion-regressions.md)。
 
+The remaining differences in this record (movement, kicks, rockets, grenades, mines, ice and fire columns, protection, the clock, the map and the result screen) were aligned on 2026-11-23; see [Remaining 4399 differences aligned](flash-alignment-2026-11-23.md). The tables below are kept as the original baseline.
+
 结论：当前版本并非所有设置都与 4399 一致。普通炸弹引信、普通爆炸伤害时长公式、冰冻/减速时长和开阔区域冰火柱时序已对齐；火箭爆炸、地雷隐藏、护盾、移动速度、道具概率、上限、AI 和部分碰撞规则仍有差异。
 
 本次基于 `765bafa` 核验，并补修初始生命被资源加载覆盖的问题。除该已要求的生命修复外，本次不调整其他玩法。下文“当前”指本地实际运行的这份代码，不代表已检查远端部署版本。

@@ -20,6 +20,8 @@ against the bomb still kicks immediately. AI kicks are unchanged.
 Not changed: a kicked bomb still slides at 0.5 px/ms (about 10.2 cells/s), while
 Flash moves it one cell per 2 frames (17.5 cells/s). See the settings audit.
 
+Superseded later the same day by [Remaining 4399 differences aligned](flash-alignment-2026-11-23.md): humans now move in Flash cell steps, so a kick happens from rest at the cell next to the bomb, and the contact gate and its test were removed. Kicked bombs now move one cell per 2 frames.
+
 ## A second wave passes through a breaking box
 
 In Flash a ray stops at the brick it breaks, but `brickBreak` clears the cell at
@@ -35,8 +37,8 @@ Each ray still stops at the box it breaks itself.
 
 ## Verification
 
-- `test/kick-contact.test.js` runs the upstream `PlayerHuman.checkMoveRight` with
-  the fix and fails without it.
+- `test/kick-contact.test.js` ran the upstream `PlayerHuman.checkMoveRight` with
+  the fix (removed with the gate; kicks are now covered by `player-controls.test.js`).
 - `test/explosion-timing.test.js` covers a breaking box that a later wave passes
   through, the next box breaking, and scoring it once. Its timings are written in
   Flash frames through `advanceToFlashFrame`.

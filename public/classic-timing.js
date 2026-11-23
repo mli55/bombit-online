@@ -34,6 +34,8 @@
       BOMB_TIMER: 60 * frameMS,
       FROZEN_TIME: 300 * frameMS,
       SLOW_TIME: 600 * frameMS,
+      // The mine's placement timeline stops (hidden) at frame 60.
+      TIME_TO_HIDE_MINE: 59 * frameMS,
     });
     return init.apply(this, args);
   };
@@ -69,15 +71,20 @@
       // Grid.destroyBox has already removed it from grid.boxes.
       const block = cell.cellContains === Game.MAP.BLOCK && this.grid.boxes.some(box =>
         box.gridPositionX === x && box.gridPositionY === y);
+      // Ice is a Flash brick too: the ray stops there and breaks it.
+      const ice = !block && cell.isFreezeCell;
       if (block) {
         this.classicStoppedRays |= 1 << index;
         this.grid.destroyBox(cell);
         this.game.ph2NotificationManager.postNotification('_ADD_SCORE_BLOCK', this.player.playerID);
+      } else if (ice) {
+        this.classicStoppedRays |= 1 << index;
+        Game.ClassicWeapons.breakIce(this.grid, cell, this.player, true);
       } else if (cell.cellContains === Game.MAP.BOMB) this.grid.explodeBomb(cell);
-      else if (cell.cellContains === Game.MAP.MINE) this.grid.destroyMine(cell);
+      if (!block && cell.cellContains === Game.MAP.MINE) this.grid.destroyMine(cell);
       // Read occupancy when the wave arrives. A newly placed bomb must also
       // chain, and a box must never disappear before its wave reaches it.
-      this.createFire(x, y, dy ? 90 : 0, direction, block || distance === this.power);
+      this.createFire(x, y, dy ? 90 : 0, direction, block || ice || distance === this.power);
     });
   };
 
@@ -91,8 +98,10 @@
       const index = grid[key]?.indexOf(this) ?? -1;
       if (index !== -1) grid[key].splice(index, 1);
     }
-    for (const sprite of this.explosion) sprite.visible = false;
-    this.destroy();
+    // Damage ends here. Flash then fades the flames by 20% a frame and removes
+    // them on the fifth frame.
+    this.hasExploded = false;
+    (grid.classicFading ||= []).push({ owner: this, sprites: [this, ...this.explosion], frames: 0 });
     cells.forEach((cell, index) => {
       const atCell = obj => obj.gridPositionX === cell.gridPositionX && obj.gridPositionY === cell.gridPositionY;
       const bomb = grid.bombs?.find(atCell), mine = grid.mines?.find(atCell);
@@ -110,6 +119,24 @@
       grid.astarGrid.grid[cell.gridPositionX][cell.gridPositionY].weight = bomb ? 0 : 1;
     });
   }
+  const gridUpdate = Game.Grid.prototype.update;
+  Game.Grid.prototype.update = function () {
+    gridUpdate.call(this);
+    if (!this.classicFading?.length || this.gameStatus === Game.GAME_STATUS.PAUSED) return;
+    this.classicFadeTime = (this.classicFadeTime || 0) + this.game.time.elapsedMS;
+    while (this.classicFadeTime + 1e-7 >= frameMS) {
+      this.classicFadeTime -= frameMS;
+      for (const fade of this.classicFading) {
+        const alpha = 1 - 0.2 * ++fade.frames;
+        for (const sprite of fade.sprites) sprite.alpha = alpha;
+        if (fade.frames < 5) continue;
+        for (const sprite of fade.sprites) sprite.visible = false;
+        fade.owner.destroy();
+      }
+      this.classicFading = this.classicFading.filter(fade => fade.frames < 5);
+    }
+    if (!this.classicFading.length) this.classicFadeTime = 0;
+  };
   Game.BombExplosion.prototype.endExplosion = finishExplosion;
   Game.WeaponExplosion.prototype.endExplosion = finishExplosion;
 
@@ -132,44 +159,4 @@
     };
   }
 
-  Game.Columns.prototype.update = function () {
-    if (this.grid.gameStatus === Game.GAME_STATUS.PAUSED || (!this.used && !this.active)) return;
-    this.classicElapsed = (this.classicElapsed || 0) + this.game.time.elapsedMS;
-    // The original creates cells on frames 4, 8, 12 and clears the area on 49.
-    while (this.used && this.currentColumn < this.usedCells.length &&
-      this.classicElapsed >= (this.currentColumn + 1) * 4 * frameMS) this.createColumn();
-    if (this.used && this.currentColumn >= this.usedCells.length) {
-      this.used = false;
-      this.active = true;
-    }
-    if (this.classicElapsed + 1e-7 < 49 * frameMS) return;
-    const animation = this.weaponType === Game.ITEM_TYPE.FREEZE ? 'ice_out' : 'fire_out';
-    for (const sprite of this.columnSprites) sprite.ph2Animations.play(animation, 1, false);
-    for (const cell of this.usedCells) {
-      const overlappingColumn = this.grid.weapons.some(weapon => weapon !== this && weapon.exists &&
-        weapon.weaponType === this.weaponType && weapon.columnSprites?.some(sprite =>
-          sprite.x === cell.centerX && sprite.y === cell.centerY));
-      if (overlappingColumn) continue;
-      // Ice expiry must still clear ice after a bomb overwrites dangerOwner.
-      if (this.weaponType === Game.ITEM_TYPE.FREEZE) cell.isFreezeCell = false;
-      else {
-        const liveBlast = [...this.grid.bombExplosions, ...this.grid.weaponExplosions].some(blast =>
-          blast.exists && blast.hasExploded && (blast.gridCell === cell || blast.cellsUsed.includes(cell)));
-        if (!liveBlast) cell.isDangerCell = false;
-      }
-    }
-    this.active = this.finish = false;
-    this.destroyWeapon();
-  };
-
-  const checkFreeze = Game.Player.prototype.checkFreeze;
-  Game.Player.prototype.checkFreeze = function () {
-    // In Flash, contact refreshes stopTime to 300 each frame. Count the thaw
-    // delay from the final ice contact, rather than from the first contact.
-    if (this.frozen && this.gridCell?.isFreezeCell && this.gridCell.dangerOwner !== this) {
-      this.frozenTimer = 0;
-      return;
-    }
-    checkFreeze.call(this);
-  };
 })();

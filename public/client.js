@@ -5,7 +5,6 @@ let socket, identity = null, room = null, generation = '', bridge = null, iframe
 let leaving = false, reconnectTimer, toastTimer, preparing = false, packetQueue = [];
 let loadId = 0, prepareId = 0, onGameReady, loadPromise, queuedSettings, selectingDifficulty = false;
 const keys = new Set();
-let activeDirection = null;
 // Keep reconnect credentials only for this page's lifetime. A refresh starts over.
 try { sessionStorage.removeItem('bomb-it-room'); } catch {}
 const pageURL = new URL(location.href);
@@ -19,25 +18,24 @@ if (invitation) { $('code').value = invitation.toUpperCase(); $('network').hidde
 function notice(message) { $('notice').textContent = message; $('notice').hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(() => { $('notice').hidden = true; }, 6000); }
 function send(msg) { if (socket?.readyState === WebSocket.OPEN) socket.send(JSON.stringify({ generation, ...msg })); }
 function status(text) { $('connection').textContent = text; }
-function mask() { return (directions[activeDirection] || 0) | (keys.has('Space') || keys.has('Enter') ? 16 : 0); }
-function release() { keys.clear(); activeDirection = null; send({ type: 'input', keys: 0 }); }
+// Send every held direction. The game checks them in Flash's fixed order.
+function mask() {
+  let bits = keys.has('Space') || keys.has('Enter') ? 16 : 0;
+  for (const code of keys) bits |= directions[code] || 0;
+  return bits;
+}
+function release() { keys.clear(); send({ type: 'input', keys: 0 }); }
 function input(code, down) {
   // Always process key-up, including while paused or disconnected.
   if (down === keys.has(code)) return;
   down ? keys.add(code) : keys.delete(code);
-  // Like the native keyboard: the latest direction wins; releasing it stops.
-  // Keep older held keys tracked so their autorepeat cannot steal the turn back.
-  if (directions[code]) {
-    if (down) activeDirection = code;
-    else if (activeDirection === code) activeDirection = null;
-  }
   if (room?.phase === 'playing' && !preparing) send({ type: 'input', keys: mask() });
 }
 function loadGame() {
   const id = ++loadId;
   iframe?.contentWindow?.bombItAudio?.dispose();
   bridge = null; liveFrames = []; playing = false; iframe?.remove();
-  iframe = document.createElement('iframe'); iframe.title = 'Bomb It 1'; iframe.allow = 'autoplay; fullscreen'; iframe.src = '/game/?v=15';
+  iframe = document.createElement('iframe'); iframe.title = 'Bomb It 1'; iframe.allow = 'autoplay; fullscreen'; iframe.src = '/game/?v=16';
   $('game-mount').replaceChildren(iframe); $('loading').textContent = 'Loading Bomb It 1…'; $('loading').hidden = false;
   loadPromise = new Promise((resolve, reject) => {
     const timeout = setTimeout(() => { if (id === loadId) reject(new Error('Loading timed out. Please refresh the page.')); }, 45000);
