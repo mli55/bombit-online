@@ -17,6 +17,7 @@ function definition(className, namespace) {
 const bombExplosionDefinition = definition('BombExplosion', 'h');
 const fireExplosionDefinition = definition('FireExplosion', 'l');
 const frameMs = 1000 / 60;
+const flashFrameMs = 1000 / 35;
 
 function fixture({ patched = true, power = 1 } = {}) {
   // Keep the original propagation, cell cleanup, and timer methods. Only Phaser
@@ -67,6 +68,7 @@ function fixture({ patched = true, power = 1 } = {}) {
   const grid = {
     cells,
     bombs: [],
+    boxes: [],
     bombExplosions: [],
     astarGrid: { grid: cells.map(column => column.map(() => ({ weight: 1 }))) },
     rowsGroup: cells.map(() => ({
@@ -87,8 +89,10 @@ function fixture({ patched = true, power = 1 } = {}) {
   grid.bombExplosions.push(explosion);
   grid.rowsGroup[6].add(explosion);
 
+  let steps = 0;
   function advance(frames) {
     for (let frame = 0; frame < frames; frame++) {
+      steps++;
       elapsed += frameMs;
       for (let i = 0; i < pending.length;) {
         if (pending[i].due > elapsed) { i++; continue; }
@@ -100,7 +104,14 @@ function fixture({ patched = true, power = 1 } = {}) {
   }
   const dangerousCells = () => cells.flat().filter(cell => cell.isDangerCell);
   const visibleFlames = () => grid.rowsGroup.flatMap(row => row.children).filter(sprite => sprite.visible);
-  return { Game, explosion, center, grid, pending, advance, dangerousCells, visibleFlames };
+  // Rules are written in Flash frames (1/35 s) but the clock steps at 60 Hz.
+  // Convert here; do not hand-count 60 Hz steps in tests.
+  function advanceToFlashFrame(flashFrame) {
+    const target = Math.ceil(flashFrame * flashFrameMs / frameMs - 1e-9);
+    assert.ok(target >= steps, `Flash frame ${flashFrame} is already past`);
+    advance(target - steps);
+  }
+  return { Game, explosion, center, grid, pending, advance, advanceToFlashFrame, dangerousCells, visibleFlames };
 }
 
 function assertFinished(f) {
@@ -205,6 +216,7 @@ test('a box blocks the ray and is destroyed only on arrival; hard walls block wi
   const f = fixture({ power: 5 });
   const box = f.grid.cells[9][6], wall = f.grid.cells[3][6];
   box.cellContains = f.Game.MAP.BLOCK; box.isEmpty = false;
+  f.grid.boxes.push({ gridPositionX: 9, gridPositionY: 6 });
   wall.cellContains = f.Game.MAP.WALL; wall.isEmpty = false;
   let destroyed = 0;
   f.grid.destroyBox = cell => { destroyed++; cell.cellContains = f.Game.MAP.FREE; cell.isEmpty = true; };
@@ -216,6 +228,32 @@ test('a box blocks the ray and is destroyed only on arrival; hard walls block wi
   assert.equal(wall.isDangerCell, false);
   f.advance(20);
   assert.equal(box.cellContains, f.Game.MAP.FREE, 'Cleanup does not restore a destroyed box');
+});
+
+test('a box still breaking from an earlier wave lets a later wave through to the next box', () => {
+  // Two bombs side by side: the nearer blast already broke the first box, whose
+  // cell keeps BLOCK until its animation ends. Flash cleared it at once.
+  const f = fixture({ power: 5 });
+  const breaking = f.grid.cells[8][6], next = f.grid.cells[9][6];
+  for (const cell of [breaking, next]) { cell.cellContains = f.Game.MAP.BLOCK; cell.isEmpty = false; }
+  f.grid.boxes.push({ gridPositionX: 9, gridPositionY: 6 });
+  const destroyed = [];
+  f.grid.destroyBox = cell => {
+    destroyed.push(cell);
+    f.grid.boxes = f.grid.boxes.filter(box => box.gridPositionX !== cell.gridPositionX || box.gridPositionY !== cell.gridPositionY);
+  };
+  let scored = 0;
+  f.explosion.game.ph2NotificationManager.postNotification = name => { if (name === '_ADD_SCORE_BLOCK') scored++; };
+  f.explosion.makeExplosion();
+  // The ray reaches distance n on Flash frame n.
+  f.advanceToFlashFrame(2);
+  assert.deepEqual(destroyed, [], 'The breaking box is not destroyed or scored twice');
+  assert.equal(breaking.isDangerCell, true);
+  f.advanceToFlashFrame(3);
+  assert.deepEqual(destroyed, [next]);
+  assert.equal(scored, 1);
+  f.advanceToFlashFrame(4);
+  assert.equal(f.grid.cells[10][6].isDangerCell, false, 'The ray stops at the box it broke');
 });
 
 test('pausing before the first wave stops both propagation and damage lifetime', () => {

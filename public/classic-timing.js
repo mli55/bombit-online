@@ -64,7 +64,11 @@
         this.classicStoppedRays |= 1 << index;
         return;
       }
-      const block = cell.cellContains === Game.MAP.BLOCK;
+      // Flash clears a broken brick at once, so a second wave passes through it.
+      // Here the box keeps BLOCK until its break animation ends, after
+      // Grid.destroyBox has already removed it from grid.boxes.
+      const block = cell.cellContains === Game.MAP.BLOCK && this.grid.boxes.some(box =>
+        box.gridPositionX === x && box.gridPositionY === y);
       if (block) {
         this.classicStoppedRays |= 1 << index;
         this.grid.destroyBox(cell);
