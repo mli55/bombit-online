@@ -6,3 +6,4 @@ coverage/
 .local/
 public/game/
 .wrangler/
+reference/
