@@ -251,8 +251,28 @@
         blast.exists && blast.hasExploded && (blast.gridCell === cell || blast.cellsUsed.includes(cell)));
       if (!otherFire && !liveBlast) cell.isDangerCell = false;
     }
+    // Each Flash effect clip runs its own timeline, so a cell added late still
+    // plays out at its own age 40 after the column itself is gone.
+    const pending = this.classicCells.filter(entry => !entry.broken && entry.age < 40)
+      .map(entry => Object.assign(entry, { out: ice ? 'ice_out' : 'fire_out' }));
+    if (pending.length) (this.grid.classicColumnFx ||= []).push(...pending);
     this.used = this.active = this.finish = false;
     this.destroyWeapon();
+  };
+  const gridUpdate = Game.Grid.prototype.update;
+  Game.Grid.prototype.update = function (...args) {
+    const result = gridUpdate.apply(this, args);
+    if (!this.classicColumnFx?.length || paused(this)) return result;
+    this.classicColumnFxTime = (this.classicColumnFxTime || 0) + this.game.time.elapsedMS;
+    while (this.classicColumnFx.length && this.classicColumnFxTime + 1e-7 >= frameMS) {
+      this.classicColumnFxTime -= frameMS;
+      for (const entry of this.classicColumnFx) {
+        if (++entry.age === 40 && !entry.broken) entry.sprite.ph2Animations.play(entry.out, 1, false);
+      }
+      this.classicColumnFx = this.classicColumnFx.filter(entry => entry.age < 40);
+    }
+    if (!this.classicColumnFx.length) this.classicColumnFxTime = 0;
+    return result;
   };
 
   // Freezing now comes only from ice contact above. Hide the cell flag from the

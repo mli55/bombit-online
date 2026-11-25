@@ -58,6 +58,8 @@ These were kept on purpose:
 | Ice column | Every 4 frames (4, 8, 12) checks the next cell as it is then; a brick or bomb skips the counter to 12, so cleanup (counter 49) comes early. Ice cells are bricks for everyone, the user included. Each cell freezes any hero, the user included, whose center is within 10/30 of a cell of its center, for the 40 frames of its effect | Same |
 | Fire column | Same timing; stops at the edge or a wall; sets off bombs, breaks boxes and ice with score and drop; damage until cleanup | Same |
 
+Fix, 2026-11-25: each Flash effect clip runs its own timeline, so a cell added at frame 12 plays out at frame 52, after the column's cleanup at frame 49. The port stopped ageing cells at cleanup, so the last cell of a full-length fire or ice column never played its out animation and stayed on screen. Unfinished cells now keep ageing on the grid (`test/classic-columns.test.js`).
+
 ## Protection and round end (`classic-match.js`)
 
 | Rule | Flash | Now |
